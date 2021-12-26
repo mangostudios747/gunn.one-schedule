@@ -1,0 +1,34 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
+.btn {
+  @apply transition-shadow duration-300 shadow-lg hover:shadow-lg outline-none  tracking-wide rounded-lg px-3 py-1  ;
+}
+
+.btn-primary {
+  @apply btn hover:bg-indigo-600 hover:shadow-indigo-500/50 shadow-indigo-500/50 text-white bg-indigo-500;
+}
+
+.btn-secondary {
+  @apply btn text-black bg-gray-50 hover:bg-gray-100
+}
+
+a[href].link {
+  @apply text-indigo-500 cursor-pointer font-medium hover:text-indigo-600;
+}
+
+.card {
+  @apply bg-water/70 rounded-lg py-4 px-5
+}
+
+
+.input-text {
+  @apply bg-gray-50 ring-offset-2 shadow-lg rounded-lg px-3 py-2 my-2 placeholder:italic caret-indigo-500 focus:ring focus:ring-2 ring-offset-gray-300 ring-offset-2 ring-indigo-500 outline-none placeholder:select-none;
+}
+
+::selection {
+  @apply bg-indigo-500/20
+}

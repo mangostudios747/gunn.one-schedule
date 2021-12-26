@@ -10,14 +10,34 @@
   },
   "dependencies": {
     "@nuxt/content": "^1.15.1",
+    "@nuxtjs/auth-next": "5.0.0-1640385888.647248d",
     "@nuxtjs/axios": "^5.13.6",
+    "@nuxtjs/dotenv": "^1.4.1",
     "@nuxtjs/pwa": "^3.3.5",
+    "body-parser": "^1.19.1",
+    "cookie-parser": "^1.4.6",
     "core-js": "^3.19.3",
+    "express": "^4.17.2",
+    "jsonwebtoken": "^8.5.1",
     "nuxt": "^2.15.8",
+    "passport": "^0.5.2",
+    "passport-schoology-oauth": "^1.0.3",
+    "password-strength-calc": "^1.0.3",
     "vue": "^2.6.14",
     "vue-server-renderer": "^2.6.14",
     "vue-template-compiler": "^2.6.14",
     "webpack": "^4.46.0"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "@nuxt/postcss8": "^1.1.3",
+    "@tailwindcss/typography": "^0.5.0",
+    "autoprefixer": "^10.4.0",
+    "connect-mongo": "^4.6.0",
+    "express-session": "^1.17.2",
+    "mongodb": "^4.2.2",
+    "node-uuid": "^1.4.8",
+    "passport-jwt": "^4.0.0",
+    "postcss": "^8.4.5",
+    "tailwindcss": "^3.0.7"
+  }
 }
