@@ -10,9 +10,10 @@ const crypto = require("crypto");
 const jwt = require('jsonwebtoken');
 const usersRouter = require('./routes/users');
 
-let usersmdb, statsmdb, testmdb;
+let usersmdb, statsmdb, testmdb, passwordsmdb;
 mdb.then(c=> {
   usersmdb = c.db('users').collection('profiles');
+  passwordsmdb = c.db('users').collection('passwords');
   statsmdb = c.db('stats').collection('userCount');
   testmdb = c.db('users').collection('test')
 })
@@ -77,10 +78,28 @@ app.get('/auth/register', function(req, res, next){
   next();
 }, passport.authenticate('schoology'))
 
+app.post('/auth/login', async function (req, res) {
+  const {email, password} = req.body;
+  // check the passwordsmdb for the email and the passwordhash
+  const profile = await passwordsmdb.findOne({email: req.body.email});
+  if (!profile) {
+    return res.json({error: 'user-not-found'}).end();
+  }
+  const hash = crypto.createHash('md5').update(password).digest('hex');
+  if (hash!== profile.passwordHash) {
+    return res.json({error:'incorrect-password'}).end();
+  }
+  // email exists, and the password is correct.
+  // generate JWT
+  return res.json({
+    jwt: jwt.sign({ uid:profile._id }, process.env.JWT_SECRET)
+  })
+});
+
 app.get('/auth/thanks-sgy', passport.authenticate('schoology'), async function (req, res) {
-  await usersmdb.updateOne({_id: req.user.uid}, {$set: {passwordHash: req.cookies.credentials}});
+  await passwordsmdb.updateOne({_id: req.user.profile.uid}, {$set: {passwordHash: req.cookies.credentials, email:req.user.profile.primary_email}}, {upsert: true});
   const token =  jwt.sign({ uid:req.user.profile.uid }, process.env.JWT_SECRET);
-  res.redirect(`/register?${(new URLSearchParams({jwt:token})).toString()}`);
+  res.redirect(`http://localhost:3000/register?${(new URLSearchParams({jwt:token})).toString()}`);
 });
 
 

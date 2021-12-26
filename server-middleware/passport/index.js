@@ -39,10 +39,8 @@ passport.use('schoology',new SchoologyStrategy({
 const JwtStrategy = require('passport-jwt').Strategy,
   ExtractJwt = require('passport-jwt').ExtractJwt;
 const opts = {}
-opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
+opts.jwtFromRequest = ExtractJwt.fromAuthHeaderWithScheme('JWT');
 opts.secretOrKey = process.env.JWT_SECRET;
-opts.issuer = 'api.gunn.one';
-opts.audience = 'gunn.one';
 passport.use('jwt', new JwtStrategy(opts, function(jwt_payload, done) {
   usersmdb.findOne({uid: jwt_payload.uid}).then((u)=>{
     authmdb.findOne({_id:+jwt_payload.uid}).then((c)=>{

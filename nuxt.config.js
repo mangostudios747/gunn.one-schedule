@@ -1,4 +1,6 @@
 export default {
+  ssr: true,
+
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     title: 'cc-frontend',
@@ -35,20 +37,28 @@ export default {
     '@nuxtjs/dotenv',
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
+    'cookie-universal-nuxt',
+    '@nuxtjs/auth-next',
     // https://go.nuxtjs.dev/pwa
     '@nuxtjs/pwa',
     // https://go.nuxtjs.dev/content
     '@nuxt/content',
-    '@nuxtjs/auth-next'
+
+
   ],
 
   auth: {
+    redirect: {
+      login: '/login',
+      logout: '/login',
+      home: '/',
+    },
     strategies: {
       local: {
         token: {
           property: 'jwt',
           // required: true,
-          // type: 'Bearer'
+           type: 'JWT'
         },
         user: {
           property: false,
@@ -61,6 +71,9 @@ export default {
         }
       }
     }
+  },
+  router: {
+    middleware: ['auth-user']
   },
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {

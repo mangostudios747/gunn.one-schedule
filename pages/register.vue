@@ -53,12 +53,13 @@
 const getPasswordStrength = require('password-strength-calc');
 export default {
   name: "register",
+  auth: 'guest',
   data:()=>({
     activeStep:1,
-    password:'456u8erDSFG!',
-    password2: '456u8erDSFG!',
-    email:'ss44523@pausd.us',
-    name:'Saumya Singhal',
+    password:'',
+    password2: '',
+    email:'',
+    name:'',
     error: false,
   }),
 
@@ -77,11 +78,14 @@ export default {
   async mounted(){
     // check if the `jwt` query param is present
     const url = new URL(document.location.href);
-    window.history.pushState({}, document.title, window.location.pathname);
+    await this.$router.push({path: this.$route.path, query: {}})
     const params = new URLSearchParams(url.search)
     if (params.has('jwt')){
       const jwt = params.get('jwt')
+      const oldRedirect = this.$auth.options.redirect;
+      this.$auth.options.redirect = false;
       await this.$auth.setUserToken(jwt);
+      this.$auth.options.rewriteRedirects = oldRedirect;
       this.activeStep = 3;
     }
     else if (this.$auth.loggedIn){
