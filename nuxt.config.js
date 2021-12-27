@@ -54,7 +54,11 @@ export default {
       home: '/',
     },
     strategies: {
-      local: {
+      guest: {
+        scheme: 'local',
+      },
+      schoology: {
+        scheme: 'local',
         token: {
           property: 'jwt',
           // required: true,

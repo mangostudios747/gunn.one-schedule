@@ -24,6 +24,7 @@
     "passport": "^0.5.2",
     "passport-schoology-oauth": "^1.0.3",
     "password-strength-calc": "^1.0.3",
+    "uuid": "^8.3.2",
     "vue": "^2.6.14",
     "vue-server-renderer": "^2.6.14",
     "vue-template-compiler": "^2.6.14",

@@ -3,7 +3,7 @@ const app = express()
 const session = require('express-session')
 const MongoStore = require('connect-mongo');
 const passport = require('./passport');
-const uuid = require('node-uuid')
+//const {v4: uuidv4} = require('uuid')
 const MONGO_URL = process.env.MONGO_URL;
 const {mdb} = require("./database");
 const crypto = require("crypto");
@@ -17,6 +17,9 @@ mdb.then(c=> {
   statsmdb = c.db('stats').collection('userCount');
   testmdb = c.db('users').collection('test')
 })
+
+const hash = (pw)=>crypto.createHash('md5').update(pw).digest('hex');
+
 const store = MongoStore.create({
   mongoUrl: MONGO_URL,
 });
@@ -24,11 +27,11 @@ const cookieParser = require('cookie-parser');
 app.use(cookieParser());
 
 app.use(session({
-  secret: process.env.COOKIE_SECRET, // TODO: legit secret
+  secret: process.env.COOKIE_SECRET,
   resave: false,
   store,
   genid: function () {
-    return uuid.v4();
+    return crypto.randomUUID();
   },
   saveUninitialized: false,
   cookie: { //
@@ -66,31 +69,62 @@ app.post('/auth/set-credentials', function(req, res){
   // hash the password using md5.
   console.log('hello???')
   try {
-    res.cookie('credentials', crypto.createHash('md5').update(req.body.credential).digest('hex'));
+    res.cookie('credentials', hash(req.body.credential));
   }
   catch (e) {
     res.send(e).end();
   }
   res.status(202).send();
 })
-app.get('/auth/register', function(req, res, next){
-  console.log('it was called');
-  next();
-}, passport.authenticate('schoology'))
+app.get('/auth/register', passport.authenticate('schoology'))
+
+app.get('/auth/guest-token', function (req, res) {
+  const uid = crypto.randomUUID();
+  res.json(jwt.sign({uid, guest:true}, process.env.JWT_SECRET))
+})
+
+/*app.post('/auth/register/basic', function (req, res) {
+  const {name, email, password} = req.body
+  // 1. Generate a UID
+  const uid = crypto.randomUUID();
+  const passwordEntry = {
+    _id: uid,
+    email,
+    passwordHash: hash(password)
+  };
+  const profileEntry = {
+    _id: uid,
+    uid,
+    primary_email: email,
+    name_display: name,
+    basicPlan: true,
+  }
+  // if user already exists, this API request ONLY changes the PASSWORD.
+  usersmdb.updateOne({primary_email: email}, {$setOnInsert:profileEntry}, {upsert: true});
+  // the only real identification we have rn is the email address.
+  passwordsmdb.updateOne({email}, {$setOnInsert:{_id: uid, email}, $set:{passwordHash: passwordEntry.passwordHash}}, {upsert: true});
+
+  // the user's uid is not necessarily the one we just generated
+  const {uid: realUID} = passwordsmdb.findOne({email});
+
+  res.json(jwt.sign({uid: realUID}, process.env.JWT_SECRET));
+})*/
 
 app.post('/auth/login', async function (req, res) {
   const {email, password} = req.body;
   // check the passwordsmdb for the email and the passwordhash
-  const profile = await passwordsmdb.findOne({email: req.body.email});
+  const profile = await passwordsmdb.findOne({email});
   if (!profile) {
     return res.json({error: 'user-not-found'}).end();
   }
-  const hash = crypto.createHash('md5').update(password).digest('hex');
-  if (hash!== profile.passwordHash) {
+  const hash2 = hash(password);
+  if (hash2!== profile.passwordHash) {
     return res.json({error:'incorrect-password'}).end();
   }
   // email exists, and the password is correct.
   // generate JWT
+
+  // this will also exist in basic plans
   return res.json({
     jwt: jwt.sign({ uid:profile._id }, process.env.JWT_SECRET)
   })

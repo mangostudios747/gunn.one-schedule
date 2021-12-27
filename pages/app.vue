@@ -1,7 +1,8 @@
 <template>
   <div>
 app?
-    {{$auth.loggedIn}}
+    {{$auth.user}}
+<button @click="$auth.logout()" class="btn-primary">logout</button>
   </div>
 </template>
 

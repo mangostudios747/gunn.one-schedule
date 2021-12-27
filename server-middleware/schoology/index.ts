@@ -1,7 +1,7 @@
 
 const oauth = require('./oauth')
 const { mdb } = require('../database')
-let userDatamdb:any; // todo: get access to types
+let userDatamdb:any; // to-do: get access to types
 mdb.then((c:any)=>{
   userDatamdb = c.db('users').collection('profiles');
 })
@@ -88,14 +88,14 @@ async function getFrom(path: string, creds: UserCredentials, method: string = 'g
 }
 
 export async function getProfile(creds: UserCredentials) {
-  const value = await getFrom('users/me', creds)
+  const value = await getFrom('users/me?extended=TRUE', creds)
   usersCache[value.uid] = value
   return value
 }
 
 export async function getProfileFor(creds: UserCredentials, uid: string) {
   if (usersCache[uid]) return usersCache[uid]
-  const returnValue = await getFrom('users/' + uid, creds)
+  const returnValue = await getFrom(`users/${uid}?extended=TRUE`, creds)
   usersCache[uid] = returnValue
   return returnValue
 }

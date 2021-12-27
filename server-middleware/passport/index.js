@@ -42,6 +42,17 @@ const opts = {}
 opts.jwtFromRequest = ExtractJwt.fromAuthHeaderWithScheme('JWT');
 opts.secretOrKey = process.env.JWT_SECRET;
 passport.use('jwt', new JwtStrategy(opts, function(jwt_payload, done) {
+  if (jwt_payload.guest){
+    // guest user
+    done(null, {
+      credentials:null,
+      profile:{
+        ...jwt_payload,
+        name_display: 'Guest',
+        profile_url: 'https://images.unsplash.com/photo-1640525999004-42b645dd3dee?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80'
+      }
+    })
+  }
   usersmdb.findOne({uid: jwt_payload.uid}).then((u)=>{
     authmdb.findOne({_id:+jwt_payload.uid}).then((c)=>{
       done(null, {credentials:c, profile:u});

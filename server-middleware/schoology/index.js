@@ -57,7 +57,7 @@ exports.__esModule = true;
 exports.getSectionAnnouncement = exports.getAllGrades = exports.getPage = exports.getDocument = exports.like = exports.fetchCourseUpdates = exports.fetchRecentUpdates = exports.getUpdate = exports.fetchFileDetails = exports.fetchExternalToolDetails = exports.fetchLinkDetails = exports.fetchAllSectionEventsForWeek = exports.fetchWeekUserEvents = exports.getSection = exports.getSectionFolder = exports.newMessage = exports.replyToMessage = exports.fetchSentMessage = exports.fetchInboxMessage = exports.fetchMessagesSent = exports.fetchMessagesInbox = exports.getPendingAssignmentsForSection = exports.getAssignmentsForSection = exports.reloadAssignmentsForSection = exports.fetchAssignmentsForSection = exports.getSections = exports.reloadSections = exports.fetchSections = exports.getProfileFor = exports.getProfile = void 0;
 var oauth = require('./oauth');
 var mdb = require('../database').mdb;
-var userDatamdb; // todo: get access to types
+var userDatamdb; // to-do: get access to types
 mdb.then(function (c) {
     userDatamdb = c.db('users').collection('profiles');
 });
@@ -135,7 +135,7 @@ function getProfile(creds) {
         var value;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, getFrom('users/me', creds)];
+                case 0: return [4 /*yield*/, getFrom('users/me?extended=TRUE', creds)];
                 case 1:
                     value = _a.sent();
                     usersCache[value.uid] = value;
@@ -153,7 +153,7 @@ function getProfileFor(creds, uid) {
                 case 0:
                     if (usersCache[uid])
                         return [2 /*return*/, usersCache[uid]];
-                    return [4 /*yield*/, getFrom('users/' + uid, creds)];
+                    return [4 /*yield*/, getFrom("users/" + uid + "?extended=TRUE", creds)];
                 case 1:
                     returnValue = _a.sent();
                     usersCache[uid] = returnValue;

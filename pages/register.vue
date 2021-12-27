@@ -5,12 +5,12 @@
         <!---- stepper numbers----->
         <div class="wrapper mx-5">
           <ol class="c-stepper">
-            <li :class="{'active':activeStep===1}" class="c-stepper__item">
+            <li :class="{'active':activeStep===1, 'completed':activeStep > 1}" class="c-stepper__item">
 
               <div class="c-stepper__content">
                 <h3 class="c-stepper__title">Create your account</h3>
                 <div  class="card expansion block  mt-3">
-                  <input @keyup="error = false" required type="text" v-model="name" class="input-text mx-auto w-72 block my-4" placeholder="Your Name" />
+                  <input @keyup="error = false" name="Name" required type="text" v-model="name" class="input-text mx-auto w-72 block my-4" placeholder="Your Name" />
                   <input @keyup="error = false" required pattern="[a-z]{2}\d{5}@pausd.us" type="email" v-model="email" class="input-text mx-auto w-72 block my-4  invalid:ring-red-500  valid:ring-green-500" placeholder="PAUSD Email" />
                   <input @keyup="error = false" required type="password" v-model="password" class="input-text mx-auto w-72 block my-4" placeholder="Create Password" />
                   <input @keyup="error = false" required type="password" v-model="password2" class="input-text mx-auto w-72 block my-4" placeholder="Confirm Password" />
@@ -19,7 +19,7 @@
                 </div>
               </div>
             </li>
-            <li :class="{'active':activeStep===2}" class="c-stepper__item">
+            <li :class="{'active':activeStep===2, 'completed':activeStep > 2}" class="c-stepper__item">
               <div class="c-stepper__content">
                 <h3 class="c-stepper__title">Link Schoology <span class="text-sm text-gray-500 italic font-semibold">(optional)</span></h3>
                 <div class="card expansion block mt-3">
@@ -139,6 +139,11 @@ export default {
 .c-stepper__item.active:before {
 
   @apply bg-indigo-500 shadow-indigo-500/50 shadow-lg;
+}
+
+.c-stepper__item.completed:before {
+
+  @apply bg-indigo-200 shadow-indigo-500/50 shadow-sm;
 }
 .c-stepper__item:not(:last-child):after {
   content: "";
