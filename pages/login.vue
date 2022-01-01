@@ -22,7 +22,7 @@ export default {
   methods: {
     async userLogin() {
       try {
-        let response = await this.$auth.loginWith('local', { data: this.login })
+        let response = await this.$auth.loginWith('schoology', { data: this.login })
         if (response.data.error){
           console.log(response.data.error)
         }

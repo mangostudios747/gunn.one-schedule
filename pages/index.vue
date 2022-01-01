@@ -1,7 +1,6 @@
 <template>
   <div>
-    marketing stuff
-    <a href="/app">woa?</a>
+    
   </div>
 </template>
 

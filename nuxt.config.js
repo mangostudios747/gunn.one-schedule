@@ -1,6 +1,8 @@
 export default {
   ssr: true,
-
+  server: {
+    host: '0' // default: localhost
+  },
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     title: 'Gunn.One',
@@ -22,6 +24,9 @@ export default {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
+    {
+      src:'~/plugins/luxon.js', mode:'client'
+    }
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -43,15 +48,31 @@ export default {
     '@nuxtjs/pwa',
     // https://go.nuxtjs.dev/content
     '@nuxt/content',
-
+    '@nuxtjs/firebase',
 
   ],
 
+  firebase: {
+    // options
+    config: {
+      apiKey: "AIzaSyDjLQAzre_M7puZsitnnXhu7uH6M-JIerc",
+      authDomain: "homeworkcentral.firebaseapp.com",
+      databaseURL: "https://homeworkcentral.firebaseio.com",
+      projectId: "homeworkcentral",
+      storageBucket: "homeworkcentral.appspot.com",
+      messagingSenderId: "709390643857",
+      appId: "1:709390643857:web:7ee7ad222cf5f2ba9f4530",
+      measurementId: "G-WYFJH182BL"
+    },
+    services: {
+      database: true,
+    }
+  },
   auth: {
     redirect: {
       login: '/login',
       logout: '/login',
-      home: '/',
+      home: '/app',
     },
     strategies: {
       guest: {
@@ -62,7 +83,7 @@ export default {
         token: {
           property: 'jwt',
           // required: true,
-           type: 'JWT'
+          type: 'JWT'
         },
         user: {
           property: false,
@@ -86,7 +107,7 @@ export default {
   },
 
   serverMiddleware: [
-    { path:'/api', handler:'~/server-middleware/auth.js' }
+    { path: '/api', handler: '~/server-middleware/auth.js' }
   ],
 
   // PWA module configuration: https://go.nuxtjs.dev/pwa

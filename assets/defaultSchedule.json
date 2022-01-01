@@ -1,0 +1,703 @@
+{
+  "defaults" : [ null, [ {
+    "end" : [ 9, 45 ],
+    "name" : "Period 1",
+    "start" : [ 9, 0 ]
+  }, {
+    "end" : [ 10, 40 ],
+    "name" : "Period 2",
+    "start" : [ 9, 55 ]
+  }, {
+    "end" : [ 10, 45 ],
+    "name" : "Brunch",
+    "start" : [ 10, 40 ]
+  }, {
+    "end" : [ 11, 40 ],
+    "name" : "Period 3",
+    "start" : [ 10, 55 ]
+  }, {
+    "end" : [ 12, 35 ],
+    "name" : "Period 4",
+    "start" : [ 11, 50 ]
+  }, {
+    "end" : [ 13, 5 ],
+    "name" : "Lunch",
+    "start" : [ 12, 35 ]
+  }, {
+    "end" : [ 14, 0 ],
+    "name" : "Period 5",
+    "start" : [ 13, 15 ]
+  }, {
+    "end" : [ 14, 55 ],
+    "name" : "Period 6",
+    "start" : [ 14, 10 ]
+  }, {
+    "end" : [ 15, 50 ],
+    "name" : "Period 7",
+    "start" : [ 15, 5 ]
+  }, {
+    "end" : [ 16, 45 ],
+    "name" : "Period 8",
+    "start" : [ 16, 0 ]
+  } ], [ {
+    "end" : [ 10, 35 ],
+    "name" : "Period 1",
+    "start" : [ 9, 0 ]
+  }, {
+    "end" : [ 10, 40 ],
+    "name" : "Brunch",
+    "start" : [ 10, 35 ]
+  }, {
+    "end" : [ 12, 20 ],
+    "name" : "Period 2",
+    "start" : [ 10, 50 ]
+  }, {
+    "end" : [ 12, 50 ],
+    "name" : "Lunch",
+    "start" : [ 12, 20 ]
+  }, {
+    "end" : [ 14, 30 ],
+    "name" : "Period 3",
+    "start" : [ 13, 0 ]
+  }, {
+    "end" : [ 16, 10 ],
+    "name" : "Period 4",
+    "start" : [ 14, 40 ]
+  } ], [ {
+    "end" : [ 10, 35 ],
+    "name" : "Period 5",
+    "start" : [ 9, 0 ]
+  }, {
+    "end" : [ 10, 40 ],
+    "name" : "Brunch",
+    "start" : [ 10, 35 ]
+  }, {
+    "end" : [ 12, 20 ],
+    "name" : "Period 6",
+    "start" : [ 10, 50 ]
+  }, {
+    "end" : [ 12, 50 ],
+    "name" : "Lunch",
+    "start" : [ 12, 20 ]
+  }, {
+    "end" : [ 14, 30 ],
+    "name" : "Period 7",
+    "start" : [ 13, 0 ]
+  }, {
+    "end" : [ 15, 30 ],
+    "name" : "Period 9",
+    "start" : [ 14, 40 ]
+  } ], [ {
+    "end" : [ 10, 35 ],
+    "name" : "Period 1",
+    "start" : [ 9, 0 ]
+  }, {
+    "end" : [ 10, 40 ],
+    "name" : "Brunch",
+    "start" : [ 10, 35 ]
+  }, {
+    "end" : [ 12, 20 ],
+    "name" : "Period 2",
+    "start" : [ 10, 50 ]
+  }, {
+    "end" : [ 12, 50 ],
+    "name" : "Lunch",
+    "start" : [ 12, 20 ]
+  }, {
+    "end" : [ 14, 30 ],
+    "name" : "Period 3",
+    "start" : [ 13, 0 ]
+  }, {
+    "end" : [ 16, 10 ],
+    "name" : "Period 4",
+    "start" : [ 14, 40 ]
+  } ], [ {
+    "end" : [ 10, 35 ],
+    "name" : "Period 5",
+    "start" : [ 9, 0 ]
+  }, {
+    "end" : [ 10, 40 ],
+    "name" : "Brunch",
+    "start" : [ 10, 35 ]
+  }, {
+    "end" : [ 12, 20 ],
+    "name" : "Period 6",
+    "start" : [ 10, 50 ]
+  }, {
+    "end" : [ 12, 50 ],
+    "name" : "Lunch",
+    "start" : [ 12, 20 ]
+  }, {
+    "end" : [ 13, 50 ],
+    "name" : "SELF",
+    "start" : [ 13, 0 ]
+  }, {
+    "end" : [ 15, 30 ],
+    "name" : "Period 7",
+    "start" : [ 14, 0 ]
+  } ] ],
+  "holidays" : {
+    "0-1-2022" : "Winter Break",
+    "0-2-2022" : "Winter Break",
+    "0-3-2022" : "Winter Break",
+    "0-4-2022" : "Winter Break",
+    "10-11-2021" : "Veteran's Day",
+    "10-20-2021" : "Thanksgiving Break",
+    "10-21-2021" : "Thanksgiving Break",
+    "10-22-2021" : "Thanksgiving Break",
+    "10-23-2021" : "Thanksgiving Break",
+    "10-24-2021" : "Thanksgiving Break",
+    "10-25-2021" : "Thanksgiving Break",
+    "10-26-2021" : "Thanksgiving Break",
+    "10-27-2021" : "Thanksgiving Break",
+    "10-28-2021" : "Thanksgiving Break",
+    "11-18-2021" : "Winter Break",
+    "11-19-2021" : "Winter Break",
+    "11-20-2021" : "Winter Break",
+    "11-21-2021" : "Winter Break",
+    "11-22-2021" : "Winter Break",
+    "11-23-2021" : "Winter Break",
+    "11-24-2021" : "Winter Break",
+    "11-25-2021" : "Winter Break",
+    "11-26-2021" : "Winter Break",
+    "11-27-2021" : "Winter Break",
+    "11-28-2021" : "Winter Break",
+    "11-29-2021" : "Winter Break",
+    "11-30-2021" : "Winter Break",
+    "11-31-2021" : "Winter Break",
+    "8-6-2021" : "Labor Day",
+    "9-1-2021" : "Staff Development Day"
+  },
+  "overrides" : {
+    "0-5-2022" : [ {
+      "end" : [ 9, 45 ],
+      "name" : "Period 1",
+      "start" : [ 9, 0 ]
+    }, {
+      "end" : [ 10, 40 ],
+      "name" : "Period 2",
+      "start" : [ 9, 55 ]
+    }, {
+      "end" : [ 10, 45 ],
+      "name" : "Brunch",
+      "start" : [ 10, 40 ]
+    }, {
+      "end" : [ 11, 40 ],
+      "name" : "Period 3",
+      "start" : [ 10, 55 ]
+    }, {
+      "end" : [ 12, 35 ],
+      "name" : "Period 4",
+      "start" : [ 11, 50 ]
+    }, {
+      "end" : [ 13, 5 ],
+      "name" : "Lunch",
+      "start" : [ 12, 35 ]
+    }, {
+      "end" : [ 14, 0 ],
+      "name" : "Period 5",
+      "start" : [ 13, 15 ]
+    }, {
+      "end" : [ 14, 55 ],
+      "name" : "Period 6",
+      "start" : [ 14, 10 ]
+    }, {
+      "end" : [ 15, 50 ],
+      "name" : "Period 7",
+      "start" : [ 15, 5 ]
+    }, {
+      "end" : [ 16, 45 ],
+      "name" : "Period 8",
+      "start" : [ 16, 0 ]
+    } ],
+    "10-10-2021" : [ {
+      "end" : [ 10, 35 ],
+      "name" : "Period 1",
+      "start" : [ 9, 0 ]
+    }, {
+      "end" : [ 10, 40 ],
+      "name" : "Brunch",
+      "start" : [ 10, 35 ]
+    }, {
+      "end" : [ 12, 20 ],
+      "name" : "Period 2",
+      "start" : [ 10, 50 ]
+    }, {
+      "end" : [ 12, 50 ],
+      "name" : "Lunch",
+      "start" : [ 12, 20 ]
+    }, {
+      "end" : [ 14, 30 ],
+      "name" : "Period 3",
+      "start" : [ 13, 0 ]
+    }, {
+      "end" : [ 16, 10 ],
+      "name" : "Period 4",
+      "start" : [ 14, 40 ]
+    } ],
+    "10-18-2021" : [ {
+      "end" : [ 10, 30 ],
+      "name" : "Period 1",
+      "start" : [ 9, 0 ]
+    }, {
+      "end" : [ 10, 35 ],
+      "name" : "Brunch",
+      "start" : [ 10, 30 ]
+    }, {
+      "end" : [ 12, 10 ],
+      "name" : "Period 2",
+      "start" : [ 10, 45 ]
+    }, {
+      "end" : [ 13, 0 ],
+      "name" : "Lunch",
+      "start" : [ 12, 10 ]
+    }, {
+      "end" : [ 14, 35 ],
+      "name" : "Period 3",
+      "start" : [ 13, 10 ]
+    }, {
+      "end" : [ 16, 10 ],
+      "name" : "Period 4",
+      "start" : [ 14, 45 ]
+    } ],
+    "10-8-2021" : [ {
+      "end" : [ 10, 35 ],
+      "name" : "Period 1",
+      "start" : [ 9, 0 ]
+    }, {
+      "end" : [ 10, 40 ],
+      "name" : "Brunch",
+      "start" : [ 10, 35 ]
+    }, {
+      "end" : [ 12, 20 ],
+      "name" : "Period 2",
+      "start" : [ 10, 50 ]
+    }, {
+      "end" : [ 12, 50 ],
+      "name" : "Lunch",
+      "start" : [ 12, 20 ]
+    }, {
+      "end" : [ 14, 30 ],
+      "name" : "Period 3",
+      "start" : [ 13, 0 ]
+    }, {
+      "end" : [ 16, 10 ],
+      "name" : "Period 4",
+      "start" : [ 14, 40 ]
+    } ],
+    "10-9-2021" : [ {
+      "end" : [ 10, 35 ],
+      "name" : "Period 5",
+      "start" : [ 9, 0 ]
+    }, {
+      "end" : [ 10, 40 ],
+      "name" : "Brunch",
+      "start" : [ 10, 35 ]
+    }, {
+      "end" : [ 12, 20 ],
+      "name" : "Period 6",
+      "start" : [ 10, 50 ]
+    }, {
+      "end" : [ 12, 50 ],
+      "name" : "Lunch",
+      "start" : [ 12, 20 ]
+    }, {
+      "end" : [ 14, 30 ],
+      "name" : "Period 7",
+      "start" : [ 13, 0 ]
+    }, {
+      "end" : [ 15, 30 ],
+      "name" : "Period 9",
+      "start" : [ 14, 40 ]
+    } ],
+    "11-10-2021" : [ {
+      "end" : [ 10, 35 ],
+      "name" : "Period 5",
+      "start" : [ 9, 0 ]
+    }, {
+      "end" : [ 10, 40 ],
+      "name" : "Brunch",
+      "start" : [ 10, 35 ]
+    }, {
+      "end" : [ 12, 20 ],
+      "name" : "Period 6",
+      "start" : [ 10, 50 ]
+    }, {
+      "end" : [ 12, 50 ],
+      "name" : "Lunch",
+      "start" : [ 12, 20 ]
+    }, {
+      "end" : [ 13, 50 ],
+      "name" : "Period 9",
+      "start" : [ 13, 0 ]
+    }, {
+      "end" : [ 15, 30 ],
+      "name" : "Period 7",
+      "start" : [ 14, 0 ]
+    } ],
+    "11-13-2021" : [ {
+      "end" : [ 10, 15 ],
+      "name" : "Period 1",
+      "start" : [ 9, 0 ]
+    }, {
+      "end" : [ 10, 20 ],
+      "name" : "Brunch",
+      "start" : [ 10, 15 ]
+    }, {
+      "end" : [ 11, 45 ],
+      "name" : "Period 2",
+      "start" : [ 10, 30 ]
+    }, {
+      "end" : [ 12, 5 ],
+      "name" : "Lunch",
+      "start" : [ 11, 45 ]
+    }, {
+      "end" : [ 13, 30 ],
+      "name" : "Period 3",
+      "start" : [ 12, 15 ]
+    }, {
+      "end" : [ 14, 55 ],
+      "name" : "Period 4",
+      "start" : [ 13, 40 ]
+    } ],
+    "11-14-2021" : [ {
+      "end" : [ 10, 15 ],
+      "name" : "Period 5",
+      "start" : [ 9, 0 ]
+    }, {
+      "end" : [ 10, 20 ],
+      "name" : "Brunch",
+      "start" : [ 10, 15 ]
+    }, {
+      "end" : [ 11, 45 ],
+      "name" : "Period 6",
+      "start" : [ 10, 30 ]
+    }, {
+      "end" : [ 12, 15 ],
+      "name" : "Lunch",
+      "start" : [ 11, 45 ]
+    }, {
+      "end" : [ 13, 30 ],
+      "name" : "Period 7",
+      "start" : [ 12, 15 ]
+    }, {
+      "end" : [ 14, 30 ],
+      "name" : "Period 9",
+      "start" : [ 13, 40 ]
+    } ],
+    "11-15-2021" : [ {
+      "end" : [ 10, 40 ],
+      "name" : "Period 2",
+      "start" : [ 9, 0 ]
+    }, {
+      "end" : [ 10, 45 ],
+      "name" : "Brunch",
+      "start" : [ 10, 40 ]
+    }, {
+      "end" : [ 11, 25 ],
+      "name" : "Period 9",
+      "start" : [ 10, 55 ]
+    }, {
+      "end" : [ 13, 15 ],
+      "name" : "Period 4",
+      "start" : [ 11, 35 ]
+    }, {
+      "end" : [ 13, 30 ],
+      "name" : "Lunch",
+      "start" : [ 13, 15 ]
+    } ],
+    "11-16-2021" : [ {
+      "end" : [ 10, 40 ],
+      "name" : "Period 1",
+      "start" : [ 9, 0 ]
+    }, {
+      "end" : [ 10, 45 ],
+      "name" : "Brunch",
+      "start" : [ 10, 40 ]
+    }, {
+      "end" : [ 12, 40 ],
+      "name" : "Period 3",
+      "start" : [ 11, 0 ]
+    }, {
+      "end" : [ 13, 15 ],
+      "name" : "Lunch",
+      "start" : [ 12, 40 ]
+    }, {
+      "end" : [ 14, 55 ],
+      "name" : "Period 7",
+      "start" : [ 13, 15 ]
+    } ],
+    "11-17-2021" : [ {
+      "end" : [ 10, 40 ],
+      "name" : "Period 5",
+      "start" : [ 9, 0 ]
+    }, {
+      "end" : [ 11, 0 ],
+      "name" : "Brunch",
+      "start" : [ 10, 40 ]
+    }, {
+      "end" : [ 12, 40 ],
+      "name" : "Period 6",
+      "start" : [ 11, 0 ]
+    }, {
+      "end" : [ 15, 30 ],
+      "name" : "Period 7",
+      "start" : [ 14, 0 ]
+    } ],
+    "8-15-2021" : [ {
+      "end" : [ 10, 35 ],
+      "name" : "Period 5",
+      "start" : [ 9, 0 ]
+    }, {
+      "end" : [ 10, 40 ],
+      "name" : "Brunch",
+      "start" : [ 10, 35 ]
+    }, {
+      "end" : [ 12, 20 ],
+      "name" : "Period 6",
+      "start" : [ 10, 50 ]
+    }, {
+      "end" : [ 13, 10 ],
+      "name" : "Lunch",
+      "start" : [ 12, 20 ]
+    }, {
+      "end" : [ 13, 50 ],
+      "name" : "Period 9",
+      "start" : [ 13, 20 ]
+    }, {
+      "end" : [ 15, 30 ],
+      "name" : "Period 7",
+      "start" : [ 14, 0 ]
+    } ],
+    "8-27-2021" : [ {
+      "end" : [ 10, 35 ],
+      "name" : "Period 1",
+      "start" : [ 9, 0 ]
+    }, {
+      "end" : [ 10, 40 ],
+      "name" : "Brunch",
+      "start" : [ 10, 35 ]
+    }, {
+      "end" : [ 12, 20 ],
+      "name" : "Period 2",
+      "start" : [ 10, 50 ]
+    }, {
+      "end" : [ 12, 50 ],
+      "name" : "Lunch",
+      "start" : [ 12, 20 ]
+    }, {
+      "end" : [ 14, 30 ],
+      "name" : "Period 3",
+      "start" : [ 13, 0 ]
+    }, {
+      "end" : [ 16, 10 ],
+      "name" : "Period 4",
+      "start" : [ 14, 40 ]
+    } ],
+    "8-28-2021" : [ {
+      "end" : [ 10, 35 ],
+      "name" : "Period 5",
+      "start" : [ 9, 0 ]
+    }, {
+      "end" : [ 10, 40 ],
+      "name" : "Brunch",
+      "start" : [ 10, 35 ]
+    }, {
+      "end" : [ 12, 20 ],
+      "name" : "Period 6",
+      "start" : [ 10, 50 ]
+    }, {
+      "end" : [ 12, 50 ],
+      "name" : "Lunch",
+      "start" : [ 12, 20 ]
+    }, {
+      "end" : [ 14, 30 ],
+      "name" : "Period 7",
+      "start" : [ 13, 0 ]
+    }, {
+      "end" : [ 15, 30 ],
+      "name" : "Period 9",
+      "start" : [ 14, 40 ]
+    } ],
+    "8-29-2021" : [ {
+      "end" : [ 10, 35 ],
+      "name" : "Period 1",
+      "start" : [ 9, 0 ]
+    }, {
+      "end" : [ 10, 40 ],
+      "name" : "Brunch",
+      "start" : [ 10, 35 ]
+    }, {
+      "end" : [ 12, 20 ],
+      "name" : "Period 2",
+      "start" : [ 10, 50 ]
+    }, {
+      "end" : [ 12, 50 ],
+      "name" : "Lunch",
+      "start" : [ 12, 20 ]
+    }, {
+      "end" : [ 14, 30 ],
+      "name" : "Period 3",
+      "start" : [ 13, 0 ]
+    }, {
+      "end" : [ 16, 10 ],
+      "name" : "Period 4",
+      "start" : [ 14, 40 ]
+    } ],
+    "8-3-2021" : [ {
+      "end" : [ 10, 15 ],
+      "name" : "Period 5",
+      "start" : [ 9, 0 ]
+    }, {
+      "end" : [ 10, 30 ],
+      "name" : "Brunch",
+      "start" : [ 10, 15 ]
+    }, {
+      "end" : [ 11, 45 ],
+      "name" : "Period 6",
+      "start" : [ 10, 30 ]
+    }, {
+      "end" : [ 13, 10 ],
+      "name" : "Period 7",
+      "start" : [ 11, 55 ]
+    } ],
+    "8-30-2021" : [ {
+      "end" : [ 10, 35 ],
+      "name" : "Period 5",
+      "start" : [ 9, 0 ]
+    }, {
+      "end" : [ 10, 40 ],
+      "name" : "Brunch",
+      "start" : [ 10, 35 ]
+    }, {
+      "end" : [ 12, 20 ],
+      "name" : "Period 6",
+      "start" : [ 10, 50 ]
+    }, {
+      "end" : [ 12, 50 ],
+      "name" : "Lunch",
+      "start" : [ 12, 20 ]
+    }, {
+      "end" : [ 13, 50 ],
+      "name" : "SELF",
+      "start" : [ 13, 0 ]
+    }, {
+      "end" : [ 15, 30 ],
+      "name" : "Period 7",
+      "start" : [ 14, 0 ]
+    } ],
+    "9-11-2021" : [ {
+      "end" : [ 10, 35 ],
+      "name" : "Period 1",
+      "start" : [ 9, 0 ]
+    }, {
+      "end" : [ 10, 40 ],
+      "name" : "Brunch",
+      "start" : [ 10, 35 ]
+    }, {
+      "end" : [ 12, 20 ],
+      "name" : "Period 2",
+      "start" : [ 10, 50 ]
+    }, {
+      "end" : [ 12, 50 ],
+      "name" : "Lunch",
+      "start" : [ 12, 20 ]
+    }, {
+      "end" : [ 14, 30 ],
+      "name" : "Period 3",
+      "start" : [ 13, 0 ]
+    }, {
+      "end" : [ 16, 10 ],
+      "name" : "Period 4",
+      "start" : [ 14, 40 ]
+    } ],
+    "9-12-2021" : [ {
+      "end" : [ 10, 35 ],
+      "name" : "Period 5",
+      "start" : [ 9, 0 ]
+    }, {
+      "end" : [ 10, 40 ],
+      "name" : "Brunch",
+      "start" : [ 10, 35 ]
+    }, {
+      "end" : [ 12, 20 ],
+      "name" : "Period 6",
+      "start" : [ 10, 50 ]
+    }, {
+      "end" : [ 12, 50 ],
+      "name" : "Lunch",
+      "start" : [ 12, 20 ]
+    }, {
+      "end" : [ 14, 30 ],
+      "name" : "Period 7",
+      "start" : [ 13, 0 ]
+    }, {
+      "end" : [ 15, 30 ],
+      "name" : "PRIME",
+      "start" : [ 14, 40 ]
+    } ],
+    "9-13-2021" : [ {
+      "end" : [ 10, 55 ],
+      "name" : "SELF",
+      "start" : [ 9, 0 ]
+    }, {
+      "end" : [ 11, 10 ],
+      "name" : "Brunch",
+      "start" : [ 10, 55 ]
+    }, {
+      "end" : [ 13, 0 ],
+      "name" : "SELF",
+      "start" : [ 11, 10 ]
+    } ],
+    "9-14-2021" : [ {
+      "end" : [ 10, 35 ],
+      "name" : "Period 1",
+      "start" : [ 9, 0 ]
+    }, {
+      "end" : [ 10, 40 ],
+      "name" : "Brunch",
+      "start" : [ 10, 35 ]
+    }, {
+      "end" : [ 12, 20 ],
+      "name" : "Period 2",
+      "start" : [ 10, 50 ]
+    }, {
+      "end" : [ 12, 50 ],
+      "name" : "Lunch",
+      "start" : [ 12, 20 ]
+    }, {
+      "end" : [ 14, 30 ],
+      "name" : "Period 3",
+      "start" : [ 13, 0 ]
+    }, {
+      "end" : [ 16, 10 ],
+      "name" : "Period 4",
+      "start" : [ 14, 40 ]
+    } ],
+    "9-15-2021" : [ {
+      "end" : [ 10, 35 ],
+      "name" : "Period 5",
+      "start" : [ 9, 0 ]
+    }, {
+      "end" : [ 10, 40 ],
+      "name" : "Brunch",
+      "start" : [ 10, 35 ]
+    }, {
+      "end" : [ 12, 20 ],
+      "name" : "Period 6",
+      "start" : [ 10, 50 ]
+    }, {
+      "end" : [ 12, 50 ],
+      "name" : "Lunch",
+      "start" : [ 12, 20 ]
+    }, {
+      "end" : [ 13, 50 ],
+      "name" : "SELF",
+      "start" : [ 13, 0 ]
+    }, {
+      "end" : [ 15, 30 ],
+      "name" : "Period 7",
+      "start" : [ 14, 0 ]
+    } ]
+  }
+}

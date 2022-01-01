@@ -10,8 +10,9 @@
               <div class="c-stepper__content">
                 <h3 class="c-stepper__title">Create your account</h3>
                 <div  class="card expansion block  mt-3">
-                  <input @keyup="error = false" name="Name" required type="text" v-model="name" class="input-text mx-auto w-72 block my-4" placeholder="Your Name" />
-                  <input @keyup="error = false" required pattern="[a-z]{2}\d{5}@pausd.us" type="email" v-model="email" class="input-text mx-auto w-72 block my-4  invalid:ring-red-500  valid:ring-green-500" placeholder="PAUSD Email" />
+                  <p>Create a password that you will use to access your account in the future.</p>
+                  <!--<input @keyup="error = false" name="Name" required type="text" v-model="name" class="input-text mx-auto w-72 block my-4" placeholder="Your Name" />
+                  <input @keyup="error = false" required pattern="[a-z]{2}\d{5}@pausd.us" type="email" v-model="email" class="input-text mx-auto w-72 block my-4  invalid:ring-red-500  valid:ring-green-500" placeholder="PAUSD Email" />--->
                   <input @keyup="error = false" required type="password" v-model="password" class="input-text mx-auto w-72 block my-4" placeholder="Create Password" />
                   <input @keyup="error = false" required type="password" v-model="password2" class="input-text mx-auto w-72 block my-4" placeholder="Confirm Password" />
                   <span class="italic text-red-500 text-sm" v-if="error && profileError">{{profileError}}</span>
@@ -24,9 +25,9 @@
                 <h3 class="c-stepper__title">Link Schoology <span class="text-sm text-gray-500 italic font-semibold">(optional)</span></h3>
                 <div class="card expansion block mt-3">
                   <p class="mb-2">Clicking the purple button below will take you to Schoology, where you can click "Allow" to allow
-                    Schoology integration with Gunn.One. If you're not ready to connect Schoology, you can skip
-                    this step for now and complete it at any time.</p>
-                  <button @click="goToSchoology" class="btn-primary float-right">Link Schoology</button> <button class="btn-secondary float-right mx-2">Skip</button>
+                    Schoology integration with Gunn.One. <!--If you're not ready to connect Schoology, you can skip
+                    this step for now and complete it at any time.--></p>
+                  <button @click="goToSchoology" class="btn-primary float-right">Link Schoology</button> <button class="btn-secondary hidden float-right mx-2">Skip</button>
                 </div>
               </div>
 
@@ -58,18 +59,18 @@ export default {
     activeStep:1,
     password:'',
     password2: '',
-    email:'',
-    name:'',
+    //email:'',
+    //name:'',
     error: false,
   }),
 
   computed: {
     profileError(){
       // check if name exists
-      if (this.name.length === 0){
+      /*if (this.name.length === 0){
         return 'Please enter a name!'
       }
-      if (!(/[a-z]{2}\d{5}@pausd\.us/.test(this.email))) return 'Please use your PAUSD email.'
+      if (!(/[a-z]{2}\d{5}@pausd\.us/.test(this.email))) return 'Please use your PAUSD email.'*/
       if (this.password !== this.password2) return 'Passwords do not match!';
       if (getPasswordStrength(this.password) < 40) return 'Password is not strong!';
       return false

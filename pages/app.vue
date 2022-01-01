@@ -1,8 +1,7 @@
 <template>
-  <div>
-app?
-    {{$auth.user}}
-<button @click="$auth.logout()" class="btn-primary">logout</button>
+  <div class="w-full h-full">
+<nuxt-child/>
+
   </div>
 </template>
 
