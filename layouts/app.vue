@@ -1,5 +1,5 @@
 <template>
-  <div class="h-screen before:content-['_'] before:vackground before:absolute before:top-0 before:left-0 before:h-full before:w-full  w-screen relative  ">
+  <div class="h-screen before:content-['_'] before:brick-indigo before:bg-slate-700 before:absolute before:top-0 before:left-0 before:h-full before:w-full  w-screen relative  ">
     <div class="relative flex flex-row  overflow-y-scroll w-full h-full">
     <button class="fixed md:hidden top-4 left-4" @click="sidebar = true;" v-if="!sidebar"><menu-icon  class="text-white  h-8 w-8" /></button>
     <button

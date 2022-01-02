@@ -6,16 +6,18 @@
       </div>
       <div :style="`background-color:${period.color[500].toString()}88; `" :key='period.name' v-for='period of sched' class=" class-block">
         
-          <span :style="`color:${period.color[50]}99;`" class="title">{{period.name}}</span>
-        <span>{{period.start}}</span>
+          <span :style="`color:${period.color[50]}bb;`" class="title">{{period.name}}</span>
+        <span class="text-sm text-slate-50/50">{{ DateTime.fromJSDate(new Date(period.start)).toLocaleString(DateTime.TIME_SIMPLE) }} to {{ DateTime.fromJSDate(new Date(period.end)).toLocaleString(DateTime.TIME_SIMPLE) }}</span>
       </div>
   </div>
 </template>
 
 <script>
+const { DateTime } = require("luxon");
 export default {
     data:()=>({
         sched:[],
+        DateTime,
     }),
     mounted(){
         this.sched = this.$store.getters['schedule/scheduleForDate'](new Date('1/5/2022'));
