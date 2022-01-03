@@ -1,24 +1,27 @@
 <template>
-  <div class="h-screen before:content-['_'] before:brick-indigo before:bg-slate-700 before:absolute before:top-0 before:left-0 before:h-full before:w-full  w-screen relative  ">
+  <div class="h-screen   bg-gradient-to-r to-indigo-500 from-purple-500   w-screen relative  ">
     <div class="relative flex flex-row  overflow-y-scroll w-full h-full">
     <button class="fixed md:hidden top-4 left-4" @click="sidebar = true;" v-if="!sidebar"><menu-icon  class="text-white  h-8 w-8" /></button>
+    <div class="md:hidden text-lg font-semibold text-white py-4 px-2 ml-16 fixed w-full">
+      {{currentEvent.remaining}} minutes {{currentEvent.displayText}} {{currentEvent.name}}
+    </div>
     <button
     :class="sidebar?'bg-black/60 backdrop-blur-[7px]':'bg-black/0 pointer-events-none'"
     @click="sidebar=false;"
     class="z-10 md:pointer-events-none transition-all duration-500 fixed  top-0 left-0 h-full w-full "
     ></button>
-    <nav :class="sidebar?'w-60':'md:w-60 w-0'" class="h-full md:sticky  transition-all fixed  z-20 top-0 left-0 bg-gray-200/30 backdrop-blur-sm rounded-r-2xl shadow-2xl overflow-x-hidden duration-500">
+    <nav :class="sidebar?'w-60':'md:w-72 w-0'" class="h-full md:sticky md:bg-transparent bg-violet-600 transition-all fixed  z-20 top-0 left-0  backdrop-blur-sm  shadow-2xl md:shadow-none overflow-x-hidden duration-500">
     <button class="absolute md:hidden top-4 right-4" @click="sidebar = false;" >
       <close-icon class="h-8 w-8 text-white"/>
     </button>
-     <div class="mx-5 pt-8">
-       <h1 class="font-semi tracking-wide text-slate-50/90 text-xl">Gunn.One</h1>
+     <div class="mx-5 md:pt-5 pt-8">
+       <h1 class="font-semibold text-center block tracking-wide text-slate-50/90 text-xl">Gunn.One</h1>
        <div class="mt-3">
-        <a :class="n===2?'bg-indigo-700/50 text-slate-50/70':'bg-slate-50/40 text-slate-50/80 '" class="block cursor-pointer  font-medium  my-3 rounded-lg px-3 py-2" :key="n" v-for="n of 4">
-          Option {{n}}
-        </a>
+        <div class="flex flex-col p-1 space-y-2 bg-indigo-900/20 rounded-xl" role="tablist" aria-orientation="vertical">
+        <tab :key="link.href" v-for="link of links" :active="$route.fullPath.split('/')[2]==link.href.split('/')[2]" :href="link.href">{{link.title}}</tab>
+        </div>
        </div>
-       <button @click="$auth.logout()" class="btn-primary ">logout</button>
+       <button @click="$auth.logout()" class="btn-primary mt-5 hidden">logout</button>
      </div>
     </nav>
     <Nuxt/>
@@ -27,14 +30,33 @@
 </template>
 
 <script>
-import CloseIcon from '~/components/ui/close-icon.vue'
-import menuIcon from '~/components/ui/menu-icon.vue'
+import CloseIcon from '~/components/close-icon.vue'
+import menuIcon from '~/components/menu-icon.vue'
+import Tab from '~/components/tab.vue'
 export default {
-  components: { menuIcon, CloseIcon },
   name: "app",
   data: ()=>({
     sidebar: false,
-  })
+    links:[
+      {
+        title:'Schedule',
+        href:'/app',
+      },
+      {
+        title:'People',
+        href:'/app/people',
+      },
+      {
+        title:'Utilities',
+        href:'/app/utilities',
+      }
+    ]
+  }),
+  computed:{
+    currentEvent(){
+      return this.$store.getters['schedule/currentEvent'];
+    }
+  }
 }
 </script>
 

@@ -4,7 +4,7 @@ import { customizations } from '~/assets/defaultCustomizations'
 export const state = ()=>({
     theSchedule,
     customizations,
-    now: new Date()
+    now: new Date('1/6/2022 11:30'), //new Date()
 })
 
 export const actions = {
@@ -44,7 +44,7 @@ export const actions = {
       const sched = state.theSchedule
       const ref = dob.getMonth() + '-' + dob.getDate() + '-' + dob.getFullYear();
       let rtv;
-      if (dob < new Date(2020, 7, 17)) {
+      if (dob < new Date(2021, 7, 15)) {
         return []
       }
       if (ref in sched.overrides) {
@@ -68,7 +68,7 @@ export const actions = {
           const end = new Date(dob.getFullYear(), dob.getMonth(), dob.getDate(), event.end[0], event.end[1]);
           let progress;
           let status;
-          const now = (new Date)//.addDays(2);
+          const now = state.now;// (new Date)//.addDays(2);
           if (now < start) {
             progress = 0;
             status = periodStates.FUTURE
@@ -95,6 +95,7 @@ export const actions = {
         })//regular schedule for this day of the week
     },
     currentEvent: (state, getters) => {
+      //console.log('hello');
       const now = state.now//.addDays(2)
       const sched = getters.scheduleForDate(now)
       for (let index in sched) {
@@ -119,6 +120,7 @@ export const actions = {
         }
         const end = event.end
         if (start <= now && now <= end) {
+          //console.log('ola')
           return {
             type: 'current',
             name: (state.customizations[event.name] || { name: undefined }).name || event.name,

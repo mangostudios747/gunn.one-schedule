@@ -1,42 +1,47 @@
 const colors = require('tailwindcss/colors')
 
+const white = {
+  500: '#cccccc',
+  50: '#222222'
+}
+
 export const customizations = { //todo: settings
     'Period 1': {
       color: colors.lime
     },
     'Period 2': {
-      color: colors.green
+      color: colors.emerald
     },
     'Period 3': {
-      color: colors.emerald
+      color: colors.pink
     },
     'Period 4': {
       color: colors.teal
     },
     'Period 5': {
-      color: colors.sky
+      color: colors.fuchsia
     },
     'Period 6': {
       color: colors.blue
     },
     'Period 7': {
-      color: colors.indigo
+      color: colors.yellow
     },
     'Period 8': {
-      color: colors.violet
+      color: colors.sky
     },
     'Period 9': {
-      color: colors.fuschia,
+      color: colors.fuchsia,
       name: "PRIME"
     },
     'Lunch': {
-      color: colors.cyan
+      color: colors.amber
     },
     'Brunch': {
       color: colors.amber
     },
     'Other': {
-      color: colors.slate
+      color: colors.amber
     },
     'SELF': {
       color: colors.rose
