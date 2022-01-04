@@ -45,7 +45,7 @@
         class="
           h-screen
           md:sticky md:bg-transparent
-          bg-primary-600
+          bg-sky-500
           transition-all
           fixed
           z-20
