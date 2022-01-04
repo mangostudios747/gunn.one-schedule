@@ -3,8 +3,7 @@
     class="
       h-screen
       bg-gradient-to-r
-      to-indigo-500
-      from-purple-500
+      from-sky-400 to-indigo-500
       w-screen
       relative
     "
