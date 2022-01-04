@@ -36,7 +36,7 @@ jobs:
     - run: "echo '  SCHOOLOGY_KEY: ${{ secrets.SCHOOLOGY_KEY }}' >> app.yaml"
     - run: "echo '  SCHOOLOGY_SECRET: ${{ secrets.SCHOOLOGY_SECRET }}' >> app.yaml"
     - run: "echo '  MONGO_URL: ${{ secrets.MONGO_URL }}' >> app.yaml"
-    - run: "echo '  cookie_secret: ${{ secrets.COOKIE_SECRET }}' >> app.yaml"
+    - run: "echo '  COOKIE_SECRET: ${{ secrets.COOKIE_SECRET }}' >> app.yaml"
     - run: "echo 'build_env_variables:' >> app.yaml"
     - run: "echo '  CONTAINER: appengine' >> app.yaml"
     - run: "echo '  JWT_SECRET: ${{ secrets.JWT_SECRET }}' >> app.yaml"
