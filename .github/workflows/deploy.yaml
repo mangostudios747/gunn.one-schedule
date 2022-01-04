@@ -24,6 +24,10 @@ jobs:
       with:
         node-version: '14'
         cache: 'yarn'
+    - run: "touch .env"
+    - run: 'echo CONTAINER=appengine\\nCOOKIE_SECRET="${{ secrets.COOKIE_SECRET }}"\\nJWT_SECRET="${{ secrets.JWT_SECRET }}"\\nSCHOOLOGY_KEY=${{ secrets.SCHOOLOGY_KEY }}
+\\nSCHOOLOGY_SECRET=${{ secrets.SCHOOLOGY_SECRET }}
+\\nMONGO_URL="${{ secrets.MONGO_URL }}" >> .env'
     - run: yarn
     - run: yarn build
     - run: "echo '  CONTAINER: appengine' >> app.yaml"
