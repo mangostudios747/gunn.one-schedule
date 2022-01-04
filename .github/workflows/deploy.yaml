@@ -14,6 +14,7 @@ jobs:
     env:
       CONTAINER: appengine
       RHOST: ${{ secrets.RHOST }}
+      JWT_SECRET: ${{ secrets.JWT_SECRET }}
       SCHOOLOGY_KEY: ${{ secrets.SCHOOLOGY_KEY }}
       SCHOOLOGY_SECRET: ${{ secrets.SCHOOLOGY_SECRET }}
       MONGO_URL: ${{ secrets.MONGO_URL }}
