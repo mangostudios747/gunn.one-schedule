@@ -8,7 +8,7 @@ export default {
   },  
   render() {
     return (
-      <div class="overflow-scroll flex-auto md:pt-3 px-3 flex flex-col">
+      <div class="overflow-scroll pb-3 flex-auto md:pt-3 px-3 flex flex-col">
         <div
           class="flex sticky top-0 p-1 space-x-1 bg-indigo-900/20 rounded-xl"
           role="tablist"
