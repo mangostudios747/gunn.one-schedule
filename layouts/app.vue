@@ -45,7 +45,7 @@
         :class="sidebar ? 'w-60' : 'md:min-w-[200px] w-0'"
         class="
           h-screen
-          md:relative md:bg-transparent
+          md:sticky md:bg-transparent
           bg-violet-600
           transition-all
           fixed
