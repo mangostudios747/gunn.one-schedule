@@ -1,0 +1,49 @@
+# This workflow will do a clean install of node dependencies, cache/restore them, build the source code and run tests across different versions of node
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
+
+name: Node.js CI
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    environment: gunn1
+    env:
+      CONTAINER: appengine
+      RHOST: ${{ secrets.RHOST }}
+      SCHOOLOGY_KEY: ${{ secrets.SCHOOLOGY_KEY }}
+      SCHOOLOGY_SECRET: ${{ secrets.SCHOOLOGY_SECRET }}
+      MONGO_URL: ${{ secrets.MONGO_URL }}
+      COOKIE_SECRET: ${{ secrets.COOKIE_SECRET }}
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/setup-node@v2
+      with:
+        node-version: '14'
+        cache: 'yarn'
+    - run: yarn
+    - run: yarn build
+    - run: "echo '  CONTAINER: appengine' >> app.yaml"
+    - run: "echo '  RHOST: ${{ secrets.RHOST }}' >> app.yaml"
+    - run: "echo '  JWT_SECRET: ${{ secrets.JWT_SECRET }}' >> app.yaml"
+    - run: "echo '  SCHOOLOGY_KEY: ${{ secrets.SCHOOLOGY_KEY }}' >> app.yaml"
+    - run: "echo '  SCHOOLOGY_SECRET: ${{ secrets.SCHOOLOGY_SECRET }}' >> app.yaml"
+    - run: "echo '  MONGO_URL: ${{ secrets.MONGO_URL }}' >> app.yaml"
+    - run: "echo '  cookie_secret: ${{ secrets.cookie_secret }}' >> app.yaml"
+    - run: "echo 'build_env_variables:' >> app.yaml"
+    - run: "echo '  CONTAINER: appengine' >> app.yaml"
+    - run: "echo '  JWT_SECRET: ${{ secrets.JWT_SECRET }}' >> app.yaml"
+    - run: "echo '  RHOST: ${{ secrets.RHOST }}' >> app.yaml"
+    - run: "echo '  SCHOOLOGY_KEY: ${{ secrets.SCHOOLOGY_KEY }}' >> app.yaml"
+    - run: "echo '  SCHOOLOGY_SECRET: ${{ secrets.SCHOOLOGY_SECRET }}' >> app.yaml"
+    - run: "echo '  MONGO_URL: ${{ secrets.MONGO_URL }}' >> app.yaml"
+    - run: "echo '  COOKIE_SECRET: ${{ secrets.COOKIE_SECRET }}' >> app.yaml"
+    - run: cat app.yaml
+    - id: Deploy
+      uses: google-github-actions/deploy-appengine@main
+      with:
+        credentials: ${{ secrets.GCP_SA_KEY }}
+        project_id: ${{ secrets.GCP_PROJECT }}
