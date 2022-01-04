@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col mt-16 w-full">
+  <div class="flex flex-col mt-5 w-full">
     <div class="header w-[70%] mx-auto px-4 flex flex-row mb-3 text-center">
         <button @click="previousDay"><left-icon class="w-8 h-8 [stroke-linecap:round] [stroke-width:2] text-white" /></button>
         <div class="grow">
