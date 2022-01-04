@@ -24,7 +24,7 @@ const store = MongoStore.create({
   mongoUrl: MONGO_URL,
 });
 const cookieParser = require('cookie-parser');
-app.use(cookieParser());
+app.use(cookieParser(process.env.COOKIE_SECRET));
 
 app.use(session({
   secret: process.env.COOKIE_SECRET,
