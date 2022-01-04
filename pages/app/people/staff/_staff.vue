@@ -1,5 +1,5 @@
 <template>
-  <div class="p-1 flex flex-col pb-5 mt-2 bg-indigo-900/20 rounded-xl">
+  <div class="p-1 flex flex-col pb-5 mt-2 bg-primary-900/20 rounded-xl">
     <div class="flex mt-2 px-2 flex-row">
         <nuxt-link to="/app/people/staff"><left-icon class="text-white [stroke-linecap:round] [stroke-width:2] h-6 w-6" /></nuxt-link>
         <h1 class="text-white text-lg leading-6 ml-2 font-semibold">{{member.name}}</h1>

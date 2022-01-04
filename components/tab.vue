@@ -8,13 +8,13 @@
       text-sm
       leading-5
       font-medium
-      text-indigo-100
+      text-primary-100
       hover:bg-white/[0.12] hover:text-white
       rounded-lg
       focus:outline-none focus:ring-2
       cursor-pointer
       mx-auto
-      ring-offset-2 ring-offset-indigo-400 ring-white ring-opacity-60
+      ring-offset-2 ring-offset-primary-400 ring-white ring-opacity-60
       text-center
     "
     :exact="exact"
@@ -47,6 +47,6 @@ export default {
 
 <style>
 .active-tab {
-    @apply hover:bg-white hover:text-indigo-700 text-indigo-700 bg-white shadow !important;
+    @apply hover:bg-white hover:text-primary-700 text-primary-700 bg-white shadow !important;
 }
 </style>

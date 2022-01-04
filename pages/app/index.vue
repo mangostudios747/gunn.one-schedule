@@ -76,7 +76,7 @@ export default {
 
 <style>
 .class-block {
-  @apply mx-auto relative shadow-indigo-600/50 shadow-2xl w-[70%] my-2 backdrop-blur-sm py-4 px-6 rounded-md;
+  @apply mx-auto relative shadow-primary-600/50 shadow-2xl w-[70%] my-2 backdrop-blur-sm py-4 px-6 rounded-md;
 }
 
 .class-block .title {

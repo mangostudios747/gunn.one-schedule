@@ -45,7 +45,7 @@
         class="
           h-screen
           md:sticky md:bg-transparent
-          bg-violet-600
+          bg-primary-600
           transition-all
           fixed
           z-20
@@ -78,7 +78,7 @@
           </h1>
           <div class="mt-3">
             <div
-              class="flex flex-col p-1 space-y-2 bg-indigo-900/20 rounded-xl"
+              class="flex flex-col p-1 space-y-2 bg-primary-900/20 rounded-xl"
               role="tablist"
               aria-orientation="vertical"
             >

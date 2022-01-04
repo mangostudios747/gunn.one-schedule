@@ -12,7 +12,9 @@ module.exports = {
     extend: {
       colors: {
         gray: colors.slate,
-        water: '#E5EAF0'
+        water: '#E5EAF0',
+        primary: colors.blue,
+        secondary: colors.sky
       },
       transitionProperty: {
         'height': 'height',

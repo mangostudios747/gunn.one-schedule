@@ -6,7 +6,7 @@
     landscape:flex-row-reverse">
       <img class="w-full h-auto md:w-auto landscape:w-auto landscape:max-w-[50%] md:max-w-[50%] lg:landscape:max-w-[65%] rounded-2xl shadow-xl" src="/n-building.jpg" />
       <div class="md:mt-0 md:mr-10 landscape:mr-10 landscape:mt-0 h-full flex ">
-        <div class=" my-auto prose prose-indigo mt-5 prose-h1:text-3xl prose-headings:font-bold"><h1>Everything at <span class="text-indigo-600">Gunn</span>, all in <span class="text-indigo-600">One</span>.</h1>
+        <div class=" my-auto prose prose-primary mt-5 prose-h1:text-3xl prose-headings:font-bold"><h1>Everything at <span class="text-primary-600">Gunn</span>, all in <span class="text-primary-600">One</span>.</h1>
         <ul>
           <li>Up-to-date schedules</li>
           <li>All of your assignments</li>

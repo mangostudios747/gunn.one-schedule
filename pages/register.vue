@@ -139,12 +139,12 @@ export default {
 
 .c-stepper__item.active:before {
 
-  @apply bg-indigo-500 shadow-indigo-500/50 shadow-lg;
+  @apply bg-primary-500 shadow-primary-500/50 shadow-lg;
 }
 
 .c-stepper__item.completed:before {
 
-  @apply bg-indigo-200 shadow-indigo-500/50 shadow-sm;
+  @apply bg-primary-200 shadow-primary-500/50 shadow-sm;
 }
 .c-stepper__item:not(:last-child):after {
   content: "";

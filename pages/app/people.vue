@@ -10,7 +10,7 @@ export default {
     return (
       <div class="overflow-auto pb-3 flex-auto md:pt-3 px-3 flex flex-col">
         <div
-          class="flex sticky top-0 p-1 space-x-1 bg-indigo-900/20 rounded-xl"
+          class="flex sticky top-0 p-1 space-x-1 bg-primary-900/20 rounded-xl"
           role="tablist"
           aria-orientation="horizontal"
         >
