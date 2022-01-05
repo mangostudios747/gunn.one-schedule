@@ -148,7 +148,8 @@ export default {
   },
   mounted(){
     //console.log(localStorage.getItem('g1.darkMode')=='true')
-    this.$store.commit('setDarkMode', localStorage.getItem('g1.darkMode')=='true')
+    this.$store.commit('setDarkMode', localStorage.getItem('g1.darkMode')=='true');
+    this.$store.commit('schedule/setCustomizations', JSON.parse(localStorage.getItem('g1.classes')));
   }
 };
 </script>

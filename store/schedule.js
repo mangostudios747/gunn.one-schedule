@@ -200,8 +200,9 @@ export const mutations = {
     setCustomizations(state, customizations) {
       if (!customizations) return ;
       state.customizations = JSON.parse(JSON.stringify(customizations));
+      
       // todo: update user preferences.classes
-      this.$axios.$patch('/api/preferences/classes', JSON.stringify(customizations));
+      //this.$axios.$patch('/api/preferences/classes', JSON.stringify(customizations));
     },
     updateSchedule:function(state, schedule){
       state.theSchedule = schedule

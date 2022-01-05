@@ -17,7 +17,7 @@
       class="class-block z-0"
       :class="period.status==0?'scale-105  period-status-0':`period-status-${period.status}`"
     >
-    <div :style="`background-color:${period.color[600] || period.color}ee; width:${period.progress}%;`" class="h-full transition-all duration-500 absolute left-0 rounded-md top-0 z-10">
+    <div :style="`background-color:${period.color[500] || period.color}ee; width:${period.progress}%;`" class="h-full transition-all duration-500 absolute left-0 rounded-md top-0 z-10">
     </div>
 
 
