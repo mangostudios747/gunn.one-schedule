@@ -1,11 +1,12 @@
 <template>
   <div
-  :class="$store.state.darkMode?'dark from-slate-750 to-slate-750':'from-[#5D8AD6] to-[#38B2E8]'"
     class="
       h-screen
       bg-gradient-to-r
       w-screen
       relative
+      from-[#5D8AD6] to-[#38B2E8]
+      dark:from-slate-750 dark:to-slate-750
     "
   >
     <div
@@ -46,6 +47,7 @@
           h-screen
           md:sticky md:bg-transparent
           bg-sky-500
+          dark:bg-slate-700
           transition-all
           fixed
           z-20
@@ -111,6 +113,12 @@ import menuIcon from "~/components/menu-icon.vue";
 import Tab from "~/components/tab.vue";
 export default {
   name: "app",
+
+  watch:{
+    $route(){
+      this.sidebar = false;
+    }
+  },
   data: () => ({
     sidebar: false,
     links: [
@@ -138,6 +146,10 @@ export default {
       return this.$store.getters["schedule/currentEvent"];
     },
   },
+  mounted(){
+    //console.log(localStorage.getItem('g1.darkMode')=='true')
+    this.$store.commit('setDarkMode', localStorage.getItem('g1.darkMode')=='true')
+  }
 };
 </script>
 

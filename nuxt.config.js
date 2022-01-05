@@ -5,6 +5,7 @@ export default {
   },
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
+    __dangerouslyDisableSanitizers: ['script'],
     title: 'Gunn.One',
     meta: [
       { charset: 'utf-8' },
@@ -13,7 +14,13 @@ export default {
       { name: 'format-detection', content: 'telephone=no' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      { rel: 'icon', type: 'image/svg', href: '/icon.svg' }
+    ],
+    script: [
+      {
+        innerHTML:"const isDark = localStorage['g1.darkMode'] === 'true' || (!('g1.darkMode' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches);document.documentElement.classList.toggle('dark', isDark)",
+        type:'text/javascript'
+      }
     ]
   },
 
