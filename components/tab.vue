@@ -47,6 +47,6 @@ export default {
 
 <style>
 .active-tab {
-    @apply hover:bg-white hover:text-primary-700 text-primary-700 bg-white shadow !important;
+    @apply hover:bg-white dark:hover:bg-slate-300 dark:bg-slate-300 dark:text-primary-900 hover:text-primary-700 text-primary-700 bg-white shadow !important;
 }
 </style>

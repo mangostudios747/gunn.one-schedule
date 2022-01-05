@@ -4,6 +4,7 @@
       h-screen
       bg-gradient-to-r
       from-[#5D8AD6] to-[#38B2E8]
+      dark:from-slate-750 dark:to-slate-750
       w-screen
       relative
     "
@@ -78,7 +79,7 @@
           </h1>
           <div class="mt-3">
             <div
-              class="flex flex-col p-1 space-y-2 bg-primary-900/20 rounded-xl"
+              class="flex flex-col p-1 space-y-2 box"
               role="tablist"
               aria-orientation="vertical"
             >

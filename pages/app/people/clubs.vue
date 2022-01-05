@@ -1,6 +1,6 @@
 <template>
     <div class="flex  flex-auto flex-col">
-        <div :class="$route.params.club?' hidden':'flex flex-auto'" class="    flex-col flex-auto overflow-auto h-0 mt-2 p-1 space-y-1 bg-primary-900/20 rounded-xl">
+        <div :class="$route.params.club?' hidden':'flex flex-auto'" class="    flex-col flex-auto overflow-auto h-0 mt-2 p-1 space-y-1 box">
 
         <tab :href="`/app/people/clubs/${id}`" :key="id" v-for="(club, id) of clubs">
             {{club.name}}
