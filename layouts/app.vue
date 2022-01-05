@@ -1,10 +1,9 @@
 <template>
   <div
+  :class="$store.state.darkMode?'dark from-slate-750 to-slate-750':'from-[#5D8AD6] to-[#38B2E8]'"
     class="
       h-screen
       bg-gradient-to-r
-      from-[#5D8AD6] to-[#38B2E8]
-      dark:from-slate-750 dark:to-slate-750
       w-screen
       relative
     "
@@ -65,7 +64,7 @@
         >
           <close-icon class="h-8 w-8 text-white" />
         </button>
-        <div class="mx-5 md:pt-5 pt-8">
+        <div class="ml-5 mr-3 md:pt-5 pt-8">
           <h1
             class="
               font-semibold
@@ -127,6 +126,10 @@ export default {
       {
         title: "Utilities",
         href: "/app/utilities",
+      },
+      {
+        title: "Settings",
+        href: "/app/settings",
       },
     ],
   }),

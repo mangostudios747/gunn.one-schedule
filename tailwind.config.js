@@ -1,7 +1,7 @@
 const colors = require('tailwindcss/colors')
 
 module.exports = {
-  darkMode: 'media',
+  darkMode: 'class',
   content: [
     "./components/**/*.{js,vue,ts}",
     "./layouts/**/*.vue",

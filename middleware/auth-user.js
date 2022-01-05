@@ -4,7 +4,7 @@ export default async function ({ app, route, redirect }) {
   console.log(route.path)
   // routes ALSO accessible by people not logged in (e.g. home page, basic plan)
   const freeRoutes = ['/']
-  const freeRegex = /^\/app(\/(utilities|people(\/.+)?)\/?)?$/
+  const freeRegex = /^\/app(\/(settings|utilities|people(\/.+)?)\/?)?$/
   // routes ONLY accessible by people not logged in
   const guestRegex =  /^\/(login|register)\/?$/
 

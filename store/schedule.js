@@ -189,7 +189,6 @@ export const actions = {
     }
   }
 export const mutations = {
-
     resetTime(state) {
       //console.log('bye')
       state.now = (new Date())//.addHours(15);
@@ -202,8 +201,7 @@ export const mutations = {
       if (!customizations) return ;
       state.customizations = JSON.parse(JSON.stringify(customizations));
       // todo: update user preferences.classes
-      this.$axios.$patch('/cc/api/preferences/classes', JSON.stringify(customizations));
-  
+      this.$axios.$patch('/api/preferences/classes', JSON.stringify(customizations));
     },
     updateSchedule:function(state, schedule){
       state.theSchedule = schedule
