@@ -10,6 +10,13 @@
         </div>
         <button @click="nextDay"><right-icon class="w-8 h-8 [stroke-linecap:round] [stroke-width:2] text-white" /></button>
     </div>
+
+    <div class="w-full text-center text-2xl font-bold text-white/70 pt-10" v-if="sched.length === 0">
+      No School
+      <br/>
+      {{sched.reason}}
+    </div>
+
     <div
       :style="`background-color:${period.color[500] || period.color}99; `"
       :key="period.id"
@@ -53,7 +60,7 @@ const { DateTime } = require("luxon");
 export default {
   components: { leftIcon, RightIcon },
   data: () => ({
-    currentDate: new Date("1/6/2022 12:40 PM"),
+    currentDate: new Date(),
     DateTime,
   }),
   methods: {

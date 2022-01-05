@@ -17,7 +17,7 @@
           <menu-icon class="text-white h-8 w-8" />
         </button>
         <div class="text-lg font-semibold text-white px-2 grow">
-          {{ currentEvent.remaining }} minutes {{ currentEvent.displayText }}
+          {{ currentEvent.remaining }} {{currentEvent.isValid?'minutes':''}} {{ currentEvent.displayText }}
           {{ currentEvent.name }}
         </div>
       </div>
@@ -151,6 +151,10 @@ export default {
     //console.log(localStorage.getItem('g1.darkMode')=='true')
     this.$store.commit('setDarkMode', localStorage.getItem('g1.darkMode')=='true');
     this.$store.commit('schedule/setCustomizations', JSON.parse(localStorage.getItem('g1.classes')));
+    const v = this;
+    window.setInterval(function(){
+      v.$store.commit('schedule/resetTime')
+    }, 1000)
   }
 };
 </script>

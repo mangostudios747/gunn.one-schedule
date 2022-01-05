@@ -4,7 +4,7 @@ import { customizations } from '~/assets/defaultCustomizations'
 export const state = ()=>({
     theSchedule,
     customizations,
-    now: new Date('1/6/2022 11:30'), //new Date()
+    now: new Date(), //new Date()
 })
 
 export const actions = {
