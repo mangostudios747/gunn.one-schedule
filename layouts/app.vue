@@ -48,6 +48,7 @@
           md:sticky md:bg-transparent
           bg-sky-500
           dark:bg-slate-700
+          dark:md:bg-transparent
           transition-all
           fixed
           z-20
