@@ -3,7 +3,7 @@
     class="
       h-screen
       bg-gradient-to-r
-      from-sky-400 to-blue-500
+      from-[#5D8AD6] to-[#38B2E8]
       w-screen
       relative
     "
@@ -83,6 +83,7 @@
               aria-orientation="vertical"
             >
               <tab
+                @click="sidebar = false"
                 :exact="link.exact"
                 :key="link.href"
                 v-for="link of links"
