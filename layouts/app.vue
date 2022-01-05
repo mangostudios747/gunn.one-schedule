@@ -13,7 +13,7 @@
       class="relative flex flex-col md:flex-row overflow-y-auto w-full h-full"
     >
       <div class="sticky z-[5] backdrop-blur-md flex flex-row md:hidden top-0 py-4">
-        <button class="md:hidden px-4" @click="sidebar = true" v-if="!sidebar">
+        <button class="md:hidden px-4" @click="sidebar = true" >
           <menu-icon class="text-white h-8 w-8" />
         </button>
         <div class="text-lg font-semibold text-white px-2 grow">

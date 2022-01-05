@@ -28,11 +28,11 @@
           v-for="(c, cid) of customizations"
         ><div>
           <div
-            class="w-8 h-8 my-auto rounded-full"
+            class="w-8  h-8 my-auto rounded-full"
             :style="`background-color:${c.color[500]}`"
           >
           <input
-          class="block opacity-0"
+          class="block cursor-pointer opacity-0"
           type="color"
           v-model="c.color[500]"
         />
