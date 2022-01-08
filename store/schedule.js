@@ -127,7 +127,7 @@ export const actions = {
             meta: (state.customizations[event.id] || { meta: {} }).meta,
             id: event.id,
             displayText: 'left in',
-            remaining: (+end - now) / 60000,
+            remaining: Math.round((+end - now) / 60000),
             elapsed: (+now - start) / 60000,
             total: (+end - start) / 60000,
             percent: (+now - start) * (100) / (+end - start),

@@ -45,6 +45,8 @@ export default {
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
     '@nuxt/postcss8',
+    // https://go.nuxtjs.dev/pwa
+    '@nuxtjs/pwa',
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
@@ -54,8 +56,6 @@ export default {
     '@nuxtjs/axios',
     'cookie-universal-nuxt',
     '@nuxtjs/auth-next',
-    // https://go.nuxtjs.dev/pwa
-    '@nuxtjs/pwa',
     // https://go.nuxtjs.dev/content
     '@nuxt/content',
     '@nuxtjs/firebase',
@@ -124,6 +124,12 @@ export default {
   pwa: {
     manifest: {
       lang: 'en'
+    },
+    meta: {
+      mobileAppIOS: true,
+      appleStatusBarStyle: 'black',
+      name:'G•1',
+      theme_color:'#38BDF8'
     }
   },
 
