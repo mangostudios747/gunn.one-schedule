@@ -17,7 +17,7 @@
           <menu-icon class="text-white h-8 w-8" />
         </button>
         <div class="text-lg font-semibold text-white px-2 grow">
-          {{ currentEvent.remaining }} {{currentEvent.isValid?'minutes':''}} {{ currentEvent.displayText }}
+          {{ Math.round(currentEvent.remaining || currentEvent.elapsed) }} {{currentEvent.type!=='none'?'minutes':''}} {{ currentEvent.displayText }}
           {{ currentEvent.name }}
         </div>
       </div>

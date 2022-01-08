@@ -111,7 +111,7 @@ export const actions = {
             meta: (state.customizations[event.id] || { meta: {} }).meta,
             id: event.id,
             displayText: 'until',
-            remaining: Math.round((+start - now) / 60000),
+            remaining: (+start - now) / 60000,
             elapsed: null,
             total: null,
             percent: index !== 0 ? (100 - (+start - now) / 6000) : null,
