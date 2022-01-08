@@ -148,6 +148,7 @@ export default {
     },
   },
   mounted(){
+    this.$store.dispatch('schedule/bindSchedule');
     //console.log(localStorage.getItem('g1.darkMode')=='true')
     this.$store.commit('setDarkMode', localStorage.getItem('g1.darkMode')=='true');
     this.$store.commit('schedule/setCustomizations', JSON.parse(localStorage.getItem('g1.classes')));
