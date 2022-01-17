@@ -6,13 +6,13 @@
       <span class="block  tracking-wide text-3xl font-semibold text-white"
         >{{DateTime.fromJSDate(currentDate).get('weekdayLong')}}</span
       >
-      <span></span>
+    
       <span class="block text-lg text-white/70">{{new Date(currentDate).toISOString() | luxon}}</span>
         </div>
         <button @click="nextDay"><right-icon class="w-8 h-8 [stroke-linecap:round] [stroke-width:2] text-white" /></button>
     </div>
 
-    <div class="w-full text-center text-2xl font-bold text-white/70 pt-10" v-if="sched.length === 0">
+    <div class="w-full text-center text-2xl font-bold text-white/70 pt-10" v-show="sched.length === 0">
       No School
       <br/>
       {{sched.reason}}
