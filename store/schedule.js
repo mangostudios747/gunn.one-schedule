@@ -155,7 +155,7 @@ export const actions = {
       }
       return {
         type:"none",
-        name:"today",
+        name:"Today",
         isHoliday:true,
         isValid:false,
         remaining: "No School",
