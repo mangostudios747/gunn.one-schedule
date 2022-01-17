@@ -85,9 +85,6 @@ export default {
       home: '/app',
     },
     strategies: {
-      guest: {
-        scheme: 'local',
-      },
       schoology: {
         scheme: 'local',
         token: {
@@ -100,9 +97,9 @@ export default {
           // autoFetch: true
         },
         endpoints: {
-          login: { url: '/auth/login', method: 'post' },
+          login: { baseURL:'/api', url: '/auth/login', method: 'post' },
           logout: { url: '/auth/logout', method: 'post' },
-          user: { url: '/users/me', method: 'get' }
+          user: { url: '/users/me', baseURL:'/api', method: 'get' }
         }
       }
     }

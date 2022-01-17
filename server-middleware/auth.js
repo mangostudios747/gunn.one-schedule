@@ -10,6 +10,7 @@ const crypto = require("crypto");
 const jwt = require('jsonwebtoken');
 const usersRouter = require('./routes/users');
 
+
 let usersmdb, statsmdb, testmdb, passwordsmdb;
 mdb.then(c=> {
   usersmdb = c.db('users').collection('profiles');
@@ -137,6 +138,10 @@ app.get('/auth/thanks-sgy', passport.authenticate('schoology'), async function (
   res.redirect(`http://localhost:3000/register?${(new URLSearchParams({jwt:token})).toString()}`);
 });
 
+
+app.get('/users/me', passport.authenticate('jwt'), async function (req, res){
+  res.json(req.user).end();
+})
 
 app.use(function (req, res, next) {
   res.status(404).send("Sorry can't find that!")

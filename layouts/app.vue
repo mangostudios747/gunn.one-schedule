@@ -90,6 +90,7 @@
                 :exact="link.exact"
                 :key="link.href"
                 v-for="link of links"
+                v-show="!link.auth || $auth.loggedIn"
                 :active="
                   $route.fullPath.split('/')[2] == link.href.split('/')[2]
                 "
@@ -129,7 +130,12 @@ export default {
         exact: true,
       },
       {
-        title: "People",
+        title: "Classes",
+        href: "/app/classes",
+        auth: true
+      },
+      {
+        title: "Directories",
         href: "/app/people",
       },
       {
