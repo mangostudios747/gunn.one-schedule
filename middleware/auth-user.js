@@ -24,7 +24,7 @@ export default async function ({ app, route, redirect }) {
     }
   }
   else {
-    if (user) {
+    if (user || true) { // this should be temporary!
       // let the user see the page if it isnt guest
     } else {
       // redirect to homepage
