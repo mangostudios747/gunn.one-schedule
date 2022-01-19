@@ -41,7 +41,8 @@ export const actions = {
   
   export const getters = {
     scheduleForDate: (state) => (dob) => {
-      const sched = state.theSchedule
+      const sched = state.theSchedule;
+      if (!sched) return [];
       const ref = dob.getMonth() + '-' + dob.getDate() + '-' + dob.getFullYear();
       let rtv;
       if (dob < new Date(2021, 7, 15)) {

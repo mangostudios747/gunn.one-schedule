@@ -31,10 +31,10 @@
 
     <!-- begin body -->
         <div class="z-20 relative">
-      <span :style="`color:${period.color[50]}dd;`" class="title">{{
+      <span :style="`color:${textColor(period.color[500]).hex()}bb;`" class="title">{{
         period.name
       }}</span>
-      <span :style="`color:${period.color[50]}bb`" class="text-sm"
+      <span :style="`color:${textColor(period.color[500]).hex()}bb`" class="text-sm"
         >{{
           DateTime.fromJSDate(new Date(period.start)).toLocaleString(
             DateTime.TIME_SIMPLE
@@ -57,12 +57,13 @@
 import leftIcon from '~/components/left-icon.vue';
 import RightIcon from '~/components/right-icon.vue';
 const { DateTime } = require("luxon");
-
+const chroma = require("chroma.ts");
 export default {
   components: { leftIcon, RightIcon },
   data: () => ({
     currentDate: new Date(),
     DateTime,
+    chroma
   }),
   methods: {
       nextDay(){
@@ -70,6 +71,14 @@ export default {
       },
       previousDay(){
           this.currentDate = this.currentDate.addDays(-1);
+      },
+      textColor(bg){
+        if (chroma.contrast(bg, '#5B3B07') > 4.5){
+          return chroma.color('#5B3B07');
+        }
+        else {
+          return chroma.color('white')
+        }
       }
   },
   computed: {

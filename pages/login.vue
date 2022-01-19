@@ -1,5 +1,5 @@
 <template>
-  <form @submit.prevent="userLogin" class="mx-auto my-auto min-w-[24rem]  card">
+  <form @submit.prevent="userLogin" class="mx-auto my-auto sm:min-w-[24rem]  card">
     <h1 class="font-bold text-xl tracking-wide">Login</h1>
     <div class="flex login-info flex-col">
       <input type="text" class="input-text" v-model="login.email" placeholder="School email" />
