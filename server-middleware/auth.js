@@ -10,25 +10,6 @@ const jwt = require('jsonwebtoken');
 const usersRouter = require('./routes/users');
 const HOSTING_DOMAIN = process.env.RHOST || 'http://localhost:3000';
 
-// echo .env to console so that I can copy it into my dev workspace :notlikeduck:
-const {
-  RHOST,
-  MONGO_URL,
-  SCHOOLOGY_KEY,
-  SCHOOLOGY_SECRET,
-  JWT_SECRET,
-  COOKIE_SECRET,
-} = process.env
-
-console.log({
-  RHOST,
-  MONGO_URL,
-  SCHOOLOGY_KEY,
-  SCHOOLOGY_SECRET,
-  JWT_SECRET,
-  COOKIE_SECRET,
-})
-
 let usersmdb, statsmdb, testmdb, passwordsmdb;
 mdb.then(c=> {
   usersmdb = c.db('users').collection('profiles');
