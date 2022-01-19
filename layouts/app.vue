@@ -5,13 +5,16 @@
       bg-gradient-to-r
       w-screen
       relative
+      pb-16 sm:pb-0
       from-[#5D8AD6] to-[#38B2E8]
       dark:from-slate-750 dark:to-slate-750
     "
   >
     <div
-      class="relative flex flex-col md:flex-row overflow-y-auto w-full h-full"
+      class="relative  flex flex-col md:flex-row overflow-y-auto w-full h-full"
     >
+
+    
       <div class="sticky z-[5] backdrop-blur-md flex flex-row md:hidden top-0 py-4">
         <button class="md:hidden px-4" @click="sidebar = true" >
           <menu-icon class="text-white h-8 w-8" />
@@ -105,19 +108,20 @@
         </div>
       </nav>
       <Nuxt />
+      <bottom-nav/>
     </div>
+    
   </div>
 </template>
 
 <script>
-import CloseIcon from "~/components/close-icon.vue";
-import menuIcon from "~/components/menu-icon.vue";
-import Tab from "~/components/tab.vue";
+import bottomNav from '~/components/bottom-nav.vue';
 export default {
+  components: { bottomNav },
   name: "app",
 
   watch:{
-    $route(){
+   $route(){
       this.sidebar = false;
     }
   },

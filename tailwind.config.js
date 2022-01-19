@@ -11,6 +11,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      fontFamily:{
+        sans: ['Quicksand','ui-sans-serif','system-ui']
+      },
       colors: {
         gray: colors.slate,
         water: '#E5EAF0',
