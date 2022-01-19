@@ -4,11 +4,11 @@
       <dots-icon  class="option-icon" />
       <span class="option-text">More</span>
     </div>
-    <nuxt-link to="/app/todo" class="option ">
+    <nuxt-link active-class="active" to="/app/todo" class="option ">
       <checklist-icon  class="option-icon" />
       <span class="option-text">Todo</span>
     </nuxt-link>
-    <nuxt-link to="/app" class="option">
+    <nuxt-link active-class="active" exact to="/app" class="option">
       <calendar-icon  class="option-icon" />
       <span class="option-text">Schedule</span>
     </nuxt-link>
@@ -16,7 +16,7 @@
       <classes-icon  class="option-icon" />
       <span class="option-text">Classes</span>
     </div>
-    <nuxt-link to='/app/settings' class="option">
+    <nuxt-link active-class="active" to='/app/settings' class="option">
       <cog-icon  class="option-icon" />
       <span class="option-text">Settings</span>
     </nuxt-link>
@@ -39,5 +39,9 @@ export default {
 }
 .option-text {
     @apply block mb-auto text-xs font-light;
+}
+
+.option.active {
+  @apply text-white;
 }
 </style>
