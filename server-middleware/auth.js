@@ -9,7 +9,7 @@ const {mdb} = require("./database");
 const crypto = require("crypto");
 const jwt = require('jsonwebtoken');
 const usersRouter = require('./routes/users');
-
+const HOSTING_DOMAIN = process.env.RHOST || 'http://localhost:3000';
 
 let usersmdb, statsmdb, testmdb, passwordsmdb;
 mdb.then(c=> {
@@ -135,7 +135,7 @@ app.post('/auth/login', async function (req, res) {
 app.get('/auth/thanks-sgy', passport.authenticate('schoology'), async function (req, res) {
   await passwordsmdb.updateOne({_id: req.user.profile.uid}, {$set: {passwordHash: req.cookies.credentials, email:req.user.profile.primary_email}}, {upsert: true});
   const token =  jwt.sign({ uid:req.user.profile.uid }, process.env.JWT_SECRET);
-  res.redirect(`http://localhost:3000/register?${(new URLSearchParams({jwt:token})).toString()}`);
+  res.redirect(`${HOSTING_DOMAIN}/register?${(new URLSearchParams({jwt:token})).toString()}`);
 });
 
 
