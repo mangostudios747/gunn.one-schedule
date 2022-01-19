@@ -1,7 +1,12 @@
 <template>
   <div class="h-full w-full">
-      <div v-if="$auth.loggedIn"></div>
-      <log-in-banner v-else/>
+      <div class="h-full w-full" v-show="$auth.loggedIn">
+        <construction/>
+      </div>
+      <div class="h-full w-full" v-show="!$auth.loggedIn">
+        <log-in-banner/>
+      </div>
+      
   </div>
 </template>
 
