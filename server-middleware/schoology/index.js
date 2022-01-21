@@ -629,7 +629,7 @@ function getUpdate(user, updateid) {
     return __awaiter(this, void 0, void 0, function () {
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, getFrom("/users/" + user.profile.uid + "/updates/" + updateid + "?with_attachments=true", user.credentials)];
+                case 0: return [4 /*yield*/, getFrom("/users/" + user.profile.uid + "/updates/" + updateid + "?with_attachments=true&richtext=1", user.credentials)];
                 case 1: return [2 /*return*/, _a.sent()];
             }
         });
@@ -641,7 +641,7 @@ function fetchRecentUpdates(user) {
         var updates, _i, updates_1, update, _a;
         return __generator(this, function (_b) {
             switch (_b.label) {
-                case 0: return [4 /*yield*/, getFrom("/recent?limit=50?with_attachments=true", user.credentials)
+                case 0: return [4 /*yield*/, getFrom("/recent?limit=50?with_attachments=true&richtext=1", user.credentials)
                         .then(function (e) { return e.update; })];
                 case 1:
                     updates = _b.sent();
@@ -671,7 +671,7 @@ function fetchCourseUpdates(user, courseid) {
         var updates, _i, updates_2, update, _a;
         return __generator(this, function (_b) {
             switch (_b.label) {
-                case 0: return [4 /*yield*/, getFrom("/sections/" + courseid + "/updates?limit=50&with_attachments=true", user.credentials)
+                case 0: return [4 /*yield*/, getFrom("/sections/" + courseid + "/updates?limit=50&with_attachments=true&richtext=1", user.credentials)
                         .then(function (e) { return e.update; })];
                 case 1:
                     updates = _b.sent();
