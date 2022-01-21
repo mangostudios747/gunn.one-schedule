@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-auto flex-col">
-    <div class="flex w-full flex-row pt-1 px-2 gap-1">
+    <div :class="$route.params.club ? ' hidden' : 'flex flex-row'" class="flex w-full  pt-1 px-2 gap-1">
       <div class="grow basis-0 text-center"><dow :active="days['Monday']" @click="days['Monday'] = !days['Monday']" button class="-">M</dow></div>
       <div class="grow basis-0 text-center"><dow :active="days['Tuesday']" @click="days['Tuesday'] = !days['Tuesday']" button class="">T</dow></div>
       <div class="grow basis-0 text-center"><dow :active="days['Wednesday']" @click="days['Wednesday'] = !days['Wednesday']" button class="">W</dow></div>
