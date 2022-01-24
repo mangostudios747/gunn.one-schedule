@@ -22,7 +22,7 @@ export const customizations = { //todo: settings
       color: colors.fuchsia
     },
     'Period 6': {
-      color: colors.blue
+      color: colors.purple
     },
     'Period 7': {
       color: colors.yellow

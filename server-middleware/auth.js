@@ -5,7 +5,6 @@ const MongoStore = require('connect-mongo');
 const passport = require('./passport');
 //const {v4: uuidv4} = require('uuid')
 const MONGO_URL = process.env.MONGO_URL;
-console.log('MONGO_URL is ' + MONGO_URL)
 const {mdb} = require("./database");
 const crypto = require("crypto");
 const jwt = require('jsonwebtoken');
