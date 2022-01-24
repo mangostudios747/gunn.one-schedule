@@ -349,6 +349,16 @@ export async function fetchCourseUpdates(user: User, courseid: string) {
     .then(e => e.update)
   for (let update of updates) {
     update.author = await getProfileFor(user.credentials, update.uid)
+    let baseURL =
+      update.body &&
+      update.body.match(/(?=\<base href=\").+(?=\"\/>)/)[0].split('"')[1];
+    update.parsedBody =  update.body
+    .replace(/(?:\r\n|\r|\n)/g, "")
+    .replace(/<base .+"\/>/, "")
+    .replace(
+      /(?:src=[\^"']\/+)[^'"]+/g,
+      (value: string) => `src="${baseURL}${value.split('"')[1]}`
+    )
     //Object.assign(update, await getUpdate(user, update.id))
   }
   return updates

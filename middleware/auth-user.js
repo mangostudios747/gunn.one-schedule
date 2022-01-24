@@ -10,7 +10,7 @@ export default async function ({ app, route, redirect }) {
 
   // name of cookie
   const user = await app.$cookies.get('auth._token.schoology')
-  console.log(user);
+  //console.log(user);
   // if the user is logged in
   if (freeRoutes.includes(route.path) || freeRegex.test(route.path)) {
     // do nothing

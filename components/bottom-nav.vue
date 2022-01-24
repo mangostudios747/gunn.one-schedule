@@ -1,5 +1,5 @@
 <template>
-  <div class="fixed border-t border-primary-200/20 bottom-0 w-full h-16 bg-primary-500/40 flex flex-row backdrop-blur-xl z-[5] pb-1 px-2 pt-1 sm:hidden sm:pointer-events-none">
+  <div class="fixed border-t border-primary-200/20 dark:border-slate-300/20 bottom-0 w-full h-16 dark:bg-slate-800/40 bg-primary-500/40 flex flex-row dark:backdrop-blur-sm backdrop-blur-xl z-[5] pb-1 px-2 pt-1 sm:hidden sm:pointer-events-none">
   <nuxt-link active-class="active" to="/app/classes" class="option ">
       <classes-icon  class="option-icon" />
       <span class="option-text">Classes</span>

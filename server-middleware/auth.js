@@ -5,11 +5,13 @@ const MongoStore = require('connect-mongo');
 const passport = require('./passport');
 //const {v4: uuidv4} = require('uuid')
 const MONGO_URL = process.env.MONGO_URL;
+
 const {mdb} = require("./database");
 const crypto = require("crypto");
 const jwt = require('jsonwebtoken');
 const usersRouter = require('./routes/users');
 const HOSTING_DOMAIN = process.env.RHOST || 'http://localhost:3000';
+const schoology = require('./schoology');
 
 let usersmdb, statsmdb, testmdb, passwordsmdb;
 mdb.then(c=> {
@@ -140,7 +142,17 @@ app.get('/auth/thanks-sgy', passport.authenticate('schoology'), async function (
 
 
 app.get('/users/me', passport.authenticate('jwt'), async function (req, res){
-  res.json(req.user).end();
+  res.json(req.user.profile).end();
+})
+
+app.get('/users/me/sections', passport.authenticate('jwt'), async function(req, res){
+  const sections = await schoology.fetchSections(req.user);
+  res.json(sections).end();
+})
+
+app.get('/sections/:section_id/updates', passport.authenticate('jwt'), async function(req, res){
+  const updates = await schoology.fetchCourseUpdates(req.user, req.params.section_id);
+  res.json({updates}).end();
 })
 
 app.use(function (req, res, next) {
