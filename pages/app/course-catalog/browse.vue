@@ -21,7 +21,7 @@
       class="flex-col flex flex-auto overflow-y-auto h-0 mt-2 p-1 space-y-1 box"
     >
       <div
-      @click="$store.commit('catalog/setSelectedCourse', key)"
+      
         class="px-3 py-2 cursor-pointer flex gap-3 w-full flex-row text-white"
         :key="key"
         v-for="(course, key) of $store.getters['catalog/filteredCourses']"
@@ -207,7 +207,7 @@
 </svg>
           </div>
         </div>
-        <div class="info grow-0 flex flex-col">
+        <div @click="$store.commit('catalog/setSelectedCourse', key)" class="info grow-0 flex flex-col">
           <span class="block font-semibold text-lg leading-6"
             >{{ course.code
             }}<span class="text-white/60">#{{ course.id }}</span></span

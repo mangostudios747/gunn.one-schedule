@@ -5,7 +5,7 @@
           <button class="cursor-pointer"   @click="$store.commit('catalog/setSelectedCourse', false)"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 absolute top-2 right-2" viewBox="0 0 20 20" fill="currentColor">
   <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" />
 </svg></button>
-<div><div class="text-white flex gap-2 flex-row"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 my-auto" viewBox="0 0 20 20" fill="currentColor">
+<div><div class="text-white flex gap-2 flex-row mb-2"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 my-auto" viewBox="0 0 20 20" fill="currentColor">
   <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd" />
 </svg> {{courses[$store.state.catalog.selectedCourse].homework || 0}} minutes homework / week</div></div>
 <div class="flex flex-row gap-2">
@@ -155,7 +155,7 @@
             >{{ courses[$store.state.catalog.selectedCourse].code
             }}<span class="text-white/60">#{{ courses[$store.state.catalog.selectedCourse].id }}</span></span
           >
-          <p v-if="courses[$store.state.catalog.selectedCourse].body" class=" text-xs leading-4">{{ courses[$store.state.catalog.selectedCourse].body.description }}</p>
+          <p v-if="courses[$store.state.catalog.selectedCourse].body" class=" text-base ">{{ courses[$store.state.catalog.selectedCourse].body.description }}</p>
         </div>
         
 </div>
