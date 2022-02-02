@@ -1,8 +1,12 @@
+import courses from '~/content/parsedCourses.json'
+
 export const state = ()=>({
     yearCourses:{},
     s1Courses:{},
     s2Courses:{},
-    key: Date.now()
+    key: Date.now(),
+    searchString: '',
+    selectedCourse:false
 });
 
 export const actions = {
@@ -35,12 +39,49 @@ export const actions = {
     }
 }
 
+export const getters = {
+    totalHW(state){
+        let t = 0;
+        const cids = [...Object.keys(state.yearCourses), ...Object.keys(state.s1Courses), ...Object.keys(state.s2Courses)]
+        for (const cid of cids){
+            t += courses[cid].homework
+        }
+        return t
+    },
+    totalCredits(state){
+        return Object.keys(state.yearCourses).length*10 + Object.keys(state.s1Courses).length*5 + Object.keys(state.s2Courses).length*5
+    },
+    filteredCourses(state){
+
+        const c = Object.entries(courses).filter(function([key, course]){
+            return (course.body && course.body.description.includes(state.searchString)) || course.name.includes(state.searchString) || course.id.includes(state.searchString) || course.code.includes(state.searchString)
+        })
+        return Object.fromEntries(c)
+    }
+}
+
 export const mutations = {
+    setSearchString(state, s){
+        state.searchString = s
+    },
+    setSelectedCourse(state, id){
+        state.selectedCourse = id
+    },
+    loadSelection(state){
+        state.yearCourses = JSON.parse(localStorage.getItem('yearCourses') || '{}');
+        state.s1Courses = JSON.parse(localStorage.getItem('s1Courses') || '{}')
+        state.s2Courses = JSON.parse(localStorage.getItem('s2Courses') || '{}')
+    },
     updateKey(state){
-        state.key = Date.now()
+        state.key = Date.now();
+        // also save everything
+        localStorage.setItem('yearCourses', JSON.stringify(state.yearCourses));
+        localStorage.setItem('s1Courses', JSON.stringify(state.s1Courses))
+        localStorage.setItem('s2Courses', JSON.stringify(state.s2Courses))
     },
     addYearCourse(state, id){
         state.yearCourses[id] = true;
+        
     },
     removeYearCourse(state, id){
         delete state.yearCourses[id];

@@ -1,27 +1,21 @@
 <template>
   <div class="flex flex-auto flex-col">
-    <div class="box mt-2 rounded-sm flex flex-row py-1 px-2">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        class="h-4 w-4 text-white/50 my-auto "
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke="currentColor"
-      >
-        <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-        />
-      </svg>
-      <input placeholder="Search by name, description, or ID" class="block bg-transparent px-2  outline-none text-white placeholder:text-white/50 w-full" />
-    </div>
+      
+      <div class="flex flex-row px-2 gap-3 mt-1">
+          <div class="text-white flex gap-2 flex-row"><progress-circle class="inline-block my-auto" :value="$store.getters['catalog/totalCredits']/0.7"/> <span>{{$store.getters['catalog/totalCredits']}}/70 credits</span></div>
+
+            <div class="text-white flex gap-2 flex-row"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 my-auto" viewBox="0 0 20 20" fill="currentColor">
+  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd" />
+</svg> {{$store.getters['catalog/totalHW']}} minutes homework / week</div>
+
+      </div>
+    
     <div
       class="flex-col flex flex-auto overflow-y-auto h-0 mt-2 p-1 space-y-1 box"
     >
       <div
-        class="px-3 py-2 flex gap-3 w-full flex-row text-white"
+      @click="$store.commit('catalog/setSelectedCourse', key)"
+        class="px-3 py-2 cursor-pointer flex gap-3 w-full flex-row text-white"
         :key="key"
         v-for="(course, key) of $store.state.catalog.yearCourses"
       >
@@ -225,7 +219,7 @@
             "
             class="w-8 rounded-sm text-xs"
           >
-            + S1
+            {{$store.state.catalog.s1Courses[key] ? '-':'+'}} S1
           </button>
           <button
             :key="key+'-'+$store.state.catalog.key+'-2'"
@@ -235,7 +229,7 @@
             "
             class="w-8 rounded-sm text-xs"
           >
-            + S2
+            {{$store.state.catalog.s2Courses[key] ? '-':'+'}} S2
           </button>
         </div>
         <div
@@ -265,12 +259,14 @@
               font-bold
             "
           >
-            +
+            {{$store.state.catalog.yearCourses[key] ? '-':'+'}}
           </button>
         </div>
       </div>
       <div
-        class="px-3 py-2 flex gap-3 w-full flex-row text-white"
+
+      @click="$store.commit('catalog/setSelectedCourse', key)"
+        class="px-3 py-2 flex  cursor-pointer gap-3 w-full flex-row text-white"
         :key="key"
         v-for="(course, key) of $store.state.catalog.s1Courses"
       >
@@ -519,7 +515,8 @@
         </div>
       </div>
       <div
-        class="px-3 py-2 flex gap-3 w-full flex-row text-white"
+      @click="$store.commit('catalog/setSelectedCourse', key)"
+        class="px-3 py-2 cursor-pointer flex gap-3 w-full flex-row text-white"
         :key="key"
         v-for="(course, key) of $store.state.catalog.s2Courses"
       >
@@ -772,14 +769,18 @@
 </template>
 
 <script>
+import progressCircle from '~/components/progress-circle.vue'
 import courses from '~/content/parsedCourses.json'
 export default {
+  components: { progressCircle },
     data: ()=>({
         courses
     })
 }
 </script>
 
-<style>
-
+<style scoped>
+.icon {
+  @apply h-5 w-5 block my-auto mx-auto;
+}
 </style>

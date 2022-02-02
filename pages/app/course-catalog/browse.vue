@@ -15,15 +15,16 @@
           d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
         />
       </svg>
-      <input placeholder="Search by name, description, or ID" class="block bg-transparent px-2  outline-none text-white placeholder:text-white/50 w-full" />
+      <input v-model="searchString" placeholder="Search by name, description, or ID" class="block bg-transparent px-2  outline-none text-white placeholder:text-white/50 w-full" />
     </div>
     <div
       class="flex-col flex flex-auto overflow-y-auto h-0 mt-2 p-1 space-y-1 box"
     >
       <div
-        class="px-3 py-2 flex gap-3 w-full flex-row text-white"
+      @click="$store.commit('catalog/setSelectedCourse', key)"
+        class="px-3 py-2 cursor-pointer flex gap-3 w-full flex-row text-white"
         :key="key"
-        v-for="(course, key) of courses"
+        v-for="(course, key) of $store.getters['catalog/filteredCourses']"
       >
         <div class="big-icon flex">
           <div v-if="course.subject.a"
@@ -225,7 +226,7 @@
             "
             class="w-8 rounded-sm text-xs"
           >
-            + S1
+            {{$store.state.catalog.s1Courses[key] ? '-':'+'}} S1
           </button>
           <button
             :key="key+'-'+$store.state.catalog.key+'-2'"
@@ -235,7 +236,7 @@
             "
             class="w-8 rounded-sm text-xs"
           >
-            + S2
+            {{$store.state.catalog.s2Courses[key] ? '-':'+'}} S2
           </button>
         </div>
         <div
@@ -265,7 +266,7 @@
               font-bold
             "
           >
-            +
+            {{$store.state.catalog.yearCourses[key] ? '-':'+'}}
           </button>
         </div>
       </div>
@@ -276,6 +277,16 @@
 <script>
 import courses from '~/content/parsedCourses.json'
 export default {
+  computed:{
+    searchString: {
+      get(){
+        return this.$store.state.catalog.searchString
+      },
+      set(e){
+        this.$store.commit('catalog/setSearchString', e)
+      }
+    }
+  },
   data: () => ({
     courses,
     fakeCourse: {
@@ -296,7 +307,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .icon {
   @apply h-5 w-5 block my-auto mx-auto;
 }
