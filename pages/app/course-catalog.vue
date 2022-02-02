@@ -1,15 +1,15 @@
 <template>
-    <div class="h-full md:pl-2 pl-5 pr-5 w-full">
-    <h1 class="text-white text-3xl leading-9 font-bold md:my-3">Course Catalog</h1>
+    <div class="overflow-auto pb-3 flex-auto md:pt-3 px-3 flex flex-col">
+    <h1 class="text-white text-3xl leading-9 mb-2 font-bold md:my-3">Course Catalog</h1>
     <div
           class="flex sticky top-0 p-1 space-x-1 box"
           role="tablist"
           aria-orientation="horizontal"
         >
-          <tab  href="/app/course-catalog/browse" active="$route.fullPath.split('/')[3]==='browse'">
+          <tab  href="/app/course-catalog/browse" :active="$route.fullPath.split('/')[3]==='browse'">
             Browse
           </tab>
-          <tab href="/app/course-catalog/my-courses" active="$route.fullPath.split('/')[3]==='my-courses'">
+          <tab href="/app/course-catalog/my-courses" :active="$route.fullPath.split('/')[3]==='my-courses'">
             My Courses
           </tab>
         </div>
