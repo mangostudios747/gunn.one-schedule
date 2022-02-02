@@ -144,6 +144,10 @@ export default {
         href: "/app/utilities",
       },
       {
+        title: "Course Catalog",
+        href: "/app/course-catalog",
+      },
+      {
         title: "Settings",
         href: "/app/settings",
       },
