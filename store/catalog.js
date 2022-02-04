@@ -54,7 +54,7 @@ export const getters = {
     filteredCourses(state){
 
         const c = Object.entries(courses).filter(function([key, course]){
-            return (course.body && course.body.description.includes(state.searchString)) || course.name.includes(state.searchString) || course.id.includes(state.searchString) || course.code.includes(state.searchString)
+            return (course.body && course.body.description.toLowerCase().includes(state.searchString.toLowerCase())) || course.name.toLowerCase().includes(state.searchString.toLowerCase()) || course.id.toLowerCase().includes(state.searchString.toLowerCase()) || course.code.toLowerCase().includes(state.searchString.toLowerCase())
         })
         return Object.fromEntries(c)
     }
