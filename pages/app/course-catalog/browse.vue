@@ -25,11 +25,11 @@
       </select>
     </div>
     <div
-      class="flex-col flex flex-auto overflow-y-auto h-0 mt-2 p-1 space-y-1 box"
+      class="flex-col flex flex-auto overflow-y-auto h-0 mt-2 p-2 space-y-1 box"
     >
       <div
       
-        class="px-3 py-2 cursor-pointer flex gap-3 w-full flex-row text-white"
+        class="px-3 py-2 cursor-pointer rounded-lg hover:bg-white/20 flex gap-3 w-full flex-row text-white"
         :key="key"
         v-for="(course, key) of $store.getters['catalog/filteredCourses']"
       >
