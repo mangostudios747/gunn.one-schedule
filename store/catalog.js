@@ -46,10 +46,10 @@ export const getters = {
         for (const cid of cids){
             t += courses[cid].homework
         }
-        return t
+        return t+ (state.key - state.key)
     },
     totalCredits(state){
-        return Object.keys(state.yearCourses).length*10 + Object.keys(state.s1Courses).length*5 + Object.keys(state.s2Courses).length*5
+        return Object.keys(state.yearCourses).length*10 + Object.keys(state.s1Courses).length*5 + Object.keys(state.s2Courses).length*5 + (state.key - state.key)
     },
     filteredCourses(state){
 

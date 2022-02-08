@@ -192,7 +192,7 @@ export const actions = {
 export const mutations = {
     resetTime(state) {
       //console.log('bye')
-      state.now = (new Date())//.addHours(15);
+      state.now = (new Date()).addDays(1);
     },
     loadCustomizations(state, customizations) {
       if (!customizations) return ;
