@@ -6,7 +6,8 @@ export const state = ()=>({
     s2Courses:{},
     key: Date.now(),
     searchString: '',
-    selectedCourse:false
+    selectedCourse:false,
+    selectedGrade: false
 });
 
 export const actions = {
@@ -53,9 +54,14 @@ export const getters = {
     },
     filteredCourses(state){
 
-        const c = Object.entries(courses).filter(function([key, course]){
+        let c = Object.entries(courses).filter(function([key, course]){
             return (course.body && course.body.description.toLowerCase().includes(state.searchString.toLowerCase())) || course.name.toLowerCase().includes(state.searchString.toLowerCase()) || course.id.toLowerCase().includes(state.searchString.toLowerCase()) || course.code.toLowerCase().includes(state.searchString.toLowerCase())
         })
+        if (state.selectedGrade){
+            c = c.filter(([key, course])=>{
+                return course.grades.includes(state.selectedGrade)
+            })
+        }
         return Object.fromEntries(c)
     }
 }
@@ -66,6 +72,9 @@ export const mutations = {
     },
     setSelectedCourse(state, id){
         state.selectedCourse = id
+    },
+    setSelectedGrade(state, id){
+        state.selectedGrade = id
     },
     loadSelection(state){
         state.yearCourses = JSON.parse(localStorage.getItem('yearCourses') || '{}');

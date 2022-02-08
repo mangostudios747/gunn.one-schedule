@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-auto flex-col">
-    <div class="box mt-2 rounded-sm flex flex-row py-1 px-2">
+    <div class="box mt-2 rounded-sm flex flex-row py-1 pl-2">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         class="h-4 w-4 text-white/50 my-auto "
@@ -15,7 +15,14 @@
           d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
         />
       </svg>
-      <input v-model="searchString" placeholder="Search by name, description, or ID" class="block bg-transparent px-2  outline-none text-white placeholder:text-white/50 w-full" />
+      <input v-model="searchString" placeholder="Search by name, description, or ID" class="block bg-transparent pl-2  outline-none text-white placeholder:text-white/50 w-full" />
+      <select v-model="grade" class="block text-sm focus:ring-0 focus:outline-none focus:bg-white/10 bg-transparent outline-none pr-8 border-0 text-white hover:bg-white/10 rounded-md mr-1">
+        <option :value="false">*</option>
+        <option :value='9'>9</option>
+        <option :value='10'>10</option>
+        <option :value='11'>11</option>
+        <option :value='12'>12</option>
+      </select>
     </div>
     <div
       class="flex-col flex flex-auto overflow-y-auto h-0 mt-2 p-1 space-y-1 box"
@@ -284,6 +291,14 @@ export default {
       },
       set(e){
         this.$store.commit('catalog/setSearchString', e)
+      }
+    },
+    grade: {
+      get(){
+        return this.$store.state.catalog.selectedGrade
+      },
+      set(e){
+        this.$store.commit('catalog/setSelectedGrade', e)
       }
     }
   },
