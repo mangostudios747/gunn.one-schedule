@@ -23,5 +23,8 @@
 <script>
 export default {
   name: 'index',
+  middleware({ redirect }){
+     return redirect("/app")
+  }
 }
 </script>
