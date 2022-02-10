@@ -14,8 +14,8 @@
 
     </div>
 
-    <label class="show-more" :for="`update-${update.id}-show-more`" role="button">read more</label>
-    <label class="show-less hidden" :for="`update-${update.id}-show-more`" role="button">read less</label>
+    <label class="show-more inline" :for="`update-${update.id}-show-more`" role="button">Show more</label>
+    <label class="show-less hidden" :for="`update-${update.id}-show-more`" role="button">Show less</label>
   </div>
 </template>
 
@@ -42,7 +42,7 @@ export default {
   }
 
   input:focus ~ label {
-    outline: -webkit-focus-ring-color auto 5px;
+    @apply ring-white ring-2 ring-offset-1
   }
 
   input:checked ~ .update-body {
@@ -55,7 +55,11 @@ export default {
   }
   input:checked ~ label.show-less,
   .update-body:not(.truncated) ~ label.show-less {
-    display: block;
+    display: inline;
+  }
+
+  label {
+    @apply px-2 py-1 bg-water/20 ml-auto mt-2 rounded-md text-white shadow hover:shadow-md
   }
 
 }
