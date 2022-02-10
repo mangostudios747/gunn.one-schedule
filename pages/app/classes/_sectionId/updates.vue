@@ -7,14 +7,40 @@
 </template>
 
 <script>
+function getCookie(name) {
+  const value = `; ${document.cookie}`;
+  const parts = value.split(`; ${name}=`);
+  if (parts.length === 2) return parts.pop().split(';').shift();
+}
 export default {
-  async asyncData({ $auth, $axios, params }) {
-      console.log($auth.loggedIn)
-      if (!$auth.loggedIn) return {updates: []}
+  data:()=>({updates:[]}),
+  async asyncData({ $auth, $axios, params, app }) {
+    const user = await app.$cookies.get('auth._token.schoology');
+    //console.log(user)
+      if (!user) return {updates: []}
     const { sectionId } = params;
-    const { updates } = await $axios.$get(`/sections/${sectionId}/updates`);
-    return { updates };
+
+    return { user, sectionId };
   },
+  fetchOnServer: false,
+  async fetch(){
+    const { updates } = await this.$axios.$get(`/sections/${this.$route.params.sectionId}/updates`, {
+      headers:{'Authorization': getCookie('auth._token.schoology')}
+    });
+    this.updates = updates || []
+  },
+  mounted(){
+    const ps = document.querySelectorAll('.update-body');
+    const observer = new ResizeObserver(entries => {
+      for (let entry of entries) {
+        entry.target.classList[entry.target.scrollHeight > entry.contentRect.height ? 'add' : 'remove']('truncated');
+      }
+    });
+
+    ps.forEach(p => {
+      observer.observe(p);
+    });
+  }
 };
 </script>
 

@@ -1,4 +1,4 @@
-export default async function ({ app, route, redirect }) {
+export default async function ({ app, route, redirect, store }) {
   // the following look directly for the cookie created by nuxtjs/auth
   // instead of using $auth.loggedIn
   console.log(route.path)
@@ -9,8 +9,8 @@ export default async function ({ app, route, redirect }) {
   const guestRegex =  /^\/(login|register)\/?$/
 
   // name of cookie
-  const user = await app.$cookies.get('auth._token.schoology')
-  //console.log(user);
+  const user = await app.$cookies.get('auth._token.schoology');
+  store.commit('sgy/setUser', user)
   // if the user is logged in
   if (freeRoutes.includes(route.path) || freeRegex.test(route.path)) {
     // do nothing

@@ -43,7 +43,8 @@
 import calendarIcon from "~/components/calendar-icon.vue";
 export default {
   components: { calendarIcon },
-  async asyncData({ $auth, $axios }) {
+  async asyncData({ $auth, $axios, store }) {
+
     if (!$auth.loggedIn) return { sections: [] };
     // user exists!
     const sections = await $axios.$get("/users/me/sections");

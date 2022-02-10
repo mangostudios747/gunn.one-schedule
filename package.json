@@ -40,6 +40,7 @@
     "passport-schoology-oauth": "^1.0.3",
     "password-strength-calc": "^1.0.3",
     "postcss": "^8.4.5",
+    "sass": "^1.49.7",
     "tailwind-color-generator": "^1.0.2",
     "tailwindcss": "^3.0.7",
     "uuid": "^8.3.2",
