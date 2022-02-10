@@ -11,7 +11,7 @@ export const actions = {
     bindSchedule: firebaseAction( function ({ bindFirebaseRef }) {
       const ref = this.$fire.database
         .ref('/schedule');
-  
+
        return bindFirebaseRef('theSchedule', ref);
     }),
     customize({ state }, courses) {
@@ -38,7 +38,7 @@ export const actions = {
       state.customizations['Gunn Together'].meta = state.customizations['Period 5'].meta
     }
   }
-  
+
   export const getters = {
     scheduleForDate: (state) => (dob) => {
       const sched = state.theSchedule;
@@ -50,7 +50,7 @@ export const actions = {
       }
       if (ref in sched.overrides) {
         //console.log("overridden");
-  
+
         rtv = sched.overrides[ref]
       } else if (ref in sched.holidays) {
         /* if (mainView) {
@@ -105,7 +105,7 @@ export const actions = {
         //console.log(start);
         // if we even got here, then either the previous doesn't exist or isn't happening.
         if (now < start) {
-  
+
           return {
             type: 'future',
             name: (state.customizations[event.id] || { name: undefined }).name || event.name,
@@ -150,9 +150,9 @@ export const actions = {
             percent: null,
             isValid: false  // we don't want to be like since 7th period happened you're still at school
           }
-  
+
         }
-  
+
       }
       return {
         type:"none",
@@ -162,7 +162,7 @@ export const actions = {
         remaining: "No School",
         percent: 0
       }
-  
+
     },
     holidayReason: (state) => (ref) => {
       return state.theSchedule.holidays[ref];
@@ -176,15 +176,15 @@ export const actions = {
         if (ready) {
           upcoming.push(event)
         }
-  
+
         if (event.name === currId) {
-  
+
           ready = true
           if (getters.currentEvent.type === 'future') {
             upcoming.push(event)
           }
         }
-  
+
       }
       return upcoming
     }
@@ -192,7 +192,7 @@ export const actions = {
 export const mutations = {
     resetTime(state) {
       //console.log('bye')
-      state.now = (new Date()).addDays(1);
+      state.now = (new Date())//.addDays(1);
     },
     loadCustomizations(state, customizations) {
       if (!customizations) return ;
@@ -201,7 +201,7 @@ export const mutations = {
     setCustomizations(state, customizations) {
       if (!customizations) return ;
       state.customizations = JSON.parse(JSON.stringify(customizations));
-      
+
       // todo: update user preferences.classes
       //this.$axios.$patch('/api/preferences/classes', JSON.stringify(customizations));
     },
@@ -215,19 +215,19 @@ Date.prototype.addDays = function(days) {
     date.setDate(date.getDate() + days)
     return date
   }
-  
+
   Date.prototype.addHours = function(hrs) {
     let date = new Date(this.valueOf())
     date.setHours(date.getHours() + hrs)
     return date
   }
-  
+
   Date.prototype.addMinutes = function(hrs) {
     let date = new Date(this.valueOf())
     date.setMinutes(date.getMinutes() + hrs)
     return date
   }
-  
+
   const periodStates = {
     PAST:-1,
     PRESENT:0,
