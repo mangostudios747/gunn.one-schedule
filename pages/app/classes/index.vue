@@ -14,10 +14,10 @@
         >
       </div>
       <div class="flex mt-1 w-full flex-row">
-        <div class="option">
+        <nuxt-link :to="`/app/classes/${section.id}/grades`" class="option">
           <grades-icon class="option-icon" />
           <span class="option-text">Grades</span>
-        </div>
+        </nuxt-link>
         <nuxt-link :to="`/app/classes/${section.id}/updates`" class="option">
           <updates-icon class="option-icon" />
           <span class="option-text">Updates</span>

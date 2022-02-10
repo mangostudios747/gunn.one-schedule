@@ -13,12 +13,13 @@ const usersRouter = require('./routes/users');
 const HOSTING_DOMAIN = process.env.RHOST || 'http://localhost:3000';
 const schoology = require('./schoology');
 
-let usersmdb, statsmdb, testmdb, passwordsmdb;
+let usersmdb, statsmdb, testmdb, passwordsmdb, prefmdb;
 mdb.then(c=> {
   usersmdb = c.db('users').collection('profiles');
   passwordsmdb = c.db('users').collection('passwords');
   statsmdb = c.db('stats').collection('userCount');
-  testmdb = c.db('users').collection('test')
+  testmdb = c.db('users').collection('test');
+  prefmdb = c.db('users').collection('preferences');
 })
 
 const hash = (pw)=>crypto.createHash('md5').update(pw).digest('hex');
@@ -153,6 +154,26 @@ app.get('/users/me/sections', passport.authenticate('jwt'), async function(req, 
 app.get('/sections/:section_id/updates', passport.authenticate('jwt'), async function(req, res){
   const updates = await schoology.fetchCourseUpdates(req.user, req.params.section_id);
   res.json({updates}).end();
+})
+
+app.get('/sections/:section_id/grades', passport.authenticate('jwt'), async function(req, res){
+  const grades = await schoology.fetchSectionGrades(req.user, req.params.section_id);
+  res.json({grades}).end();
+})
+
+app.patch('/preferences/classes',passport.authenticate('jwt'), async function(req, res, next) {
+  const classp = req.body;
+  await prefmdb.updateOne({_id:req.user.profile._id}, {$set:{classes:classp}}, {upsert:true});
+  res.status(204).end();
+})
+
+app.get('/preferences/classes',passport.authenticate('jwt'), async function(req, res, next) {
+  const p = ( await prefmdb.findOne({_id:req.user.profile._id}) ) || {};
+  let classes = undefined;
+  if (p.classes){
+    classes = JSON.parse(Object.keys(p.classes)[0]);
+  }
+  res.status(200).send(classes);
 })
 
 app.use(function (req, res, next) {

@@ -393,7 +393,7 @@ async function getSectionGrades(user: User, sectionid:string) {
     .then(e=>e.section)
 }
 
-async function sortedSectionGrades(user:User, sectionid:string) {
+export async function fetchSectionGrades(user:User, sectionid:string) {
   const [g] = await getSectionGrades(user, sectionid); const a = await getSectionAssignments(user, sectionid);
   if (!g) return undefined
   // a is a reference, g is the thing we need to transform
@@ -423,7 +423,7 @@ export async function getAllGrades(user: User) {
   const sectionids = (await getSections(user)).map((section: { id: string }) => section.id)
   const grades: Record<string, any> = {};
   for (const sectionid of sectionids) {
-    grades[sectionid] = await sortedSectionGrades(user, sectionid);
+    grades[sectionid] = await fetchSectionGrades(user, sectionid);
   }
   return grades
 }

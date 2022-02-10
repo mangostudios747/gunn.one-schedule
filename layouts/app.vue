@@ -108,7 +108,7 @@
       <Nuxt />
       <bottom-nav/>
     </div>
-    
+
   </div>
 </template>
 
@@ -158,15 +158,22 @@ export default {
         return this.$store.state.sidebar;
       },
       set(v){
-        this.$store.commit('setSidebar', v) 
+        this.$store.commit('setSidebar', v)
       }
     }
   },
-  mounted(){
+  async mounted(){
     this.$store.dispatch('schedule/bindSchedule');
     //console.log(localStorage.getItem('g1.darkMode')=='true')
     this.$store.commit('setDarkMode', localStorage.getItem('g1.darkMode')=='true');
-    this.$store.commit('schedule/setCustomizations', JSON.parse(localStorage.getItem('g1.classes')));
+    if (this.$auth.loggedIn){
+      console.log('Schoology user detected, loading preferences from server.')
+      this.$store.commit('schedule/setCustomizations', await this.$axios.$get('/preferences/classes'))
+    }
+    else {
+      console.log('User not detected, loading preferences from browser.')
+      this.$store.commit('schedule/setCustomizations', JSON.parse(localStorage.getItem('g1.classes')));
+    }
     const v = this;
     window.setInterval(function(){
       v.$store.commit('schedule/resetTime')
