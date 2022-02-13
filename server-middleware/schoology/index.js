@@ -232,7 +232,7 @@ function fetchAssignmentsForSection(sectionId, creds) {
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0: return [4 /*yield*/, getFrom("/sections/" + sectionId + "/assignments", creds)];
-                case 1:
+                case 1: 
                 // get the assignments from a specific course!
                 return [2 /*return*/, (_a.sent()).assignment];
             }
@@ -245,7 +245,7 @@ function reloadAssignmentsForSection(user, sectionId) {
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0: return [4 /*yield*/, fetchAssignmentsForSection(sectionId, user.credentials)];
-                case 1:
+                case 1: 
                 // put them in the database
                 /*for (let index in asg) {
                   userDatadb.set(`${user.profile.uid}.assignments.${sectionId}.${index}`, asg[index]).write();
@@ -261,7 +261,7 @@ function getAssignmentsForSection(user, sectionId) {
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0: return [4 /*yield*/, reloadAssignmentsForSection(user, sectionId)];
-                case 1:
+                case 1: 
                 // we only need the uid hmm
                 //let data = null//userDatadb.get(`${user.profile.uid}.assignments.${sectionId}`).value();
                 // we hath not loaded the data! ever!
@@ -463,7 +463,7 @@ function replyToMessage(user, messageId, datums) {
                 case 0: return [4 /*yield*/, getFrom("/messages/" + messageId, user.credentials, 'post', JSON.stringify(datums))
                     // the client should now reload the messages.
                 ];
-                case 1:
+                case 1: 
                 // datums should have {recipient_ids, subject, message}
                 return [2 /*return*/, _a.sent()
                     // the client should now reload the messages.
@@ -562,7 +562,7 @@ function fetchAllSectionEventsForWeek(user) {
                     return [4 /*yield*/, getFrom("/multiget", user.credentials, 'post', JSON.stringify({
                             request: sections
                         }))];
-                case 2:
+                case 2: 
                 //console.log(sections)
                 return [2 /*return*/, _a.apply(void 0, [(_b.sent())
                             .response
@@ -772,7 +772,6 @@ function getSectionGrades(user, sectionid) {
         });
     });
 }
-exports.fetchSectionGrades = fetchSectionGrades()
 function fetchSectionGrades(user, sectionid) {
     return __awaiter(this, void 0, void 0, function () {
         var g, a, categories, grades, assignments, _loop_2, _i, assignments_1, as;

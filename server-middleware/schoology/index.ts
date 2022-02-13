@@ -394,7 +394,8 @@ async function getSectionGrades(user: User, sectionid:string) {
 }
 
 export async function fetchSectionGrades(user:User, sectionid:string) {
-  const [g] = await getSectionGrades(user, sectionid); const a = await getSectionAssignments(user, sectionid);
+  const [g] = await getSectionGrades(user, sectionid);
+  const a = await getSectionAssignments(user, sectionid);
   if (!g) return undefined
   // a is a reference, g is the thing we need to transform
   const categories:Record<string,any> = {};
