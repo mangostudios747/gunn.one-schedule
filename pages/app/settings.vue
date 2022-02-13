@@ -56,7 +56,10 @@ export default {
     this.darkMode = localStorage["g1.darkMode"] == "true";
     if (this.$auth.loggedIn){
       console.log('Schoology user detected, loading preferences from server.')
-      this.customizations = await this.$axios.$get('/preferences/classes') || customizations
+      const fc = await this.$axios.$get('/preferences/classes');
+      console.log(fc)
+      this.customizations = fc || customizations
+
     }
     else {
       console.log('User not detected, loading preferences from browser.')
@@ -80,7 +83,7 @@ export default {
         this.$store.commit('schedule/setCustomizations', this.customizations)
         if (this.$auth.loggedIn){
           this.$axios.$patch('/preferences/classes', this.customizations).then(()=>{
-            console.log('preferences patched on server')
+            //console.log('preferences patched on server')
           })
         }
 

@@ -177,11 +177,7 @@ api.patch('/preferences/classes',  async function (req, res, next) {
 
 api.get('/preferences/classes', async function (req, res, next) {
   const p = (await prefmdb.findOne({_id: req.user.profile._id})) || {};
-  let classes = undefined;
-  if (p.classes) {
-    classes = JSON.parse(Object.keys(p.classes)[0]);
-  }
-  res.status(200).send(classes);
+  res.status(200).send(p.classes);
 })
 
 api.get('/me/messages/inbox', async function (req, res, next) {
@@ -233,11 +229,12 @@ api.get('/me/sections/:sectionid/page/:pageid', async function (req, res, next){
 api.get('/me/grades', async function (req, res, next){
   res.send(await schoology.getAllGrades(req.user));
 })
+app.use('/', api)
 
 app.use(function (req, res, next) {
   res.status(404).send("Sorry can't find that!")
 })
 
-app.use('/', api)
+
 
 module.exports = app
