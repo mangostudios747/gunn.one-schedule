@@ -177,7 +177,7 @@ api.patch('/preferences/classes',  async function (req, res, next) {
 
 api.get('/preferences/classes', async function (req, res, next) {
   const p = (await prefmdb.findOne({_id: req.user.profile._id})) || {};
-  res.status(200).send(p.classes);
+  res.status(200).json(p.classes?Object.keys(p.classes).join(''):'null');
 })
 
 api.get('/me/messages/inbox', async function (req, res, next) {

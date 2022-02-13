@@ -163,12 +163,14 @@ export default {
     }
   },
   async mounted(){
-    this.$store.dispatch('schedule/bindSchedule');
+    await this.$store.dispatch('schedule/bindSchedule');
     //console.log(localStorage.getItem('g1.darkMode')=='true')
     this.$store.commit('setDarkMode', localStorage.getItem('g1.darkMode')=='true');
     if (this.$auth.loggedIn){
+      this.$store.commit('sgy/setUser', await this.$axios.$get('/users/me'))
       console.log('Schoology user detected, loading preferences from server.')
       this.$store.commit('schedule/setCustomizations', await this.$axios.$get('/preferences/classes'))
+      this.$store.dispatch('schedule/customize', await this.$axios.$get('/users/me/sections'))
     }
     else {
       console.log('User not detected, loading preferences from browser.')
