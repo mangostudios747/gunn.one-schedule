@@ -43,7 +43,7 @@
       <div class="grow basis-0 text-center">
         <dow
           :active="days['Friday']"
-          @click="days['Friday'] = !days['Friday']"
+          @click="toggleDay('Friday')"
           button
           class=""
           >F</dow
@@ -109,7 +109,18 @@ export default {
     },
     searchString: "",
   }),
-  mounted(){
+  methods: {
+    toggleDay(d){
+      this.days[d] = !this.days[d];
+    }
+  },
+  watch:{
+    days:{
+      deep:true,
+      handler(){
+        const a = JSON.stringify(this.days)
+      }
+    }
   },
   computed: {
     ss() {
