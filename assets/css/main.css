@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;351;400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -9,7 +11,7 @@
 
     background-image: url("/background.jpg");
     background-size: cover;
-  
+
     background-position: center;
   }
 }
@@ -27,7 +29,7 @@
 }
 
 a[href].link {
-  @apply text-primary-500 cursor-pointer font-medium hover:text-primary-600;
+  @apply text-primary-500 cursor-pointer  hover:text-primary-600;
 }
 
 .card {
@@ -38,6 +40,17 @@ a[href].link {
   @apply bg-primary-900/20 dark:bg-slate-500/20 rounded-xl;
 }
 
+.btn-elimination {
+  @apply px-4 py-2 font-bold text-white transition transition-shadow duration-100 ease-in-out rounded-md shadow-lg bg-gradient-to-br from-red-500 via-red-500 to-pink-600 shadow-red-700/40 hover:shadow-xl hover:shadow-red-700/40;
+}
+
+.link-elimination {
+  @apply  bg-clip-text font-bold text-transparent bg-gradient-to-r from-red-500 to-rose-500
+}
+
+.text-elimination {
+  @apply bg-clip-text text-transparent bg-gradient-to-br from-red-300 dark:from-red-400 via-rose-300 dark:via-rose-400 to-red-300 dark:to-pink-400 shadow-red-700/40
+}
 
 .input-text {
   @apply bg-gray-50 ring-offset-2 shadow-lg rounded-lg px-3 py-2 my-2 placeholder:italic caret-primary-500 focus:ring focus:ring-2 ring-offset-gray-300 ring-offset-2 ring-primary-500 outline-none placeholder:select-none;
@@ -45,6 +58,10 @@ a[href].link {
 
 ::selection {
   @apply bg-primary-800/40 text-white;
+}
+
+.box-input {
+  @apply focus:ring focus:ring-2 ring-offset-gray-300 ring-offset-2 ring-primary-500 outline-none placeholder:select-none bg-white/10 px-2 py-1 rounded-lg placeholder:text-white/40 border-0;
 }
 
 @layer utilities {

@@ -11,12 +11,13 @@ const jwt = require('jsonwebtoken');
 const usersRouter = require('./routes/users');
 const HOSTING_DOMAIN = process.env.RHOST || 'http://localhost:3000';
 
-let usersmdb, statsmdb, testmdb, passwordsmdb;
+let usersmdb, statsmdb, testmdb, passwordsmdb, elimdb;
 mdb.then(c=> {
   usersmdb = c.db('users').collection('profiles');
   passwordsmdb = c.db('users').collection('passwords');
   statsmdb = c.db('stats').collection('userCount');
   testmdb = c.db('users').collection('test')
+  elimdb = c.db('users').collection('elimination')
 })
 
 const hash = (pw)=>crypto.createHash('md5').update(pw).digest('hex');
@@ -53,7 +54,7 @@ app.use(psession);
 app.use('/users', usersRouter)
 
 app.get('/', function(req, res){
-  res.send('lol hi you found the api ig')
+  res.send({hi:'lol hi you found the api ig'})
 })
 
 app.get('/test/add', async function (req, res){
@@ -84,6 +85,8 @@ app.get('/auth/guest-token', function (req, res) {
   const uid = crypto.randomUUID();
   res.json(jwt.sign({uid, guest:true}, process.env.JWT_SECRET))
 })
+
+
 
 /*app.post('/auth/register/basic', function (req, res) {
   const {name, email, password} = req.body
@@ -141,6 +144,21 @@ app.get('/auth/thanks-sgy', passport.authenticate('schoology'), async function (
 
 app.get('/users/me', passport.authenticate('jwt'), async function (req, res){
   res.json(req.user).end();
+})
+
+app.post('/auth/elimination/user', passport.authenticate('jwt'), async function (req, res){
+  const {user} = req.body;
+  if (!user) return res.status(400).send({error:'null-user'});
+  await elimdb.updateOne({_id:req.user.profile.uid}, {$set:{token: user}}, {upsert: true});
+  res.status(201).send({success: true});
+})
+
+app.get('/auth/elimination/user', passport.authenticate('jwt'), async function (req, res){
+  const resp = await elimdb.findOne({_id:req.user.profile.uid});
+  if (!resp){
+    res.status(401).send({error:'not-found'});
+  }
+  res.status(200).send({user: resp.token});
 })
 
 app.use(function (req, res, next) {

@@ -26,6 +26,9 @@ export default {
         if (response.data.error){
           console.log(response.data.error)
         }
+        else {
+          history.push('/app')
+        }
       } catch (err) {
         console.log(err)
       }

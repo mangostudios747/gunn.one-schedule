@@ -1863,7 +1863,7 @@
     jwt-decode "^3.1.2"
     requrl "^3.0.2"
 
-"@nuxtjs/axios@^5.13.6":
+"@nuxtjs/axios@^5.13.0", "@nuxtjs/axios@^5.13.6":
   version "5.13.6"
   resolved "https://registry.yarnpkg.com/@nuxtjs/axios/-/axios-5.13.6.tgz#6f4bbd98a3a7799a5d2c0726c6ad2a98aa111881"
   integrity sha512-XS+pOE0xsDODs1zAIbo95A0LKlilvJi8YW0NoXYuq3/jjxGgWDxizZ6Yx0AIIjZOoGsXJOPc0/BcnSEUQ2mFBA==
@@ -3088,7 +3088,7 @@ bn.js@^5.0.0, bn.js@^5.1.1:
   resolved "https://registry.yarnpkg.com/bn.js/-/bn.js-5.2.0.tgz#358860674396c6997771a9d051fcc1b57d4ae002"
   integrity sha512-D7iWRBvnZE8ecXiLj/9wbxH7Tk79fAh8IHaTNq1RWRixsS02W+5qS+iE9yq6RYl0asXx5tw0bLhmT5pIfbSquw==
 
-body-parser@1.19.1, body-parser@^1.19.1:
+body-parser@1.19.1, body-parser@^1.19.0, body-parser@^1.19.1:
   version "1.19.1"
   resolved "https://registry.yarnpkg.com/body-parser/-/body-parser-1.19.1.tgz#1499abbaa9274af3ecc9f6f10396c995943e31d4"
   integrity sha512-8ljfQi5eBk8EJfECMrgqNGWPEY5jWP+1IzkzkGdFFEwFQZZyaZ21UqdaHktgiMlH0xLHqIFtE/u2OYE5dOtViA==
@@ -7635,6 +7635,21 @@ nuxt@^2.15.8:
     "@nuxt/vue-app" "2.15.8"
     "@nuxt/vue-renderer" "2.15.8"
     "@nuxt/webpack" "2.15.8"
+
+nuxtjs-multi-auth@^0.0.6:
+  version "0.0.6"
+  resolved "https://registry.yarnpkg.com/nuxtjs-multi-auth/-/nuxtjs-multi-auth-0.0.6.tgz#fafd7726c766b7c4cc1c57bf19f2f4e539f27029"
+  integrity sha512-HlAqBBW4kXFskJc26DHz8Fh100gsVPUfK+B/Q98EH3QMTH+lRYCKp2otgW7kHU/iO3/TcHnHhv6ayB/VCcfhew==
+  dependencies:
+    "@nuxtjs/axios" "^5.13.0"
+    axios "^0.21.1"
+    body-parser "^1.19.0"
+    consola "^2.15.3"
+    cookie "^0.4.1"
+    defu "^3.2.2"
+    hasha "^5.2.2"
+    jwt-decode "^3.1.2"
+    requrl "^3.0.2"
 
 oauth@0.9.x:
   version "0.9.15"
