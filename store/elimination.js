@@ -36,8 +36,7 @@ export const actions = {
         'content-type': 'application/json'
       }
     });
-
-    console.log(response)
+    commit('setUser', response)
   }
 }
 

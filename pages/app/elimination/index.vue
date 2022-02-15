@@ -7,9 +7,7 @@
 <script>
 export default {
   name: "index",
-  middleware(){
-    // check if elimination user
-  }
+
 }
 </script>
 

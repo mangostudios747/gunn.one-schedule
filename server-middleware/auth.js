@@ -10,6 +10,7 @@ const crypto = require("crypto");
 const jwt = require('jsonwebtoken');
 const usersRouter = require('./routes/users');
 const HOSTING_DOMAIN = process.env.RHOST || 'http://localhost:3000';
+const schoology = require('./schoology')
 
 let usersmdb, statsmdb, testmdb, passwordsmdb, elimdb;
 mdb.then(c=> {
@@ -86,8 +87,6 @@ app.get('/auth/guest-token', function (req, res) {
   res.json(jwt.sign({uid, guest:true}, process.env.JWT_SECRET))
 })
 
-
-
 /*app.post('/auth/register/basic', function (req, res) {
   const {name, email, password} = req.body
   // 1. Generate a UID
@@ -160,6 +159,18 @@ app.get('/auth/elimination/user', passport.authenticate('jwt'), async function (
   }
   res.status(200).send({user: resp.token});
 })
+
+app.get('/assignments/pending', passport.authenticate('jwt'), async function(req, res) {
+  console.log("i run")
+  const sections = await schoology.getSections(req.user)
+  let resp = [];
+  for (const section of sections){
+    const assignments = await schoology.getPendingAssignmentsForSection(req.user, section.id);
+    resp = [resp, assignments].flat()
+  }
+  res.status(200).send(resp)
+})
+
 
 app.use(function (req, res, next) {
   res.status(404).send("Sorry can't find that!")
