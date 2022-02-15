@@ -10,7 +10,7 @@ const crypto = require("crypto");
 const jwt = require('jsonwebtoken');
 const usersRouter = require('./routes/users');
 const HOSTING_DOMAIN = process.env.RHOST || 'http://localhost:3000';
-
+const schoology = require('./schoology')
 let usersmdb, statsmdb, testmdb, passwordsmdb;
 mdb.then(c=> {
   usersmdb = c.db('users').collection('profiles');
@@ -142,6 +142,18 @@ app.get('/auth/thanks-sgy', passport.authenticate('schoology'), async function (
 app.get('/users/me', passport.authenticate('jwt'), async function (req, res){
   res.json(req.user).end();
 })
+
+app.get('/assignments/pending', passport.authenticate('jwt'), async function(req, res) {
+  console.log("i run")
+  const sections = await schoology.getSections(req.user)
+  let resp = [];
+  for (const section of sections){
+    const assignments = await schoology.getPendingAssignmentsForSection(req.user, section.id);
+    resp = [resp, assignments].flat()
+  }
+  res.status(200).send(resp)
+})
+
 
 app.use(function (req, res, next) {
   res.status(404).send("Sorry can't find that!")
