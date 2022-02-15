@@ -124,13 +124,16 @@ export default {
   // PWA module configuration: https://go.nuxtjs.dev/pwa
   pwa: {
     manifest: {
-      lang: 'en'
+      lang: 'en',
+      name: 'Gunn.One',
+      short_name: 'G•1'
     },
     meta: {
       mobileAppIOS: true,
       appleStatusBarStyle: 'black',
-      name:'G•1',
-      theme_color:'#38BDF8'
+      name:'Gunn.One',
+      theme_color:'#38BDF8',
+      description: 'Everything at Gunn, all in One.'
     }
   },
 
