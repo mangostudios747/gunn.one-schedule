@@ -343,12 +343,12 @@ export async function fetchFileDetails(user: User, sectionid: string, documentid
 }
 
 export async function getUpdate(user: User, updateid: string) {
-  return await getFrom(`/users/${user.profile.uid}/updates/${updateid}?with_attachments=true`, user.credentials)
+  return await getFrom(`/users/${user.profile.uid}/updates/${updateid}?with_attachments=true&richtext=1`, user.credentials)
 
 }
 
 export async function fetchRecentUpdates(user: User) {
-  const updates = await getFrom(`/recent?limit=50?with_attachments=true`, user.credentials)
+  const updates = await getFrom(`/recent?limit=50?with_attachments=true&richtext=1`, user.credentials)
     .then(e => e.update)
   for (let update of updates) {
     update.author = await getProfileFor(user.credentials, update.uid)
@@ -358,10 +358,20 @@ export async function fetchRecentUpdates(user: User) {
 }
 
 export async function fetchCourseUpdates(user: User, courseid: string) {
-  const updates = await getFrom(`/sections/${courseid}/updates?limit=50&with_attachments=true`, user.credentials)
+  const updates = await getFrom(`/sections/${courseid}/updates?limit=50&with_attachments=true&richtext=1`, user.credentials)
     .then(e => e.update)
   for (let update of updates) {
     update.author = await getProfileFor(user.credentials, update.uid)
+    let baseURL =
+      update.body &&
+      update.body.match(/(?=\<base href=\").+(?=\"\/>)/)[0].split('"')[1];
+    update.parsedBody =  update.body
+    .replace(/(?:\r\n|\r|\n)/g, "")
+    .replace(/<base .+"\/>/, "")
+    .replace(
+      /(?:src=[\^"']\/+)[^'"]+/g,
+      (value: string) => `src="${baseURL}${value.split('"')[1]}`
+    )
     //Object.assign(update, await getUpdate(user, update.id))
   }
   return updates
@@ -396,8 +406,9 @@ async function getSectionGrades(user: User, sectionid:string) {
     .then(e=>e.section)
 }
 
-async function sortedSectionGrades(user:User, sectionid:string) {
-  const [g] = await getSectionGrades(user, sectionid); const a = await getSectionAssignments(user, sectionid);
+export async function fetchSectionGrades(user:User, sectionid:string) {
+  const [g] = await getSectionGrades(user, sectionid);
+  const a = await getSectionAssignments(user, sectionid);
   if (!g) return undefined
   // a is a reference, g is the thing we need to transform
   const categories:Record<string,any> = {};
@@ -426,7 +437,7 @@ export async function getAllGrades(user: User) {
   const sectionids = (await getSections(user)).map((section: { id: string }) => section.id)
   const grades: Record<string, any> = {};
   for (const sectionid of sectionids) {
-    grades[sectionid] = await sortedSectionGrades(user, sectionid);
+    grades[sectionid] = await fetchSectionGrades(user, sectionid);
   }
   return grades
 }

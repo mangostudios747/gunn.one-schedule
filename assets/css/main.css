@@ -38,6 +38,16 @@ a[href].link {
   @apply bg-primary-900/20 dark:bg-slate-500/20 rounded-xl;
 }
 
+.update-body.clamped div {
+  @apply line-clamp-3;
+}
+
+.update-body.clamped::after {
+  content: "(show more)";
+  display: inline;
+
+}
+
 
 .input-text {
   @apply bg-gray-50 ring-offset-2 shadow-lg rounded-lg px-3 py-2 my-2 placeholder:italic caret-primary-500 focus:ring focus:ring-2 ring-offset-gray-300 ring-offset-2 ring-primary-500 outline-none placeholder:select-none;
