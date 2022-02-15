@@ -14,7 +14,7 @@ export default {
       { name: 'format-detection', content: 'telephone=no' }
     ],
     link: [
-      { rel: 'icon', type: 'image/svg', href: '/icon.svg' },
+      { rel: 'icon', type: 'image/svg', href: '/icon.png' },
       {
         rel: 'stylesheet',
         href: 'https://fonts.googleapis.com/css?family=Quicksand:wght@300;351;400;500;600;700&display=swap'
@@ -125,13 +125,19 @@ export default {
   // PWA module configuration: https://go.nuxtjs.dev/pwa
   pwa: {
     manifest: {
-      lang: 'en'
+      lang: 'en',
+      name: 'Gunn.One',
+      short_name: 'G•1',
+      start_url: '/app?standalone=true',
+      background_color: '#4E9DDE'
     },
     meta: {
       mobileAppIOS: true,
       appleStatusBarStyle: 'black',
-      name:'G•1',
-      theme_color:'#38BDF8'
+      name:'Gunn.One',
+      theme_color:'#4E9DDE',
+      description: 'Everything at Gunn, all in One.',
+      
     }
   },
 

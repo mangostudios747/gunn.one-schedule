@@ -231,10 +231,19 @@ function fetchAssignmentsForSection(sectionId, creds) {
     return __awaiter(this, void 0, void 0, function () {
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, getFrom("/sections/" + sectionId + "/assignments", creds)];
+                case 0: return [4 /*yield*/, getFrom("/sections/" + sectionId + "/assignments?limit=999999&richtext=1", creds)];
                 case 1: 
                 // get the assignments from a specific course!
-                return [2 /*return*/, (_a.sent()).assignment];
+                return [2 /*return*/, (_a.sent()).assignment.map(function (asg) {
+                        var baseURL = asg.description &&
+                            asg.description.match(/(?=\<base href=\").+(?=\"\/>)/)[0].split('"')[1];
+                        asg.description = asg.description || '';
+                        asg.parsedBody = asg.description
+                            .replace(/(?:\r\n|\r|\n)/g, "")
+                            .replace(/<base .+"\/>/, "")
+                            .replace(/(?:src=[\^"']\/+)[^'"]+/g, function (value) { return "src=\"" + baseURL + value.split('"')[1]; });
+                        return asg;
+                    })];
             }
         });
     });
@@ -280,7 +289,7 @@ function getPendingAssignmentsForSection(user, sectionId) {
                 case 1:
                     data = _a.sent();
                     return [2 /*return*/, data.filter(function (assignment) {
-                            return !!(assignment.available && !assignment.completed);
+                            return +(new Date(assignment.due)) > Date.now();
                         })];
             }
         });

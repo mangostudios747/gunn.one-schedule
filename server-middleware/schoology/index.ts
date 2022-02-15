@@ -134,7 +134,20 @@ export async function getSections(user: User) {
 
 export async function fetchAssignmentsForSection(sectionId: string, creds: UserCredentials) {
   // get the assignments from a specific course!
-  return (await getFrom(`/sections/${sectionId}/assignments`, creds)).assignment
+  return (await getFrom(`/sections/${sectionId}/assignments?limit=999999&richtext=1`, creds)).assignment.map(asg => {
+  
+  let baseURL =
+      asg.description &&
+      asg.description.match(/(?=\<base href=\").+(?=\"\/>)/)[0].split('"')[1];
+    asg.description = asg.description || ''
+    asg.parsedBody =  asg.description
+    .replace(/(?:\r\n|\r|\n)/g, "")
+    .replace(/<base .+"\/>/, "")
+    .replace(
+      /(?:src=[\^"']\/+)[^'"]+/g,
+      (value: string) => `src="${baseURL}${value.split('"')[1]}`
+    )
+    return asg});
 }
 
 export async function reloadAssignmentsForSection(user: User, sectionId: string) {
@@ -154,11 +167,11 @@ export async function getAssignmentsForSection(user: User, sectionId: string) {
   return await reloadAssignmentsForSection(user, sectionId)
 }
 
-export async function getPendingAssignmentsForSection(user: User, sectionId: string) {
+export async function getPendingAssignmentsForSection(user: User, sectionId: string) : Promise<Array<any>> {
   // we only need the uid hmm
   let data = await getAssignmentsForSection(user, sectionId)
   return data.filter((assignment: any) => {
-    return !!(assignment.available && !assignment.completed)
+    return +(new Date(assignment.due)) > Date.now()
   })
 }
 

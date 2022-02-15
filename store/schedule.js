@@ -113,6 +113,7 @@ export const getters = {
           total: null,
           percent: index !== 0 ? (100 - (+start - now) / 6000) : null,
           isValid: true
+
         }
       }
       const end = event.end
@@ -165,13 +166,13 @@ export const getters = {
       if (ready) {
         upcoming.push(event)
       }
-
       if (event.name === currId) {
 
         ready = true
         if (getters.currentEvent.type === 'future') {
           upcoming.push(event)
         }
+
       }
 
     }

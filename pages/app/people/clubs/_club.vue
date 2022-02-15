@@ -11,7 +11,7 @@
                 
                 
                 <div class="flex mt-2 flex-row">
-                    <div class="rounded-full block h-3 w-3 mx-[2px] bg-white" :key="n" v-for="n of club.tier" >
+                    <div class="rounded-full block h-3 w-3 mx-[2px] bg-white" :key="n+'full'" v-for="n of club.tier" >
 
                     </div>
                     <div class="rounded-full block h-3 w-3 mx-[2px] dark:bg-slate-900/20 bg-primary-900/20" :key="n" v-for="n of (3 - club.tier)" >
@@ -42,6 +42,9 @@
     <p class="text-sm mx-3 mb-10 leading-5 font-medium text-primary-50">
         {{club.desc}}
     </p>
+    <div >
+        <a target="_blank" :href="signInLink" class="btn bg-water/20 text-white mb-2 mr-2 float-right">Attendance Form</a>
+    </div>
   </div>
 </template>
 
@@ -59,6 +62,11 @@ export default {
     }}),
     async asyncData({params}){
         return {club: clubs[params.club]}
+    },
+    computed: {
+        signInLink(){
+            return `https://docs.google.com/forms/d/e/1FAIpQLSfFaDat-272V6ZGE1iocJHWoNi8vxDxMETeWWn4rbGOqPXOFQ/viewform?entry.272185165=${encodeURIComponent((this.club||{name:''}).name)}`
+        }
     }
 }
 </script>

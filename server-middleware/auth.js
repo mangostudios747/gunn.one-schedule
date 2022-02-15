@@ -229,7 +229,21 @@ api.get('/me/sections/:sectionid/page/:pageid', async function (req, res, next){
 api.get('/me/grades', async function (req, res, next){
   res.send(await schoology.getAllGrades(req.user));
 })
+
+api.get('/assignments/pending',  async function(req, res) {
+  console.log("i run")
+  const sections = await schoology.getSections(req.user)
+  let resp = [];
+  for (const section of sections){
+    const assignments = await schoology.getPendingAssignmentsForSection(req.user, section.id);
+    resp = [resp, assignments].flat()
+  }
+  res.status(200).send(resp)
+})
+
 app.use('/', api)
+
+
 
 app.use(function (req, res, next) {
   res.status(404).send("Sorry can't find that!")

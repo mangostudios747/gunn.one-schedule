@@ -1,10 +1,10 @@
 <template>
-  <div role="progressbar" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100" style="--value:65"></div>
+  <div role="progressbar" :aria-valuenow="value" aria-valuemin="0" aria-valuemax="100" :style="`--value:${value}`"></div>
 </template>
 
 <script>
 export default {
-
+  props:['value']
 }
 </script>
 
@@ -21,9 +21,9 @@ export default {
 }
 
 div[role="progressbar"] {
-  --size: 12rem;
-  --fg: #369;
-  --bg: #def;
+  --size: 1rem;
+  --fg: #22c55e;
+  --bg: #1e3a8a33;
   --pgPercentage: var(--value);
   animation: growProgressBar 3s 1 forwards;
   width: var(--size);
@@ -32,7 +32,7 @@ div[role="progressbar"] {
   display: grid;
   place-items: center;
   background: 
-    radial-gradient(closest-side, white 80%, transparent 0 99.9%, white 0),
+    radial-gradient(closest-side, white 0%, transparent 0 99.9%, white 0),
     conic-gradient(var(--fg) calc(var(--pgPercentage) * 1%), var(--bg) 0)
     ;
   font-size: calc(var(--size) / 5);
@@ -41,6 +41,6 @@ div[role="progressbar"] {
 
 div[role="progressbar"]::before {
   counter-reset: percentage var(--value);
-  content: counter(percentage) '%';
+/*  content: counter(percentage) '%';*/
 }
 </style>
