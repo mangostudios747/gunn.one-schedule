@@ -177,6 +177,12 @@ export const getters = {
 
     }
     return upcoming
+  },
+  sectionInfo: (state) => (sid) => {
+    return Object.values(state.customizations).filter(({meta})=>{
+      if (!meta) return false;
+      return meta.id === sid;
+    })[0] || {}
   }
 }
 export const mutations = {

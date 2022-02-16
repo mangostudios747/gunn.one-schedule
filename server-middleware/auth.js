@@ -159,6 +159,11 @@ api.get('/users/me/sections', async function (req, res) {
   res.json(sections).end();
 })
 
+api.get('/sections/:section_id', async function(req, res){
+  const section = await schoology.getSection(req.user, req.params.section_id);
+  res.json(section).end()
+})
+
 api.get('/sections/:section_id/updates', async function (req, res) {
   const updates = await schoology.fetchCourseUpdates(req.user, req.params.section_id);
   res.json({updates}).end();
