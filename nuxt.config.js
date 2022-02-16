@@ -137,7 +137,8 @@ export default {
       name:'Gunn.One',
       theme_color:'#4E9DDE',
       description: 'Everything at Gunn, all in One.',
-      
+      ogImage: true,
+      nativeUI: true,
     }
   },
 
