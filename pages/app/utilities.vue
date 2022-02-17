@@ -6,16 +6,26 @@ export default {
         VueBarcode
     },
     data: ()=>({
-        idNumber:'00000'
+        idn:'00000'
     }),
+    computed: {
+        idNumber: {
+            get(){
+                return this.idn
+            },
+            set(v){
+                this.idn = String(Number(v)| 0).padStart(5, '0').substring(0, 5)
+            }
+        }
+    },
     render(){
         return (
             <div class="w-full flex ">
                 <div class="mx-auto my-4 shadow-md ">
-                    <VueBarcode height={70} format="CODE39" value={950+(this.idNumber.padStart(5, '0')||'00000')} />
+                    <VueBarcode height={70} format="CODE39" value={'950'+this.idn} />
                     <div class="flex flex-row  items-center w-full  overflow-hidden" >
                         <span class=" bg-primary-600 dark:bg-slate-800 rounded-bl-lg text-white h-full p-2">950</span>
-                        <input max={99999} vModel={this.idNumber} class="grow rounded-br-lg bg-white p-2  outline-none" type="number" />
+                        <input maxlength="6" vModel={this.idNumber} class="grow rounded-br-lg bg-white p-2  outline-none" type="text" />
                     </div>
                 </div>
             </div>
