@@ -8,13 +8,16 @@ export default {
     data: ()=>({
         idn:'00000'
     }),
+    mounted(){
+        this.$store.commit('setBarcode', localStorage.getItem('g1.barcode'))
+    },
     computed: {
         idNumber: {
             get(){
-                return this.idn
+                return this.$store.state.barcode
             },
             set(v){
-                this.idn = String(Number(v)| 0).padStart(5, '0').substring(0, 5)
+                this.$store.commit('setBarcode', String(Number(v)| 0).padStart(5, '0').substring(0, 5))
             }
         }
     },
@@ -22,7 +25,7 @@ export default {
         return (
             <div class="w-full flex ">
                 <div class="mx-auto my-4 shadow-md ">
-                    <VueBarcode height={70} format="CODE39" value={'950'+this.idn} />
+                    <VueBarcode height={70} format="CODE39" value={'950'+this.$store.state.barcode} />
                     <div class="flex flex-row  items-center w-full  overflow-hidden" >
                         <span class=" bg-primary-600 dark:bg-slate-800 rounded-bl-lg text-white h-full p-2">950</span>
                         <input maxlength="6" vModel={this.idNumber} class="grow rounded-br-lg bg-white p-2  outline-none" type="text" />
