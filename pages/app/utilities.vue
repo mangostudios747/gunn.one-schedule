@@ -24,7 +24,7 @@ export default {
     render(){
         return (
             <div class="w-full flex ">
-                <div class="mx-auto my-4 shadow-md ">
+                <div class="mx-auto rounded-lg my-4 shadow-md ">
                     <VueBarcode height={70} format="CODE39" value={'950'+this.$store.state.barcode} />
                     <div class="flex flex-row  items-center w-full rounded-b-lg overflow-hidden" >
                         <span class=" bg-primary-600 dark:bg-slate-800 rounded-bl-lg text-white h-full p-2">950</span>
