@@ -63,9 +63,11 @@ export default {
     // https://go.nuxtjs.dev/content
     '@nuxt/content',
     '@nuxtjs/firebase',
-
+    '@nuxtjs/gtm',
   ],
-
+  gtm: {
+    id: 'GTM-W2JN9ZK'
+  },
   firebase: {
     // options
     config: {
