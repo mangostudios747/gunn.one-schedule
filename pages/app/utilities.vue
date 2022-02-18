@@ -26,9 +26,9 @@ export default {
             <div class="w-full flex ">
                 <div class="mx-auto my-4 shadow-md ">
                     <VueBarcode height={70} format="CODE39" value={'950'+this.$store.state.barcode} />
-                    <div class="flex flex-row  items-center w-full  overflow-hidden" >
+                    <div class="flex flex-row  items-center w-full rounded-lg overflow-hidden" >
                         <span class=" bg-primary-600 dark:bg-slate-800 rounded-bl-lg text-white h-full p-2">950</span>
-                        <input maxlength="6" vModel={this.idNumber} class="grow rounded-br-lg bg-white p-2  outline-none" type="text" />
+                        <input maxlength="6" vModel={this.idNumber} class="grow border-0 rounded-br-lg bg-white p-2  outline-none" type="text" />
                     </div>
                 </div>
             </div>
