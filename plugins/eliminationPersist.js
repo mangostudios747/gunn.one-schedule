@@ -1,7 +1,9 @@
 export default async function EliminationPersistPlugin(store) {
   // called when the store is initialized
   // fetch the user
-  //const l = localStorage;
+  if (process.server) return;
+  console.log('client! uau!')
+  const l = localStorage;
 
   store.subscribe(async (mutation, state) => {
     // called after every mutation.

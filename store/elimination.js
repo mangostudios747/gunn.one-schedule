@@ -1,4 +1,3 @@
-import EliminationPersistPlugin from "~/plugins/eliminationPersist";
 
 export const state = () => ({
   // User token
