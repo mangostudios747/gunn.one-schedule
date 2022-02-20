@@ -14,7 +14,7 @@ export default {
       { name: 'format-detection', content: 'telephone=no' }
     ],
     link: [
-      { rel: 'icon', type: 'image/svg', href: '/icon.svg' },
+      { rel: 'icon', type: 'image/svg', href: '/icon.png' },
       {
         rel: 'stylesheet',
         href: 'https://fonts.googleapis.com/css?family=Quicksand:wght@300;351;400;500;600;700&display=swap'
@@ -63,9 +63,11 @@ export default {
     // https://go.nuxtjs.dev/content
     '@nuxt/content',
     '@nuxtjs/firebase',
-
+    '@nuxtjs/gtm',
   ],
-
+  gtm: {
+    id: 'GTM-W2JN9ZK'
+  },
   firebase: {
     // options
     config: {
@@ -135,6 +137,7 @@ export default {
   axios: {
     // Workaround to avoid enforcing hard-coded localhost:3000: https://github.com/nuxt-community/axios-module/issues/308
     baseURL: '/api',
+    port: 3000
   },
 
   serverMiddleware: [
@@ -156,7 +159,8 @@ export default {
       name:'Gunn.One',
       theme_color:'#4E9DDE',
       description: 'Everything at Gunn, all in One.',
-      
+      ogImage: true,
+      nativeUI: true,
     }
   },
 

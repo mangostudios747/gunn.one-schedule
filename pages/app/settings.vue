@@ -52,9 +52,18 @@ export default {
     customizations,
     darkMode: false,
   }),
-  mounted() {
+  async mounted() {
     this.darkMode = localStorage["g1.darkMode"] == "true";
-    this.customizations = JSON.parse(localStorage.getItem('g1.classes') || JSON.stringify(customizations))
+    if (this.$auth.loggedIn){
+      console.log('Schoology user detected, loading preferences from server.')
+      this.customizations = JSON.parse(await this.$axios.$get('/preferences/classes')) || customizations
+    }
+    else {
+      console.log('User not detected, loading preferences from browser.')
+      this.customizations = JSON.parse(localStorage.getItem('g1.classes') || JSON.stringify(customizations))
+    }
+
+
     //console.log(this.$store.state.darkMode)
   },
   watch:{
@@ -68,7 +77,13 @@ export default {
   methods: {
     updateClasses() {
         localStorage.setItem('g1.classes', JSON.stringify(this.customizations))
-        this.$store.commit('schedule/setCustomizations', this.customizations)
+        this.$store.commit('schedule/setCustomizations', {customizations: this.customizations, sgy: this.$auth.loggedIn})
+        /*if (this.$auth.loggedIn){
+          this.$axios.$patch('/preferences/classes', this.customizations).then(()=>{
+            //console.log('preferences patched on server')
+          })
+        }*/
+
     },
     toggle(value) {
       const isDark = document.body.parentElement.classList.toggle(

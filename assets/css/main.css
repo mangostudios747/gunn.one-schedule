@@ -51,6 +51,16 @@ a[href].link {
 .text-elimination {
   @apply bg-clip-text text-transparent bg-gradient-to-br from-red-300 dark:from-red-400 via-rose-300 dark:via-rose-400 to-red-300 dark:to-pink-400 shadow-red-700/40
 }
+.update-body.clamped div {
+  @apply line-clamp-3;
+}
+
+.update-body.clamped::after {
+  content: "(show more)";
+  display: inline;
+
+}
+
 
 .input-text {
   @apply bg-gray-50 ring-offset-2 shadow-lg rounded-lg px-3 py-2 my-2 placeholder:italic caret-primary-500 focus:ring focus:ring-2 ring-offset-gray-300 ring-offset-2 ring-primary-500 outline-none placeholder:select-none;

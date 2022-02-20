@@ -54,7 +54,7 @@ var __spreadArrays = (this && this.__spreadArrays) || function () {
     return r;
 };
 exports.__esModule = true;
-exports.getSectionAnnouncement = exports.getAllGrades = exports.getPage = exports.getDocument = exports.like = exports.fetchCourseUpdates = exports.fetchRecentUpdates = exports.getUpdate = exports.fetchFileDetails = exports.fetchExternalToolDetails = exports.fetchLinkDetails = exports.fetchAllSectionEventsForWeek = exports.fetchWeekUserEvents = exports.getSection = exports.getSectionFolder = exports.newMessage = exports.replyToMessage = exports.fetchSentMessage = exports.fetchInboxMessage = exports.fetchMessagesSent = exports.fetchMessagesInbox = exports.getPendingAssignmentsForSection = exports.getAssignmentsForSection = exports.reloadAssignmentsForSection = exports.fetchAssignmentsForSection = exports.getSections = exports.reloadSections = exports.fetchSections = exports.getProfileFor = exports.getProfile = void 0;
+exports.getSectionAnnouncement = exports.getAllGrades = exports.fetchSectionGrades = exports.getPage = exports.getDocument = exports.like = exports.fetchCourseUpdates = exports.fetchRecentUpdates = exports.getUpdate = exports.fetchFileDetails = exports.fetchExternalToolDetails = exports.fetchLinkDetails = exports.fetchAllSectionEventsForWeek = exports.fetchWeekUserEvents = exports.getSection = exports.getSectionFolder = exports.newMessage = exports.replyToMessage = exports.fetchSentMessage = exports.fetchInboxMessage = exports.fetchMessagesSent = exports.fetchMessagesInbox = exports.getPendingAssignmentsForSection = exports.getAssignmentsForSection = exports.reloadAssignmentsForSection = exports.fetchAssignmentsForSection = exports.getSections = exports.reloadSections = exports.fetchSections = exports.getProfileFor = exports.getProfile = void 0;
 var oauth = require('./oauth');
 var mdb = require('../database').mdb;
 var userDatamdb; // to-do: get access to types
@@ -638,7 +638,7 @@ function getUpdate(user, updateid) {
     return __awaiter(this, void 0, void 0, function () {
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, getFrom("/users/" + user.profile.uid + "/updates/" + updateid + "?with_attachments=true", user.credentials)];
+                case 0: return [4 /*yield*/, getFrom("/users/" + user.profile.uid + "/updates/" + updateid + "?with_attachments=true&richtext=1", user.credentials)];
                 case 1: return [2 /*return*/, _a.sent()];
             }
         });
@@ -650,7 +650,7 @@ function fetchRecentUpdates(user) {
         var updates, _i, updates_1, update, _a;
         return __generator(this, function (_b) {
             switch (_b.label) {
-                case 0: return [4 /*yield*/, getFrom("/recent?limit=50?with_attachments=true", user.credentials)
+                case 0: return [4 /*yield*/, getFrom("/recent?limit=50?with_attachments=true&richtext=1", user.credentials)
                         .then(function (e) { return e.update; })];
                 case 1:
                     updates = _b.sent();
@@ -677,25 +677,41 @@ function fetchRecentUpdates(user) {
 exports.fetchRecentUpdates = fetchRecentUpdates;
 function fetchCourseUpdates(user, courseid) {
     return __awaiter(this, void 0, void 0, function () {
-        var updates, _i, updates_2, update, _a;
-        return __generator(this, function (_b) {
-            switch (_b.label) {
-                case 0: return [4 /*yield*/, getFrom("/sections/" + courseid + "/updates?limit=50&with_attachments=true", user.credentials)
+        var updates, _loop_1, _i, updates_2, update;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0: return [4 /*yield*/, getFrom("/sections/" + courseid + "/updates?limit=50&with_attachments=true&richtext=1", user.credentials)
                         .then(function (e) { return e.update; })];
                 case 1:
-                    updates = _b.sent();
+                    updates = _a.sent();
+                    _loop_1 = function (update) {
+                        var _a, baseURL;
+                        return __generator(this, function (_b) {
+                            switch (_b.label) {
+                                case 0:
+                                    _a = update;
+                                    return [4 /*yield*/, getProfileFor(user.credentials, update.uid)];
+                                case 1:
+                                    _a.author = _b.sent();
+                                    baseURL = update.body &&
+                                        update.body.match(/(?=\<base href=\").+(?=\"\/>)/)[0].split('"')[1];
+                                    update.parsedBody = update.body
+                                        .replace(/(?:\r\n|\r|\n)/g, "")
+                                        .replace(/<base .+"\/>/, "")
+                                        .replace(/(?:src=[\^"']\/+)[^'"]+/g, function (value) { return "src=\"" + baseURL + value.split('"')[1]; });
+                                    return [2 /*return*/];
+                            }
+                        });
+                    };
                     _i = 0, updates_2 = updates;
-                    _b.label = 2;
+                    _a.label = 2;
                 case 2:
                     if (!(_i < updates_2.length)) return [3 /*break*/, 5];
                     update = updates_2[_i];
-                    _a = update;
-                    return [4 /*yield*/, getProfileFor(user.credentials, update.uid)
-                        //Object.assign(update, await getUpdate(user, update.id))
-                    ];
+                    return [5 /*yield**/, _loop_1(update)];
                 case 3:
-                    _a.author = _b.sent();
-                    _b.label = 4;
+                    _a.sent();
+                    _a.label = 4;
                 case 4:
                     _i++;
                     return [3 /*break*/, 2];
@@ -765,9 +781,9 @@ function getSectionGrades(user, sectionid) {
         });
     });
 }
-function sortedSectionGrades(user, sectionid) {
+function fetchSectionGrades(user, sectionid) {
     return __awaiter(this, void 0, void 0, function () {
-        var g, a, categories, grades, assignments, _loop_1, _i, assignments_1, as;
+        var g, a, categories, grades, assignments, _loop_2, _i, assignments_1, as;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0: return [4 /*yield*/, getSectionGrades(user, sectionid)];
@@ -788,7 +804,7 @@ function sortedSectionGrades(user, sectionid) {
                     grades = g.final_grade.find(function (e) { return e.weight; });
                     grades.grading_category.forEach(function (c) { return Object.assign(categories[c.category_id], c); });
                     assignments = g.period.find(function (e) { return e.period_id === grades.period_id; }).assignment;
-                    _loop_1 = function (as) {
+                    _loop_2 = function (as) {
                         var asg_info = a.find(function (e) { return e.id === as.assignment_id; });
                         if (asg_info) {
                             Object.assign(as, asg_info);
@@ -797,7 +813,7 @@ function sortedSectionGrades(user, sectionid) {
                     };
                     for (_i = 0, assignments_1 = assignments; _i < assignments_1.length; _i++) {
                         as = assignments_1[_i];
-                        _loop_1(as);
+                        _loop_2(as);
                     }
                     grades.categories = categories;
                     return [2 /*return*/, grades];
@@ -805,6 +821,7 @@ function sortedSectionGrades(user, sectionid) {
         });
     });
 }
+exports.fetchSectionGrades = fetchSectionGrades;
 function getAllGrades(user) {
     return __awaiter(this, void 0, void 0, function () {
         var sectionids, grades, _i, sectionids_1, sectionid, _a, _b;
@@ -821,7 +838,7 @@ function getAllGrades(user) {
                     sectionid = sectionids_1[_i];
                     _a = grades;
                     _b = sectionid;
-                    return [4 /*yield*/, sortedSectionGrades(user, sectionid)];
+                    return [4 /*yield*/, fetchSectionGrades(user, sectionid)];
                 case 3:
                     _a[_b] = _c.sent();
                     _c.label = 4;
