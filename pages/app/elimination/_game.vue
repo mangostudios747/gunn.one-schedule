@@ -9,7 +9,7 @@
     <tab  :href="`/app/elimination/${$route.params.game}/feed`">
       Kill Feed
     </tab>
-    <tab :href="`/app/elimination/${$route.params.game}`" >
+    <tab exact :href="`/app/elimination/${$route.params.game}`" >
       Home
     </tab>
     <tab :href="`/app/elimination/${$route.params.game}/leaderboard`">

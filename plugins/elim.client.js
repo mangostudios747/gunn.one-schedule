@@ -23,7 +23,7 @@ class EliminationSDK {
   }
   async fetchUser(uid){
     // need to implement a cache
-    return await this.getFrom('user/'+uid)
+    return await this.getFrom('users/'+uid)
   }
   async fetchGames(){
     const gameList = await this.getFrom('games');
@@ -34,8 +34,9 @@ class EliminationSDK {
     }))
   }
   async fetchLeaderboard(gameId){
-    const leaderboard = Promise.all((await this.getFrom(`game/${gameId}/top`)).map(async (x)=>{
+    return Promise.all((await this.getFrom(`elimination/game/${gameId}/top`)).map(async (x) => {
       // set target and entity
+      x.user = await this.fetchUser(x.userID);
       return x
     }))
   }
