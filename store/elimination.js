@@ -20,15 +20,17 @@ export const actions = {
           'content-type': 'application/json'
         }
       });
-      commit('setUser', response)
+      commit('setUser', response);
+      await this.$router.push('/app/elimination')
     }
     catch (e) {
       console.log(e)
     }
   },
-  signup({state, commit}, creds) {
-    const response = this.$axios.$post('https://api.gunnelimination.com/signup', {
+  async signup({state, commit}, creds) {
+    const response = await this.$axios.$post('https://api.gunnelimination.com/signup', {
       ...creds,
+      createdBy:"Gunn.One",
       redirectURL:'https://gunn.one/app/elimination/callback'
     }, {
       headers: {

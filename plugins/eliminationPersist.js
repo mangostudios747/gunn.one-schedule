@@ -52,9 +52,11 @@ export default async function EliminationPersistPlugin(store) {
         const user = l.getItem('g1.eliminationUser')
         if (user){
           store.commit('elimination/setUser', user);
-          console.info('Elimination user found, logging in');
+          console.info('%cG1 %cElimination%c user found, logging in', 'color: #29bfff','background-color:#ef4444;color:white;font-weight:700;padding: 2px 3px;border-radius:5px','color: initial');
         }
-        console.info('Elimination user not found')
+        else {
+          console.info('Elimination user not found')
+        }
       }
     }
   })

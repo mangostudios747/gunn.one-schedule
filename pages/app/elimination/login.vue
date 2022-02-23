@@ -1,5 +1,5 @@
 <template>
-  <form class="box flex flex-col gap-2 w-full mx-auto my-auto text-white py-3 px-4">
+  <form class="box flex max-w-sm flex-col gap-2 w-full mx-auto my-auto text-white py-3 px-4">
     <h1 class="text-lg font-bold block mx-auto">Log in to <span class="text-elimination">Elimination</span></h1>
     <div v-if="error.valid" class="rounded-md py-3 px-2 bg-red-500/20 flex flex-row gap-2 text-red-400">
       <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 my-auto" viewBox="0 0 20 20" fill="currentColor">

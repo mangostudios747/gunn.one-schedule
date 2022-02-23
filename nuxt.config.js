@@ -40,7 +40,8 @@ export default {
     },
     {
       src:'~/plugins/barcode.js'
-    }
+    },
+    '~/plugins/elim.client.js'
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components

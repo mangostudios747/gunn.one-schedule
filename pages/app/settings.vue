@@ -1,6 +1,6 @@
 <template>
   <div class="h-full md:pl-2 pl-5 pr-5 w-full">
-    <h1 class="text-white text-3xl leading-9 font-bold md:my-3">Settings</h1>
+    <h1 class="page-title">Settings</h1>
     <div class="box my-4 p-4">
       <h2 class="text-base leading-4 font-medium text-white/70 mb-5">
         Appearance
