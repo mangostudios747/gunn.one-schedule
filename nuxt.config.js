@@ -65,7 +65,15 @@ export default {
     '@nuxt/content',
     '@nuxtjs/firebase',
     '@nuxtjs/gtm',
+    'nuxt-socket-io',
   ],
+  io: {
+    // module options
+    sockets: [{
+      name: 'main',
+      url: 'wss://api.gunnelimination.com'
+    }]
+  },
   gtm: {
     id: 'GTM-W2JN9ZK'
   },

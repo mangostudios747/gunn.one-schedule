@@ -27,7 +27,31 @@
 export default {
   data: () => ({
     game: null,
+    socket:null,
   }),
+  mounted(){
+    this.socket = this.$nuxtSocket({
+      extraHeaders:{
+        Authorization: `Bearer ${localStorage.getItem('g1.eliminationUser')}`
+      }
+    });
+    this.socket.on('userInfo', (e, f)=>{
+      console.log(e, f)
+    })
+    this.socket.on('eliminationUpdateSelf', (e, f)=>{
+      console.log(e, f)
+    })
+    this.socket.on('eliminationKill', (e, f)=>{
+      console.log(e, f)
+    })
+    this.socket.on('gameUpdated', (e, f)=>{
+      console.log(e, f)
+    })
+
+    this.socket.on('gameCreated', (e, f)=>{
+      console.log(e, f)
+    })
+  },
   fetchOnServer: false,
   async fetch() {
     this.game = this.$elim.Game(this.$route.params.game);

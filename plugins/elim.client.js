@@ -8,14 +8,14 @@ req.onerror = event => {
 };
 
 req.onupgradeneeded = (event) => {
-  userCache = db.createObjectStore('users', {keyPath: 'userID'});
+  userCache = req.result.createObjectStore('users', {keyPath: 'userID'});
   userCache.createIndex('userID', 'userID', {unique: true});
   userCache.transaction.oncomplete = event => {
 
   }
 };
 
-req.onsuccess = async () => {
+req.onsuccess = () => {
   db = req.result
 }
 
@@ -57,7 +57,8 @@ function getUserProfile(uid, gameId= null) {
 }
 
 class EliminationGame {
-  constructor(sdk, gameId){
+  constructor(sdk, ns, gameId){
+    this.ns = ns;
     this.cache = {
       users:{},
       leaderboard:[],
@@ -70,24 +71,37 @@ class EliminationGame {
   async init(){
     await this.fetchSelf();
   }
+
+
+  async fetchUser(uid){
+    return await getUserProfile(uid, this.gameId)
+  }
   async fetchSelf(){
     Object.assign(this, await this.sdk.getFrom(`game/${this.gameId}`));
   }
 
+  async fetchKillFeed(){
+    return await Promise.all((await this.sdk.getFrom(`elimination/game/${this.gameId}/kills`)).map(async (x)=>{
+        x.target = await this.fetchUser(x.target);
+        x.entity = await this.fetchUser(x.entity);
+        return x
+    }))
+  }
+
   async fetchLeaderboard(){
-    return Promise.all((await this.sdk.getFrom(`elimination/game/${this.gameId}/top`)).map(async (x) => {
+    return await Promise.all((await this.sdk.getFrom(`elimination/game/${this.gameId}/top`)).map(async (x) => {
       // set target and entity
-      x.user = await this.sdk.fetchUser(x.userID);
+      x.user = await this.fetchUser(x.userID);
       return x
     }))
   }
 }
 class EliminationSDK {
-  constructor() {
-
+  constructor(ns) {
+    this.ns = ns;
   }
   Game(...args){
-    return new EliminationGame(this, ...args)
+    return new EliminationGame(this, this.ns, ...args)
   }
   async getFrom(path, body = undefined){
     const response = await fetch(`${API_DOMAIN}/${path}`, {
@@ -109,7 +123,7 @@ class EliminationSDK {
   }
   async fetchUser(uid){
     // need to implement a cache
-    return await this.getFrom('users/'+uid)
+    return await getUserProfile(uid)
   }
   async fetchGames(){
     const gameList = await this.getFrom('games');
@@ -122,7 +136,7 @@ class EliminationSDK {
 
 }
 
-export default ({ app }, inject) => {
-  const elim = new EliminationSDK()
+export default ({ app, $nuxtSocket }, inject) => {
+  const elim = new EliminationSDK($nuxtSocket)
   inject('elim', elim);
 }
