@@ -86,6 +86,9 @@ export default {
       else {
         this.killError = false
         this.killed = this.target.firstName
+        setTimeout(()=>{
+          window.location.reload()
+        }, 300)
       }
     }
   }
