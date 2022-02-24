@@ -73,6 +73,7 @@ class EliminationGame {
 
   async init(){
     await this.fetchGame();
+    await this.fetchLeaderboard();
   }
 
   async fetchSelf(){

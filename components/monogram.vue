@@ -1,5 +1,5 @@
 <script>
-const colors = ['bg-lime-700', 'bg-rose-700', 'bg-sky-700', 'bg-amber-700', 'bg-purple-700', 'bg-emerald-700']
+const colors = ['bg-lime-400', 'bg-fuchsia-300', 'bg-sky-500', 'bg-amber-400', 'bg-violet-400', 'bg-emerald-500']
 export default {
   props: {
     user: {

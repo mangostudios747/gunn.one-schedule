@@ -56,6 +56,7 @@ export default {
   async fetch() {
     this.game = this.$elim.Game(this.$route.params.game);
     await this.game.init();
+
   },
 };
 </script>
