@@ -38,7 +38,7 @@
           </div>
         </div>
         <div class="flex flex-row gap-2">
-          <input disabled readonly :value="me.secret" class="box-input select-none grow blur-sm" /> <button class="btn bg-white/10">Show code</button>
+          <input disabled readonly :value="me.secret" :class="[showSecret?'':'blur-sm']" class="box-input font-mono text-xs text-center select-none grow" /> <button @click="showSecret=!showSecret" class="btn bg-white/10">{{showSecret?'Hide':'Show'}} code</button>
         </div>
 
       </div></div>
@@ -51,7 +51,9 @@ export default {
   name: "index",
   data:()=>({
     me:null,
-    target:null
+    target:null,
+    killCode:'',
+    showSecret:false
   }),
   fetchOnServer: false,
   async fetch(){
