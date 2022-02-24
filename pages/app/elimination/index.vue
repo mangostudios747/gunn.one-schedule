@@ -7,7 +7,7 @@
           <p v-if="game.description.trim().replace('\u8203','')" class="">{{game.description.trim()}}</p></div>
         <div class="flex mr-0 ml-auto">
           <a :href="`/app/elimination/${game.id}`" v-if="game.joined" class="btn-elimination ml-auto block my-auto float-right">Open</a>
-          <a v-else class="btn-elimination ml-auto block my-auto float-right">Join</a>
+          <a v-else @click='joinGame(game.id)' class="btn-elimination ml-auto block my-auto float-right">Join</a>
         </div>
 
       </div>
@@ -23,10 +23,15 @@ export default {
     games:[]
   }),
   async fetch(){
-    this.games = await this.$elim.fetchGames()
+    this.games = (await this.$elim.fetchGames()).filter(e=>!Object.entries(e).includes('dev'))
+  },
+  methods:{
+    async joinGame(id){
+      const response = await this.$elim.joinGame(id)
+      this.$router.push(`/app/elimination/${id}`);
+    }
   },
   beforeMount(){
-
     // if user not detected, prompt them to login
     if (!localStorage.getItem('g1.eliminationUser')){
       this.$router.push('/app/elimination/login')

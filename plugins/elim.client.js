@@ -113,7 +113,7 @@ class EliminationSDK {
   Game(...args){
     return new EliminationGame(this, ...args)
   }
-  async getFrom(path, body = undefined, method='GET'){
+  async getFrom(path, body = undefined, method='GET', json=true){
     const response = await fetch(`${API_DOMAIN}/${path}`, {
       headers: {
         'Authorization': `Bearer ${localStorage.getItem('g1.eliminationUser')}`,
@@ -123,7 +123,7 @@ class EliminationSDK {
       method
     })
     if (response.status === 200){
-      return await response.json();
+      return json? await response.json() : await response.text();
     }
     else {
       return {
@@ -143,6 +143,9 @@ class EliminationSDK {
       x.joined = (await t.getFrom(`game/${x.id}/joined`)).joined;
       return x
     }))
+  }
+  async joinGame(id){
+    return await this.getFrom(`game/${id}/join`, null, 'POST', false)
   }
 
 }
