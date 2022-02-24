@@ -2,7 +2,7 @@
 export const state = () => ({
   // User token
   user: false,
-  popup: false
+  popup: {}
 })
 
 export const mutations = {

@@ -29,25 +29,28 @@ function getUserProfile(uid, gameId= null) {
               let user = JSON.parse(JSON.stringify(ureq.result))
               if (gameId) {
                   user = Object.assign(user, await fetch(`${API_DOMAIN}/elimination/game/${gameId}/user/${uid}`, {
-                      headers: {
-                          'Content-Type': 'application/json'
-                      }
+                    headers: {
+                      'Authorization': `Bearer ${localStorage.getItem('g1.eliminationUser')}`,
+                      'Content-Type':'application/json',
+                    },
                   }).then(e => e.json()));
                  resolve(user);
               }
               else resolve(user);
           }
           const user = await fetch(`${API_DOMAIN}/users/${uid}`, {
-              headers: {
-                  'Content-Type': 'application/json'
-              }
+            headers: {
+              'Authorization': `Bearer ${localStorage.getItem('g1.eliminationUser')}`,
+              'Content-Type':'application/json',
+            },
           }).then(e => e.json());
           db.transaction("users", "readwrite").objectStore('users').put(user);
           if (gameId) {
               Object.assign(user, await fetch(`${API_DOMAIN}/elimination/game/${gameId}/user/${uid}`, {
-                  headers: {
-                      'Content-Type': 'application/json'
-                  }
+                headers: {
+                  'Authorization': `Bearer ${localStorage.getItem('g1.eliminationUser')}`,
+                  'Content-Type':'application/json',
+                },
               }).then(e => e.json()));
           }
           resolve(user);
@@ -69,14 +72,17 @@ class EliminationGame {
   }
 
   async init(){
-    await this.fetchSelf();
+    await this.fetchGame();
   }
 
+  async fetchSelf(){
+    return await this.fetchUser('@me')
+  }
 
   async fetchUser(uid){
     return await getUserProfile(uid, this.gameId)
   }
-  async fetchSelf(){
+  async fetchGame(){
     Object.assign(this, await this.sdk.getFrom(`game/${this.gameId}`));
   }
 
@@ -89,11 +95,12 @@ class EliminationGame {
   }
 
   async fetchLeaderboard(){
-    return await Promise.all((await this.sdk.getFrom(`elimination/game/${this.gameId}/top`)).map(async (x) => {
+    this.cache.leaderboard =  await Promise.all((await this.sdk.getFrom(`elimination/game/${this.gameId}/top`)).map(async (x) => {
       // set target and entity
       x.user = await this.fetchUser(x.userID);
       return x
     }))
+    return this.cache.leaderboard
   }
 }
 class EliminationSDK {

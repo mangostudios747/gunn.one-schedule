@@ -12,7 +12,7 @@ export default {
       const clickedOnTrigger = target.closest('.popup-trigger');
       // if clicked outside popup
       if (!clickedOnPopup && !clickedOnTrigger){
-        this.$store.commit('elimination/setPopup', false)
+        this.$store.commit('elimination/setPopup', {})
       }
 
     })

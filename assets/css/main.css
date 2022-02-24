@@ -37,7 +37,7 @@ a[href].link {
 }
 
 .box {
-  @apply bg-primary-900/20 dark:bg-slate-500/20 rounded-xl;
+  @apply bg-primary-900/20 text-white dark:bg-slate-500/20 rounded-xl ;
 }
 
 .btn-elimination {
