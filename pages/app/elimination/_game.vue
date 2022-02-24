@@ -1,31 +1,40 @@
 <template>
   <div class="h-full w-full">
-    <h1 class="page-title">Elimination</h1>
+    <div v-if="$fetchState.pending">
+      Loading...
+    </div>
+    <div v-else>
+    <h1 class="page-title">{{ game.name }}</h1>
     <div
       class="flex sticky top-0 p-1 mt-3 space-x-1 box"
       role="tablist"
       aria-orientation="horizontal"
     >
-    <tab  :href="`/app/elimination/${$route.params.game}/feed`">
-      Kill Feed
-    </tab>
-    <tab exact :href="`/app/elimination/${$route.params.game}`" >
-      Home
-    </tab>
-    <tab :href="`/app/elimination/${$route.params.game}/leaderboard`">
-      Leaderboard
-    </tab>
+      <tab :href="`/app/elimination/${$route.params.game}/feed`">
+        Kill Feed
+      </tab>
+      <tab exact :href="`/app/elimination/${$route.params.game}`"> Home </tab>
+      <tab :href="`/app/elimination/${$route.params.game}/leaderboard`">
+        Leaderboard
+      </tab>
     </div>
-    <nuxt-child/>
+    <nuxt-child />
+    </div>
   </div>
 </template>
 
 <script>
 export default {
-
-}
+  data: () => ({
+    game: null,
+  }),
+  fetchOnServer: false,
+  async fetch() {
+    this.game = this.$elim.Game(this.$route.params.game);
+    await this.game.init();
+  },
+};
 </script>
 
 <style scoped>
-
 </style>

@@ -1,7 +1,87 @@
 const API_DOMAIN = 'https://api.gunnelimination.com'
 
+function getUserProfile(uid, gameId= null) {
+
+  return new Promise(async (resolve, reject) => {
+      let userCache;
+      let db;
+      const req = window.indexedDB.open("EliminationDB", 1)
+
+      req.onerror = event => {
+          reject(req.errorCode);
+      };
+
+      req.onupgradeneeded = (event) => {
+          // Do something with request.result!
+          userCache = db.createObjectStore('users', {keyPath: 'userID'});
+          userCache.createIndex('userID', 'userID', {unique: true});
+          userCache.transaction.oncomplete = event => {
+
+          }
+      };
+      req.onsuccess = async () => {
+          db = req.result
+
+          const UserT = db.transaction("users", "readwrite").objectStore('users');
+          const ureq = UserT.get(uid)
+          ureq.onsuccess = async () => {
+              if (!ureq.result) return;
+              let user = JSON.parse(JSON.stringify(ureq.result))
+              if (gameId) {
+                  user = Object.assign(user, await fetch(`${API_DOMAIN}/elimination/game/${gameId}/user/${uid}`, {
+                      headers: {
+                          'Content-Type': 'application/json'
+                      }
+                  }).then(e => e.json()));
+                 resolve(user);
+              }
+              else resolve(user);
+          }
+          const user = await fetch(`${API_DOMAIN}/users/${uid}`, {
+              headers: {
+                  'Content-Type': 'application/json'
+              }
+          }).then(e => e.json());
+          db.transaction("users", "readwrite").objectStore('users').put(user);
+          if (gameId) {
+              Object.assign(user, await fetch(`${API_DOMAIN}/elimination/game/${gameId}/user/${uid}`, {
+                  headers: {
+                      'Content-Type': 'application/json'
+                  }
+              }).then(e => e.json()));
+          }
+          resolve(user);
+      }
+  });
+
+}
+
+class EliminationGame {
+  constructor(sdk, gameId){
+    
+    this.sdk = sdk;
+    this.gameId = gameId;
+  }
+  async init(){
+    await this.fetchSelf();
+  }
+  async fetchSelf(){
+    Object.assign(this, await this.sdk.getFrom(`game/${this.gameId}`));
+  }
+  async fetchLeaderboard(){
+    return Promise.all((await this.sdk.getFrom(`elimination/game/${this.gameId}/top`)).map(async (x) => {
+      // set target and entity
+      x.user = await this.sdk.fetchUser(x.userID);
+      return x
+    }))
+  }
+}
 class EliminationSDK {
   constructor() {
+    
+  }
+  Game(...args){
+    return new EliminationGame(this, ...args)
   }
   async getFrom(path, body = undefined){
     const response = await fetch(`${API_DOMAIN}/${path}`, {
@@ -33,13 +113,7 @@ class EliminationSDK {
       return x
     }))
   }
-  async fetchLeaderboard(gameId){
-    return Promise.all((await this.getFrom(`elimination/game/${gameId}/top`)).map(async (x) => {
-      // set target and entity
-      x.user = await this.fetchUser(x.userID);
-      return x
-    }))
-  }
+  
 }
 
 export default ({ app }, inject) => {

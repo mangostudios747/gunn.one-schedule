@@ -2,7 +2,7 @@
   <div class="h-full w-full">
     <h1 class="page-title">Elimination</h1>
     <div class="box p-2 space-y-1 mt-2">
-      <div class="text-white px-3 py-2 rounded-lg hover:bg-white/10 flex flex-row" v-for="game of games">
+      <div class="text-white px-3 py-2 rounded-lg hover:bg-white/10 flex flex-row" :key="game.id" v-for="game of games">
         <div class="flex flex-col justify-around"><h1 class="font-semibold text-lg ">{{game.name}}</h1>
           <p v-if="game.description.trim().replace('\u8203','')" class="">{{game.description.trim()}}</p></div>
         <div class="flex mr-0 ml-auto">

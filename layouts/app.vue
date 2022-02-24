@@ -173,12 +173,12 @@ export default {
     if (this.$auth.loggedIn){
       this.$store.commit('sgy/setUser', await this.$axios.$get('/users/me'))
       console.log('Schoology user detected, loading preferences from server.')
-      this.$store.commit('schedule/setCustomizations', await this.$axios.$get('/preferences/classes'))
+      this.$store.commit('schedule/setCustomizations', {customizations: await this.$axios.$get('/preferences/classes'), sgy: true})
       this.$store.dispatch('schedule/customize', await this.$axios.$get('/users/me/sections'))
     }
     else {
       console.log('User not detected, loading preferences from browser.')
-      this.$store.commit('schedule/setCustomizations', JSON.parse(localStorage.getItem('g1.classes')));
+      this.$store.commit('schedule/setCustomizations', {customizations:JSON.parse(localStorage.getItem('g1.classes'))});
     }
     const v = this;
     window.setInterval(function(){

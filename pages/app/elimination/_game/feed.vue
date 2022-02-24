@@ -1,6 +1,6 @@
 <template>
-  <div>
-
+  <div class="box flex p-2 space-y-1 mt-2 text-white flex-col">
+    
   </div>
 </template>
 

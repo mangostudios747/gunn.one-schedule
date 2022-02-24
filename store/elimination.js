@@ -1,12 +1,16 @@
 
 export const state = () => ({
   // User token
-  user: false
+  user: false,
+  popup: false
 })
 
 export const mutations = {
   setUser(state, user) {
     state.user = user;
+  },
+  setPopup(state, id){
+    state.popup = id;
   }
 }
 
