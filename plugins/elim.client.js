@@ -81,7 +81,9 @@ class EliminationGame {
   }
 
   async fetchUser(uid){
-    return await getUserProfile(uid, this.gameId)
+    const user = await getUserProfile(uid, this.gameId);
+    user.rank = this.cache.leaderboard.findIndex(e=>e.userID === user.userID)
+    return user;
   }
   async fetchGame(){
     Object.assign(this, await this.sdk.getFrom(`game/${this.gameId}`));
