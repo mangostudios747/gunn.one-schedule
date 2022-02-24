@@ -45,7 +45,7 @@ export default {
       console.log(e, f)
     })
     this.socket.on('gameUpdated', (e, f)=>{
-      console.log(e, f)
+      this.game.fetchGame()
     })
 
     this.socket.on('gameCreated', (e, f)=>{

@@ -60,8 +60,7 @@ function getUserProfile(uid, gameId= null) {
 }
 
 class EliminationGame {
-  constructor(sdk, ns, gameId){
-    this.ns = ns;
+  constructor(sdk, gameId){
     this.cache = {
       users:{},
       leaderboard:[],
@@ -70,7 +69,9 @@ class EliminationGame {
     this.sdk = sdk;
     this.gameId = gameId;
   }
-
+  async eliminate(uid, eliminationCode){
+    return await this.sdk.getFrom(`/elimination/game/${this.gameId}/user/${uid}/eliminate`, {eliminationCode}, 'POST')
+  }
   async init(){
     await this.fetchGame();
     await this.fetchLeaderboard();
@@ -107,19 +108,19 @@ class EliminationGame {
   }
 }
 class EliminationSDK {
-  constructor(ns) {
-    this.ns = ns;
+  constructor() {
   }
   Game(...args){
-    return new EliminationGame(this, this.ns, ...args)
+    return new EliminationGame(this, ...args)
   }
-  async getFrom(path, body = undefined){
+  async getFrom(path, body = undefined, method='GET'){
     const response = await fetch(`${API_DOMAIN}/${path}`, {
       headers: {
         'Authorization': `Bearer ${localStorage.getItem('g1.eliminationUser')}`,
         'Content-Type':'application/json',
       },
-      body: body && JSON.stringify(body)
+      body: body && JSON.stringify(body),
+      method
     })
     if (response.status === 200){
       return await response.json();
@@ -146,7 +147,7 @@ class EliminationSDK {
 
 }
 
-export default ({ app, $nuxtSocket }, inject) => {
-  const elim = new EliminationSDK($nuxtSocket)
+export default ({ app }, inject) => {
+  const elim = new EliminationSDK()
   inject('elim', elim);
 }
