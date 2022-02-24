@@ -40,6 +40,9 @@ export default {
             message: 'Incorrect email and password combination.'
           }
         }
+        else {
+          history.push('/app')
+        }
       } catch (err) {
         console.log(err)
       }

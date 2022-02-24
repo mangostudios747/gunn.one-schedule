@@ -5,20 +5,20 @@ const MongoStore = require('connect-mongo');
 const passport = require('./passport');
 //const {v4: uuidv4} = require('uuid')
 const MONGO_URL = process.env.MONGO_URL;
-
 const {mdb} = require("./database");
 const crypto = require("crypto");
 const jwt = require('jsonwebtoken');
 const usersRouter = require('./routes/users');
 const HOSTING_DOMAIN = process.env.RHOST || 'http://localhost:3000';
-const schoology = require('./schoology');
+const schoology = require('./schoology')
 
-let usersmdb, statsmdb, testmdb, passwordsmdb, prefmdb;
-mdb.then(c => {
+let usersmdb, statsmdb, testmdb, passwordsmdb, elimdb, prefmdb;
+mdb.then(c=> {
   usersmdb = c.db('users').collection('profiles');
   passwordsmdb = c.db('users').collection('passwords');
   statsmdb = c.db('stats').collection('userCount');
-  testmdb = c.db('users').collection('test');
+  testmdb = c.db('users').collection('test')
+  elimdb = c.db('users').collection('elimination');
   prefmdb = c.db('users').collection('preferences');
 })
 
@@ -56,7 +56,7 @@ app.use(psession);
 app.use('/users', usersRouter)
 
 app.get('/', function (req, res) {
-  res.send('lol hi you found the api ig')
+  res.send({hi:'lol hi you found the api ig'})
 })
 
 app.get('/test/add', async function (req, res) {
@@ -213,6 +213,21 @@ api.get('/me/events/week', async function(req, res, next) {
 
 api.get('/me/events/week/sections', async function(req, res, next) {
   res.send(await schoology.fetchAllSectionEventsForWeek(req.user))
+})
+
+app.post('/auth/elimination/user', passport.authenticate('jwt'), async function (req, res){
+  const {user} = req.body;
+  if (!user) return res.status(400).send({error:'null-user'});
+  await elimdb.updateOne({_id:req.user.profile.uid}, {$set:{token: user}}, {upsert: true});
+  res.status(201).send({success: true});
+})
+
+app.get('/auth/elimination/user', passport.authenticate('jwt'), async function (req, res){
+  const resp = await elimdb.findOne({_id:req.user.profile.uid});
+  if (!resp){
+    res.status(401).send({error:'not-found'});
+  }
+  res.status(200).send({user: resp.token});
 })
 
 api.get('/me/recent', async function(req, res, next) {

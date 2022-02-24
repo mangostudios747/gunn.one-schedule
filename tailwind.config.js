@@ -26,6 +26,15 @@ module.exports = {
       transitionProperty: {
         'height': 'height',
         'spacing': 'margin, padding',
+      },
+      animation:{
+        'slide-left':'slideLeft 0.2s linear'
+      },
+      keyframes: {
+        slideLeft: {
+          '0%': { transform: 'translateX(4px)' },
+          '100%': { transform: 'translateX(0)' },
+        }
       }
     },
   },

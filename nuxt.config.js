@@ -40,7 +40,8 @@ export default {
     },
     {
       src:'~/plugins/barcode.js'
-    }
+    },
+    '~/plugins/elim.client.js'
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -59,12 +60,20 @@ export default {
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
     'cookie-universal-nuxt',
-    '@nuxtjs/auth-next',
+    'nuxtjs-multi-auth',
     // https://go.nuxtjs.dev/content
     '@nuxt/content',
     '@nuxtjs/firebase',
     '@nuxtjs/gtm',
+    'nuxt-socket-io',
   ],
+  io: {
+    // module options
+    sockets: [{
+      name: 'main',
+      url: 'wss://api.gunnelimination.com'
+    }]
+  },
   gtm: {
     id: 'GTM-W2JN9ZK'
   },
@@ -85,30 +94,50 @@ export default {
     }
   },
   auth: {
-    redirect: {
-      login: '/login',
-      logout: '/login',
-      home: '/app',
-    },
-    strategies: {
-      schoology: {
-        scheme: 'local',
-        token: {
-          property: 'jwt',
-          // required: true,
-          type: 'JWT'
-        },
-        user: {
-          property: false,
-          // autoFetch: true
-        },
-        endpoints: {
-          login: { baseURL:'/api', url: '/auth/login', method: 'post' },
-          logout: { url: '/auth/logout', method: 'post' },
-          user: { url: '/users/me', baseURL:'/api', method: 'get' }
-        }
-      }
+
+      redirect: {
+        login: '/login',
+        logout: '/login',
+        home: '/app',
+      },
+      strategies: {
+          schoology: {
+            scheme: 'local',
+            token: {
+              property: 'jwt',
+              // required: true,
+              type: 'JWT',
+              maxAge: 60*60*24
+            },
+            user: {
+              property: false,
+              // autoFetch: false
+            },
+            endpoints: {
+              login: { baseURL:'/api', url: '/auth/login', method: 'post' },
+              logout: { url: '/auth/logout', method: 'post' },
+              user: { url: '/users/me', baseURL:'/api', method: 'get' }
+            }
+          },
+          'app/elimination':{
+            scheme: 'local',
+            token: {
+              property: false,
+              // required: true,
+              type: 'Bearer',
+            },
+            user: {
+              property: false,
+              // autoFetch: true
+            },
+            endpoints: {
+              login: { baseURL:'https://api.gunnelimination.com', url: '/login', method: 'post' },
+              logout: { baseURL:'https://api.gunnelimination.com', url: '/logout', method: 'post' },
+              user: { baseURL:'https://api.gunnelimination.com', url: '/users/@me', method: 'get' }
+            }
+          }
     }
+
   },
   router: {
     middleware: ['auth-user']
