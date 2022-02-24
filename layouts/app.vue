@@ -136,6 +136,10 @@ export default {
         auth: true
       },
       {
+        title: 'Elimination',
+        href: '/app/elimination',
+      },
+      {
         title: "Directories",
         href: "/app/people",
       },
