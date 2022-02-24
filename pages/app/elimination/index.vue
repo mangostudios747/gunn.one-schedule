@@ -23,7 +23,7 @@ export default {
     games:[]
   }),
   async fetch(){
-    this.games = (await this.$elim.fetchGames()).filter(e=>!Object.entries(e).includes('dev'))
+    this.games = (await this.$elim.fetchGames()).filter(e=>e.dev===undefined)
   },
   methods:{
     async joinGame(id){
