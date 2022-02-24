@@ -174,7 +174,7 @@ export default {
       this.$store.commit('sgy/setUser', await this.$axios.$get('/users/me'))
       console.log('Schoology user detected, loading preferences from server.')
       this.$store.commit('schedule/setCustomizations', {customizations: await this.$axios.$get('/preferences/classes'), sgy: true})
-      this.$store.dispatch('schedule/customize', await this.$axios.$get('/users/me/sections'))
+      await this.$store.dispatch('schedule/customize', await this.$axios.$get('/users/me/sections'))
     }
     else {
       console.log('User not detected, loading preferences from browser.')

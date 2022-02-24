@@ -80,6 +80,14 @@ a[href].link {
 }
 
 @layer utilities {
+  @keyframes slideRight {
+    from {
+      @apply transform -translate-x-1
+    }
+    to {
+      @apply transform translate-x-0
+    }
+  }
 
   .brick {
 

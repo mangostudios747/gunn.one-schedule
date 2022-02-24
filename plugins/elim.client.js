@@ -1,27 +1,27 @@
 const API_DOMAIN = 'https://api.gunnelimination.com'
+let userCache;
+let db;
+const req = window.indexedDB.open("EliminationDB", 1)
+
+req.onerror = event => {
+  console.error(event)
+};
+
+req.onupgradeneeded = (event) => {
+  userCache = db.createObjectStore('users', {keyPath: 'userID'});
+  userCache.createIndex('userID', 'userID', {unique: true});
+  userCache.transaction.oncomplete = event => {
+
+  }
+};
+
+req.onsuccess = async () => {
+  db = req.result
+}
 
 function getUserProfile(uid, gameId= null) {
 
   return new Promise(async (resolve, reject) => {
-      let userCache;
-      let db;
-      const req = window.indexedDB.open("EliminationDB", 1)
-
-      req.onerror = event => {
-          reject(req.errorCode);
-      };
-
-      req.onupgradeneeded = (event) => {
-          // Do something with request.result!
-          userCache = db.createObjectStore('users', {keyPath: 'userID'});
-          userCache.createIndex('userID', 'userID', {unique: true});
-          userCache.transaction.oncomplete = event => {
-
-          }
-      };
-      req.onsuccess = async () => {
-          db = req.result
-
           const UserT = db.transaction("users", "readwrite").objectStore('users');
           const ureq = UserT.get(uid)
           ureq.onsuccess = async () => {
@@ -51,23 +51,29 @@ function getUserProfile(uid, gameId= null) {
               }).then(e => e.json()));
           }
           resolve(user);
-      }
+
   });
 
 }
 
 class EliminationGame {
   constructor(sdk, gameId){
-    
+    this.cache = {
+      users:{},
+      leaderboard:[],
+      killFeed:[]
+    }
     this.sdk = sdk;
     this.gameId = gameId;
   }
+
   async init(){
     await this.fetchSelf();
   }
   async fetchSelf(){
     Object.assign(this, await this.sdk.getFrom(`game/${this.gameId}`));
   }
+
   async fetchLeaderboard(){
     return Promise.all((await this.sdk.getFrom(`elimination/game/${this.gameId}/top`)).map(async (x) => {
       // set target and entity
@@ -78,7 +84,7 @@ class EliminationGame {
 }
 class EliminationSDK {
   constructor() {
-    
+
   }
   Game(...args){
     return new EliminationGame(this, ...args)
@@ -113,7 +119,7 @@ class EliminationSDK {
       return x
     }))
   }
-  
+
 }
 
 export default ({ app }, inject) => {
