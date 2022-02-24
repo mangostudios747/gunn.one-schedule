@@ -4,7 +4,7 @@
       Loading...
     </div>
     <div v-else class="flex flex-col w-full lg:flex-row gap-3 mt-3">
-      <div class="box flex flex-col basis-1 grow gap-2 -!bg-red-500/80 -dark:!bg-red-500/20  px-3 py-2">
+      <div v-if="!me.eliminated" class="box flex flex-col basis-1 grow gap-2 -!bg-red-500/80 -dark:!bg-red-500/20  px-3 py-2">
       <div class="flex flex-row gap-2">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 my-auto" viewBox="0 0 24 24" fill="transparent" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="22" y1="12" x2="18" y2="12"/><line x1="6" y1="12" x2="2" y2="12"/><line x1="12" y1="6" x2="12" y2="2"/><line x1="12" y1="22" x2="12" y2="18"/></svg>
 
@@ -21,10 +21,16 @@
         <div class="bg-red-500/30 py-2 px-3 rounded-md font-medium" v-if="killError">
           {{killError}}
         </div>
+        <div class="bg-green-500/30 py-2 px-3 rounded-md font-medium" v-if="killed">
+          Yay! You successfully eliminated {{killed}}.
+        </div>
         <div class="flex flex-row gap-2">
-          <input :placeholder="`Enter ${target.firstName}'s kill code`" class="box-input grow" /> <button @click="eliminate" class="btn text-white bg-red-400">Eliminate</button>
+          <input v-model="killCode" :placeholder="`Enter ${target.firstName}'s kill code`" class="box-input grow" /> <button @click="eliminate" class="btn text-white bg-red-400">Eliminate</button>
         </div>
     </div>
+      <div v-else class="italic box px-3 py-2">
+        You have been eliminated.
+      </div>
       <div class="box flex flex-col basis-1 grow gap-2 px-3 py-2">
         <div class="flex flex-row gap-2">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 my-auto" viewBox="0 0 20 20" fill="currentColor">
@@ -57,8 +63,8 @@ export default {
     target:null,
     killCode:'',
     showSecret:false,
-    killError:'OMG you messsed up',
-    killed: true
+    killError:false,
+    killed: false
   }),
   fetchOnServer: false,
   async fetch(){
@@ -71,11 +77,14 @@ export default {
   },
   methods:{
     async eliminate() {
+      if (!this.killCode) return;
       const result = await this.$parent.game.eliminate(this.target.userID, this.killCode)
       if (result.error){
-        this.killError = await result.response.text()
+        this.killed = false
+        this.killError = (await result.response.json()).error
       }
       else {
+        this.killError = false
         this.killed = this.target.firstName
       }
     }

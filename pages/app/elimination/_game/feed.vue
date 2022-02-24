@@ -4,7 +4,7 @@
       <span class="text-xs">{{new Date(item.at).toISOString() | luxon('relative')}}</span>
       <Monogram small name :user="item.target" />
 
-      <span class="inline text-white/80 italic">{{killTypes[item.type]}}</span>
+      <span class="inline text-white/80 italic mr-1">{{killTypes[item.type]}}</span>
       <Monogram small name v-if="item.entity" :user="item.entity"/>
     </div>
   </div>

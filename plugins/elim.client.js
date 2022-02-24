@@ -70,7 +70,7 @@ class EliminationGame {
     this.gameId = gameId;
   }
   async eliminate(uid, eliminationCode){
-    return await this.sdk.getFrom(`/elimination/game/${this.gameId}/user/${uid}/eliminate`, {eliminationCode}, 'POST')
+    return await this.sdk.getFrom(`elimination/game/${this.gameId}/user/${uid}/eliminate`, {eliminationCode}, 'POST')
   }
   async init(){
     await this.fetchGame();
