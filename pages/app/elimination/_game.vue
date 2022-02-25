@@ -44,16 +44,23 @@ export default {
       }
     });
     this.socket.on('userInfo', (e, f) => {
-      console.log(e, f)
+      Object.assign(this.game.cache.me, e)
+      console.log(e)
     })
     this.socket.on('eliminationUpdateSelf', (e, f) => {
-      console.log(e, f)
+      Object.assign(this.game.cache.me, e.user)
+      console.log(e)
+    })
+    window.addEventListener('eliminationKill', ({detail:e})=>{
+      Object.assign(this.game.cache.me, e.user)
+      console.log(e)
     })
     this.socket.on('eliminationKill', (e, f) => {
       console.log(e, f)
     })
     this.socket.on('gameUpdated', (e, f) => {
       this.game.fetchGame()
+      console.log(e)
     })
 
     this.socket.on('gameCreated', (e, f) => {

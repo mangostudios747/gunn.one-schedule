@@ -71,7 +71,7 @@ class EliminationGame {
     this.gameId = gameId;
   }
   async eliminate(uid, eliminationCode){
-    return await this.sdk.getFrom(`elimination/game/${this.gameId}/user/${uid}/eliminate`, {eliminationCode}, 'POST')
+    return await this.sdk.getFrom(`elimination/game/${this.gameId}/user/${uid}/eliminate`, {eliminationCode}, 'POST', false)
   }
   async init(){
     await this.fetchGame();
@@ -87,6 +87,7 @@ class EliminationGame {
   async fetchUser(uid){
     const user = await getUserProfile(uid, this.gameId);
     user.rank = this.cache.leaderboard.findIndex(e=>e.userID === user.userID) + 1
+    this.cache.users[user.userID] = user;
     return user;
   }
   async fetchGame(){

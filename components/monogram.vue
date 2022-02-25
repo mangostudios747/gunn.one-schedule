@@ -32,14 +32,14 @@ export default {
   },
   render() {
     const popup = ()=>( <div
-      class="absolute z-20 w-40 text-sm font-normal cursor-auto animate-slide-left popup text-center justify-around flex flex-col top-0 left-full ml-1 shadow-lg bg-water/10 backdrop-blur-md border-[0.5px] border-water/20 text-white rounded-lg px-3 py-2">
+      class="absolute z-20 w-40 text-sm font-medium cursor-auto animate-slide-left popup text-center justify-around flex flex-col top-0 left-full ml-1 shadow-lg bg-water/10 backdrop-blur-md border-[0.5px] border-water/20 text-white rounded-lg px-3 py-2">
       <div class="flex flex-row justify-around">
         <div
           class={`rounded-full justify-center text-center relative  shrink-0 flex ${colors[this.n]} text-white font-semibold text-base w-10 h-10`}>
           <span class="my-auto">{(this.user.firstName || [])[0]}{(this.user.lastName || [])[0]}</span>
         </div>
       </div>
-      <div class="text-base">{[this.user.firstName, this.user.lastName].join(' ')}</div>
+      <div class="text-base font-bold">{[this.user.firstName, this.user.lastName].join(' ')}</div>
       <div class="inline-flex gap-1 mx-auto flex-row">
               <span
                 class={`h-3 my-auto w-3 rounded-full  ${this.user.eliminated ? 'bg-red-500' : 'bg-green-500'}`}/>
@@ -61,7 +61,7 @@ export default {
         </div>}
         {this.name && <span vOn:click={() => (this.$store.commit('elimination/setPopup', {id:this.id, type:1}))} class="popup-trigger font-semibold  cursor-pointer my-auto hover:underline">{this.user.firstName} {this.user.lastName}</span>}
         {this.$store.state.elimination.popup.id === this.id && this.$store.state.elimination.popup.type===1 && popup()}
-        { !(this.icon || this.name) && <div vOn:click={() => (this.$store.commit('elimination/setPopup', {id:this.id, type:2}))} class="popup-trigger bg-white/10 font-semibold text-xs px-0.5 rounded-md cursor-pointer hover:bg-white/30">@{this.user.userID}
+        { !(this.icon || this.name) && <div vOn:click={() => (this.$store.commit('elimination/setPopup', {id:this.id, type:2}))} class="popup-trigger bg-white/20 font-semibold text-xs px-0.5 rounded-md cursor-pointer hover:bg-white/30">@{this.user.firstName} {this.user.lastName}
           {this.$store.state.elimination.popup.id === this.id && this.$store.state.elimination.popup.type===2 && popup()}
         </div>
 
