@@ -33,7 +33,7 @@ function getUserProfile(uid, gameId= null) {
                       'Authorization': `Bearer ${localStorage.getItem('g1.eliminationUser')}`,
                       'Content-Type':'application/json',
                     },
-                  }).then(e => e.json()));
+                  }).then(e => (e.status===200?e.json():{})));
                  resolve(user);
               }
               else resolve(user);
