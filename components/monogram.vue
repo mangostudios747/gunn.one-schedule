@@ -32,7 +32,7 @@ export default {
   },
   render() {
     const popup = ()=>( <div
-      class="absolute z-20 w-40 cursor-auto animate-slide-left popup text-center justify-around flex flex-col top-0 left-full ml-1 shadow-lg bg-water/10 backdrop-blur-md border-[0.5px] border-water/20 text-white rounded-lg px-3 py-2">
+      class="absolute z-20 w-40 text-sm font-normal cursor-auto animate-slide-left popup text-center justify-around flex flex-col top-0 left-full ml-1 shadow-lg bg-water/10 backdrop-blur-md border-[0.5px] border-water/20 text-white rounded-lg px-3 py-2">
       <div class="flex flex-row justify-around">
         <div
           class={`rounded-full justify-center text-center relative  shrink-0 flex ${colors[this.n]} text-white font-semibold text-base w-10 h-10`}>
@@ -50,7 +50,7 @@ export default {
     </div>
     )
     return (
-      <div class="inline-flex gap-2 relative" >
+      <div class="inline-flex  gap-2 relative" >
         {this.icon && <div
           vOn:click={() => (!this.huge && this.$store.commit('elimination/setPopup', {id: this.id, type: 0}))}
           class={`rounded-full popup-trigger ${!this.huge && 'cursor-pointer hover:shadow-md'} justify-center text-center relative  shrink-0 inline-flex ${colors[this.n]} text-white font-semibold  ${this.small ? 'w-6 h-6 grow text-xs' : (this.huge ? 'w-16 h-16 text-2xl tracking-wide' : 'w-7 h-7 text-xs')}`}>
