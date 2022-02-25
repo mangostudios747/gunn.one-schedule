@@ -15,7 +15,7 @@
           aria-orientation="horizontal"
         >
           <tab :href="`/app/elimination/${$route.params.game}/feed`">
-            Kill Feed
+            Updates
           </tab>
           <tab exact :href="`/app/elimination/${$route.params.game}`"> Home</tab>
           <tab :href="`/app/elimination/${$route.params.game}/leaderboard`">
