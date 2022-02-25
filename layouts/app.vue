@@ -5,7 +5,7 @@
       bg-gradient-to-r
       w-screen
       relative
-      pb-16 sm:pb-0
+       sm:pb-0
       from-[#5D8AD6] to-[#38B2E8]
       dark:from-slate-750 dark:to-slate-750
     "

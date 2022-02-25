@@ -66,7 +66,7 @@ export default {
   }),
   fetchOnServer: false,
   async fetch(){
-    this.me = await this.$parent.game.fetchSelf();
+    this.me = await this.$parent.game.cache.me
     this.target = await this.$parent.game.fetchUser(this.me.targetID)
   },
   mounted(){

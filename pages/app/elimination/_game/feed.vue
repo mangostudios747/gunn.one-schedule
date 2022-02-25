@@ -3,14 +3,16 @@
     <loader v-if="$fetchState.pending"/>
     <div v-else class="box flex p-2 space-y-1 mt-2 text-white flex-col">
 
-    <div class="py-2 px-3 rounded-lg text-sm gap-2 hover:bg-white/10" :key="item.id" v-for="item of feed">
-      <span class="text-xs">{{new Date(item.at).toISOString() | luxon('relative')}}</span>
-      <Monogram small name :user="item.target" />
-
-      <span class="inline text-white/80 italic mr-1">{{killTypes[item.type]}}</span>
-      <Monogram small name v-if="item.entity" :user="item.entity"/>
+    <div class="py-2 px-3 rounded-lg flex flex-row text-sm gap-3" :key="item.id" v-for="item of feed">
+      <div class="my-auto justify-around pr-1"><Monogram :user="item.target" /></div>
+      <div class="flex flex-col">
+        <div class="flex flex-row gap-2"><Monogram name :icon="false" :user="item.target" /> <span class="text-white/80 text-xs my-auto">{{new Date(item.at).toISOString() | luxon('relative')}}</span></div>
+        <div class="flex flex-row gap-1"><span class="my-auto">{{killTypes[item.type]}}</span> <Monogram class="my-auto" :name="false" :icon="false" :user="item.entity" /> </div>
+      </div>
     </div>
-  </div></div>
+
+  </div>
+  </div>
 
 </template>
 

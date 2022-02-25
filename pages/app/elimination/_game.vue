@@ -7,7 +7,7 @@
       </svg> Loading...</span>
     </div>
     <div class="w-full h-full" v-else>
-      <h1 class="page-title">{{ game.name }}</h1>
+      <h1 class="page-title">{{ game.name }} </h1>
       <div class="h-full w-full" v-if="game.start">
         <div
           class="flex sticky top-0 p-1 mt-3 space-x-1 box"

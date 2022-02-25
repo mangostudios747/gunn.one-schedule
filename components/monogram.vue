@@ -15,6 +15,10 @@ export default {
     name:{
       type:Boolean,
       default:false
+    },
+    icon: {
+      type:Boolean,
+      default: true
     }
   },
   data: () => ({
@@ -42,20 +46,26 @@ export default {
         <span class="my-auto">{this.user.eliminated ? 'Eliminated' : 'Alive'}</span>
       </div>
       <div>{[this.user.kills, ' kill', this.user.kills !== 1 ? 's' : ''].join('')}</div>
+        <div>#{this.user.rank} rank</div>
     </div>
     )
     return (
       <div class="inline-flex gap-2 relative" >
-      <div
-        vOn:click={() => (!this.huge && this.$store.commit('elimination/setPopup', {id: this.id, type:0}))}
-           class={`rounded-full popup-trigger ${!this.huge && 'cursor-pointer'} justify-center text-center relative  shrink-0 inline-flex ${colors[this.n]} text-white font-semibold  ${this.small ? 'w-6 h-6 grow text-xs' : (this.huge?'w-16 h-16 text-2xl tracking-wide':'w-7 h-7 text-xs')}`}>
-        <span class="my-auto">{(this.user.firstName || [])[0]}{(this.user.lastName || [])[0]}</span>
-        <span
-          class={`absolute ${this.small ? 'h-2 w-2 bottom-0 right-0' : (this.huge?'h-5 w-5 bottom-0.5 right-0.5':'h-3 w-3 -bottom-0.5 -right-0.5')} rounded-full  ${this.user.eliminated ? 'bg-red-500' : 'bg-green-500'}`}/>
-        {this.$store.state.elimination.popup.id === this.id && this.$store.state.elimination.popup.type===0 && popup()}
-      </div>
+        {this.icon && <div
+          vOn:click={() => (!this.huge && this.$store.commit('elimination/setPopup', {id: this.id, type: 0}))}
+          class={`rounded-full popup-trigger ${!this.huge && 'cursor-pointer'} justify-center text-center relative  shrink-0 inline-flex ${colors[this.n]} text-white font-semibold  ${this.small ? 'w-6 h-6 grow text-xs' : (this.huge ? 'w-16 h-16 text-2xl tracking-wide' : 'w-7 h-7 text-xs')}`}>
+          <span class="my-auto">{(this.user.firstName || [])[0]}{(this.user.lastName || [])[0]}</span>
+          <span
+            class={`absolute ${this.small ? 'h-2 w-2 bottom-0 right-0' : (this.huge ? 'h-5 w-5 bottom-0.5 right-0.5' : 'h-3 w-3 -bottom-0.5 -right-0.5')} rounded-full  ${this.user.eliminated ? 'bg-red-500' : 'bg-green-500'}`}/>
+          {this.$store.state.elimination.popup.id === this.id && this.$store.state.elimination.popup.type === 0 && popup()}
+        </div>}
         {this.name && <span vOn:click={() => (this.$store.commit('elimination/setPopup', {id:this.id, type:1}))} class="popup-trigger font-semibold  cursor-pointer my-auto hover:underline">{this.user.firstName} {this.user.lastName}</span>}
         {this.$store.state.elimination.popup.id === this.id && this.$store.state.elimination.popup.type===1 && popup()}
+        { !(this.icon || this.name) && <div vOn:click={() => (this.$store.commit('elimination/setPopup', {id:this.id, type:2}))} class="popup-trigger bg-white/10 font-semibold text-xs px-0.5 rounded-md cursor-pointer hover:bg-white/30">@{this.user.userID}
+          {this.$store.state.elimination.popup.id === this.id && this.$store.state.elimination.popup.type===2 && popup()}
+        </div>
+
+        }
       </div>
     )
   },

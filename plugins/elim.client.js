@@ -62,6 +62,7 @@ function getUserProfile(uid, gameId= null) {
 class EliminationGame {
   constructor(sdk, gameId){
     this.cache = {
+      me:{},
       users:{},
       leaderboard:[],
       killFeed:[]
@@ -75,15 +76,17 @@ class EliminationGame {
   async init(){
     await this.fetchGame();
     await this.fetchLeaderboard();
+    await this.fetchSelf()
   }
 
   async fetchSelf(){
-    return await this.fetchUser('@me')
+    this.cache.me =  await this.fetchUser('@me')
+    return this.cache.me
   }
 
   async fetchUser(uid){
     const user = await getUserProfile(uid, this.gameId);
-    user.rank = this.cache.leaderboard.findIndex(e=>e.userID === user.userID)
+    user.rank = this.cache.leaderboard.findIndex(e=>e.userID === user.userID) + 1
     return user;
   }
   async fetchGame(){
