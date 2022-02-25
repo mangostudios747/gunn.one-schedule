@@ -53,7 +53,7 @@ export default {
       <div class="inline-flex gap-2 relative" >
         {this.icon && <div
           vOn:click={() => (!this.huge && this.$store.commit('elimination/setPopup', {id: this.id, type: 0}))}
-          class={`rounded-full popup-trigger ${!this.huge && 'cursor-pointer'} justify-center text-center relative  shrink-0 inline-flex ${colors[this.n]} text-white font-semibold  ${this.small ? 'w-6 h-6 grow text-xs' : (this.huge ? 'w-16 h-16 text-2xl tracking-wide' : 'w-7 h-7 text-xs')}`}>
+          class={`rounded-full popup-trigger ${!this.huge && 'cursor-pointer hover:shadow-md'} justify-center text-center relative  shrink-0 inline-flex ${colors[this.n]} text-white font-semibold  ${this.small ? 'w-6 h-6 grow text-xs' : (this.huge ? 'w-16 h-16 text-2xl tracking-wide' : 'w-7 h-7 text-xs')}`}>
           <span class="my-auto">{(this.user.firstName || [])[0]}{(this.user.lastName || [])[0]}</span>
           <span
             class={`absolute ${this.small ? 'h-2 w-2 bottom-0 right-0' : (this.huge ? 'h-5 w-5 bottom-0.5 right-0.5' : 'h-3 w-3 -bottom-0.5 -right-0.5')} rounded-full  ${this.user.eliminated ? 'bg-red-500' : 'bg-green-500'}`}/>
