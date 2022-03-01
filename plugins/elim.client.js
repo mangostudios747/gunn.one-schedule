@@ -33,7 +33,7 @@ function getUserProfile(uid, gameId= null) {
                       'Authorization': `Bearer ${localStorage.getItem('g1.eliminationUser')}`,
                       'Content-Type':'application/json',
                     },
-                  }).then(e => e.json()));
+                  }).then(async (e) => (e.status===200?(JSON.parse((await e.text()) || '{}')):{})));
                  resolve(user);
               }
               else resolve(user);
@@ -51,7 +51,7 @@ function getUserProfile(uid, gameId= null) {
                   'Authorization': `Bearer ${localStorage.getItem('g1.eliminationUser')}`,
                   'Content-Type':'application/json',
                 },
-              }).then(e => e.json()));
+              }).then(async (e) => (e.status===200?(JSON.parse((await e.text()) || '{}')):{})));
           }
           resolve(user);
 
