@@ -5,10 +5,10 @@ export default {
       if (oopRegex.test(route.fullPath)){
           redirect('/app/people/clubs')
       }
-  },  
+  },
   render() {
     return (
-      <div class="overflow-auto pb-3 flex-auto md:pt-3 px-3 flex flex-col">
+      <div class="overflow-auto pb-3 flex-auto md:pt-3 px-3 flex flex-col mb-8">
         <div
           class="flex sticky top-0 p-1 space-x-1 box"
           role="tablist"

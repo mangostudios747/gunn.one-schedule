@@ -1,9 +1,9 @@
 <template>
-  <div class="h-full w-full">
+  <div class="h-full pb-16 w-full mb-8">
     <loader v-if="$fetchState.pending"/>
     <div class="w-full h-full" v-else>
       <h1 class="page-title">{{ game.name }} </h1>
-      <div class="h-full w-full" v-if="game.start">
+      <div class="h-full w-full flex flex-auto flex-col" v-if="game.start">
         <div
           class="flex sticky top-0 p-1 mt-3 space-x-1 box"
           role="tablist"
@@ -12,9 +12,12 @@
           <tab :href="`/app/elimination/${$route.params.game}/feed`">
             Updates
           </tab>
+          <tab :href="`/app/elimination/${$route.params.game}/rules`">
+            Rules
+          </tab>
           <tab exact :href="`/app/elimination/${$route.params.game}`"> Home</tab>
           <tab :href="`/app/elimination/${$route.params.game}/leaderboard`">
-            Leaderboard
+            Ranking
           </tab>
         </div>
         <nuxt-child/>

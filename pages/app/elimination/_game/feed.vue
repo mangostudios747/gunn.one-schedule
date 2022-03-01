@@ -1,7 +1,7 @@
 <template>
-  <div class="w-full h-full">
+  <div class="w-full h-full flex flex-col flex-auto">
     <loader v-if="$fetchState.pending"/>
-    <div v-else class="box flex p-2 space-y-1 mt-2 text-white flex-col">
+    <div v-else class="box flex p-2 space-y-1 mt-2 text-white flex-col flex-col flex-auto overflow-auto h-0 mt-2 p-1 space-y-1">
 
     <div class="py-2 px-3 rounded-lg flex flex-row text-sm gap-3" :key="item.id" v-for="item of feed">
       <div class="my-auto justify-around pr-1"><Monogram :user="item.target" /></div>
