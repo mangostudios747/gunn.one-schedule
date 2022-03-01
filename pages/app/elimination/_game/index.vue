@@ -13,7 +13,7 @@
             <span class="mx-auto text-lg font-bold">{{target.firstName}} {{target.lastName}}</span></div>
           <div class="flex flex-col mr-4 justify-around ml-auto text-right">
             <span><span class="text-xl font-bold mr-4">{{target.kills}}</span> kills</span>
-            <span><span class="text-xl font-bold mr-3">#{{target.rank}}</span> rank</span>
+            <span><span class="text-xl font-bold mr-3">#{{target.rank||'??'}}</span> rank</span>
           </div>
         </div>
         <div class="bg-red-500/30 py-2 px-3 rounded-md font-medium" v-if="killError">
@@ -41,7 +41,7 @@
             <span class="mx-auto text-lg font-bold">{{me.firstName}} {{me.lastName}}</span></div>
           <div class="flex flex-col mr-4 justify-around ml-auto text-right">
             <span><span class="text-xl font-bold mr-3">{{me.kills}}</span> points</span>
-            <span><span class="text-xl font-bold mr-6">#{{me.rank}}</span> rank</span>
+            <span><span class="text-xl font-bold mr-6">#{{me.rank||'??'}}</span> rank</span>
           </div>
         </div>
         <div class="flex flex-row gap-2">

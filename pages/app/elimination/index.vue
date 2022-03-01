@@ -31,12 +31,7 @@ export default {
       this.$router.push(`/app/elimination/${id}`);
     }
   },
-  beforeMount(){
-    // if user not detected, prompt them to login
-    if (!localStorage.getItem('g1.eliminationUser')){
-      this.$router.push('/app/elimination/login')
-    }
-  }
+
 
 }
 </script>
