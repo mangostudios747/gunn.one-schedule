@@ -1,11 +1,6 @@
 <template>
   <div class="h-full w-full">
-    <div class="h-full w-full flex text-white font-bold text-2xl" v-if="$fetchState.pending">
-     <span class="mx-auto my-auto flex flex-row gap-2"><svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-      </svg> Loading...</span>
-    </div>
+    <loader v-if="$fetchState.pending"/>
     <div class="w-full h-full" v-else>
       <h1 class="page-title">{{ game.name }} </h1>
       <div class="h-full w-full" v-if="game.start">
@@ -24,8 +19,23 @@
         </div>
         <nuxt-child/>
       </div>
-      <div class="w-full h-full flex text-white text-3xl font-bold text-center" v-else>
-        <span class="my-auto mx-auto">Waiting for game to start...</span>
+      <div class="w-full h-full flex flex-col " v-else>
+        <div v-if="game.cache.announcement" :key="game.cache.announcement._id" class="flex my-2 basis-1 font-medium text-base px-3 py-2 flex-col text-amber-400 rounded-xl bg-orange-800/20 dark:bg-orange-200/20">
+          <div class="flex gap-2 flex-row">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 my-auto" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M18 3a1 1 0 00-1.447-.894L8.763 6H5a3 3 0 000 6h.28l1.771 5.316A1 1 0 008 18h1a1 1 0 001-1v-4.382l6.553 3.276A1 1 0 0018 15V3z" clip-rule="evenodd" />
+            </svg>
+            <span class="font-bold my-auto text-lg">Announcement</span>
+          </div>
+          <div class="italic text-xs opacity-90">
+            {{new Date(game.cache.announcement.time).toISOString() | luxon('relative') }}
+          </div>
+          <div v-text="game.cache.announcement.message" :class="announcementCollapsed&&(game.cache.announcement.message.length>100)?'line-clamp-2':'whitespace-pre-wrap'"></div>
+          <div v-if="game.cache.announcement.message.length>100" class="mt-2">
+            <button @click="announcementCollapsed=!announcementCollapsed" class="btn float-right text-white bg-orange-400/80 ">Show {{announcementCollapsed?'more':'less'}}</button>
+          </div>
+        </div>
+        <p class="my-auto mx-auto text-white text-3xl font-bold text-center">Waiting for game to start...</p>
       </div>
     </div>
   </div>
@@ -36,6 +46,7 @@ export default {
   data: () => ({
     game: null,
     socket: null,
+    announcementCollapsed: true
   }),
   mounted() {
     this.socket = this.$nuxtSocket({

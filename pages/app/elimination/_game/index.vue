@@ -49,7 +49,7 @@
         </div>
 
       </div>
-      <div v-if="$parent.game.cache.announcement" :key="$parent.game.cache.announcement._id" class="flex basis-1 grow px-3 py-2 flex-col text-amber-400 rounded-xl bg-orange-800/20 dark:bg-orange-200/20">
+      <div v-if="$parent.game.cache.announcement" :key="$parent.game.cache.announcement._id" class="flex basis-1 grow font-medium text-base px-3 py-2 flex-col text-amber-400 rounded-xl bg-orange-800/20 dark:bg-orange-200/20">
         <div class="flex gap-2 flex-row">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 my-auto" viewBox="0 0 20 20" fill="currentColor">
             <path fill-rule="evenodd" d="M18 3a1 1 0 00-1.447-.894L8.763 6H5a3 3 0 000 6h.28l1.771 5.316A1 1 0 008 18h1a1 1 0 001-1v-4.382l6.553 3.276A1 1 0 0018 15V3z" clip-rule="evenodd" />
@@ -59,8 +59,10 @@
         <div class="italic text-xs opacity-90">
           {{new Date($parent.game.cache.announcement.time).toISOString() | luxon('relative') }}
         </div>
-        <div v-text="$parent.game.cache.announcement.message" class="whitespace-pre-wrap"></div>
-
+        <div v-text="$parent.game.cache.announcement.message" :class="announcementCollapsed&&($parent.game.cache.announcement.message.length>100)?'line-clamp-2':'whitespace-pre-wrap'"></div>
+        <div v-if="$parent.game.cache.announcement.message.length>100" class="mt-2">
+          <button @click="announcementCollapsed=!announcementCollapsed" class="btn float-right text-white bg-orange-400/80 ">Show {{announcementCollapsed?'more':'less'}}</button>
+        </div>
       </div>
     </div>
 
@@ -76,7 +78,8 @@ export default {
     killCode:'',
     showSecret:false,
     killError:false,
-    killed: false
+    killed: false,
+    announcementCollapsed: true
   }),
   fetchOnServer: false,
   async fetch(){
