@@ -65,7 +65,7 @@ class EliminationGame {
       me:{},
       users:{},
       leaderboard:[],
-      killFeed:[],
+      killFeed:false,
       announcement:false,
     }
     this.sdk = sdk;
@@ -78,7 +78,8 @@ class EliminationGame {
     await this.fetchGame();
     await this.fetchLeaderboard();
     await this.fetchAnnouncement()
-    await this.fetchSelf()
+    await this.fetchKillFeed();
+    await this.fetchSelf();
   }
 
   async fetchAnnouncement(){
@@ -101,11 +102,12 @@ class EliminationGame {
   }
 
   async fetchKillFeed(){
-    return await Promise.all((await this.sdk.getFrom(`elimination/game/${this.gameId}/kills`)).map(async (x)=>{
+    this.cache.killFeed = await Promise.all((await this.sdk.getFrom(`elimination/game/${this.gameId}/kills`)).map(async (x)=>{
         x.target = await this.fetchUser(x.target);
         x.entity = await this.fetchUser(x.entity);
         return x
     }))
+    return this.cache.killFeed
   }
 
   async fetchLeaderboard(){
