@@ -137,7 +137,7 @@ export default {
       },
       {
         title: 'Elimination',
-        href: '/app/elimination',
+        href: '/app/elimination/',
       },
       {
         title: "Directories",

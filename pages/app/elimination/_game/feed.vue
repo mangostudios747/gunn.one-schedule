@@ -1,7 +1,7 @@
 <template>
   <div class="w-full h-full flex flex-col flex-auto">
     <loader v-if="!$parent.game.cache.killFeed"/>
-    <div v-else-if="$parent.game.cache.killFeed.length!==0" class="box flex p-2 space-y-1 mt-2 text-white flex-col flex-col flex-auto overflow-auto h-0 mt-2 p-1 space-y-1">
+    <div v-else-if="$parent.game.cache.killFeed.length!==0" class="box flex p-2 space-y-1 mt-2 text-white flex-col flex-auto overflow-auto h-0 mt-2 space-y-1 pb-28">
 
     <div class="py-2 px-3 rounded-lg flex flex-row text-sm gap-3" :key="item.id" v-for="item of $parent.game.cache.killFeed">
       <div class="my-auto justify-around pr-1"><Monogram :user="item.target" /></div>

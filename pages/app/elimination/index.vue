@@ -24,6 +24,9 @@ export default {
   }),
   async fetch(){
     this.games = (await this.$elim.fetchGames()).filter(e=>e.dev===undefined)
+    if (this.games.filter(e=>e.id==='NEKOD28LAGAOAPO')[0].joined){
+      this.$router.push('/app/elimination/NEKOD28LAGAOAPO')
+    }
   },
   methods:{
     async joinGame(id){
