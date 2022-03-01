@@ -1,7 +1,7 @@
 <template>
   <div class="h-full  w-full">
     <loader v-if="$fetchState.pending"/>
-    <div v-else class="flex flex-col w-full lg:flex-row gap-3 mt-3">
+    <div v-else class=" flex flex-col w-full h-full lg:flex-row gap-3 mt-3">
       <div v-if="!me.eliminated" class="box flex flex-col basis-1 grow gap-2 -!bg-red-500/80 -dark:!bg-red-500/20  px-3 py-2">
       <div class="flex flex-row gap-2">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 my-auto" viewBox="0 0 24 24" fill="transparent" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="22" y1="12" x2="18" y2="12"/><line x1="6" y1="12" x2="2" y2="12"/><line x1="12" y1="6" x2="12" y2="2"/><line x1="12" y1="22" x2="12" y2="18"/></svg>
@@ -49,7 +49,7 @@
         </div>
 
       </div>
-      <div v-if="$parent.game.cache.announcement" :key="$parent.game.cache.announcement._id" class="flex basis-1 grow font-medium text-base px-3 py-2 flex-col text-amber-400 rounded-xl bg-orange-800/20 dark:bg-orange-200/20">
+      <div v-if="$parent.game.cache.announcement" :key="$parent.game.cache.announcement._id" class="flex mb-16 basis-1 grow font-medium text-base px-3 py-2 flex-col text-amber-400 rounded-xl bg-orange-800/20 dark:bg-orange-200/20">
         <div class="flex gap-2 flex-row">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 my-auto" viewBox="0 0 20 20" fill="currentColor">
             <path fill-rule="evenodd" d="M18 3a1 1 0 00-1.447-.894L8.763 6H5a3 3 0 000 6h.28l1.771 5.316A1 1 0 008 18h1a1 1 0 001-1v-4.382l6.553 3.276A1 1 0 0018 15V3z" clip-rule="evenodd" />

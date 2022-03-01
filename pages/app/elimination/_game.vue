@@ -1,5 +1,5 @@
 <template>
-  <div :key="game&&game.id" class="h-full pb-16 w-full sm:mb-8 mb-20">
+  <div :key="game&&game.id" class="h-full w-full">
     <loader  v-if="$fetchState.pending"/>
     <div class="w-full h-full " v-else>
       <h1 class="page-title">{{ game.name }} </h1>

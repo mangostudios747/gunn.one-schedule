@@ -2,7 +2,8 @@
 export const state = () => ({
   // User token
   user: false,
-  popup: {}
+  popup: {},
+  qr:false
 })
 
 export const mutations = {
@@ -11,6 +12,9 @@ export const mutations = {
   },
   setPopup(state, id){
     state.popup = id;
+  },
+  setQR(state, secret){
+    state.qr = secret;
   }
 }
 

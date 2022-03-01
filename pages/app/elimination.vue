@@ -1,5 +1,5 @@
 <template>
-  <div class="flex w-full h-full px-5 overflow-auto pb-3 flex-auto md:pt-3 px-3 flex flex-col">
+  <div class="flex w-full h-full px-5 mb-20 overflow-auto pb-3 flex-auto md:pt-3 px-3 flex flex-col">
     <nuxt-child/>
   </div>
 </template>

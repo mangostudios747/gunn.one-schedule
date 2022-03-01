@@ -20,10 +20,9 @@ req.onsuccess = () => {
 }
 
 function getUserProfile(uid, gameId= null) {
-
   return new Promise(async (resolve, reject) => {
           const UserT = db.transaction("users", "readwrite").objectStore('users');
-          const ureq = UserT.get(uid)
+          const ureq = UserT.get(uid || 'bad')
           ureq.onsuccess = async () => {
               if (!ureq.result) return;
               let user = JSON.parse(JSON.stringify(ureq.result))
