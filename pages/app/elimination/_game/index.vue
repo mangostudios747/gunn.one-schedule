@@ -23,7 +23,7 @@
           Yay! You successfully eliminated {{killed}}.
         </div>
         <div class="flex flex-row gap-2">
-          <input v-model="killCode" :placeholder="`Enter ${target.firstName}'s kill code`" class="box-input grow" /> <button @click="eliminate" class="btn text-white bg-red-400">Eliminate</button>
+          <input v-model="killCode" :placeholder="`Enter ${target.firstName}'s code`" class="box-input grow" /> <button @click="eliminate" class="btn text-white bg-red-400">Eliminate</button>
         </div>
     </div>
       <div v-else class="italic box px-3 py-2">
@@ -40,15 +40,29 @@
           <div class="flex w-1/2 flex-col ml-2"><Monogram huge class="mx-auto" :user="me"/>
             <span class="mx-auto text-lg font-bold">{{me.firstName}} {{me.lastName}}</span></div>
           <div class="flex flex-col mr-4 justify-around ml-auto text-right">
-            <span><span class="text-xl font-bold mr-4">{{me.kills}}</span> kills</span>
-            <span><span class="text-xl font-bold mr-3">#{{me.rank}}</span> rank</span>
+            <span><span class="text-xl font-bold mr-3">{{me.kills}}</span> points</span>
+            <span><span class="text-xl font-bold mr-6">#{{me.rank}}</span> rank</span>
           </div>
         </div>
         <div class="flex flex-row gap-2">
           <input disabled readonly :value="me.secret" :class="[showSecret?'':'blur-sm']" class="box-input font-mono text-xs text-center select-none grow" /> <button @click="showSecret=!showSecret" class="btn bg-white/10">{{showSecret?'Hide':'Show'}} code</button>
         </div>
 
-      </div></div>
+      </div>
+      <div v-if="$parent.game.cache.announcement" :key="$parent.game.cache.announcement._id" class="flex basis-1 grow px-3 py-2 flex-col text-amber-400 rounded-xl bg-orange-800/20 dark:bg-orange-200/20">
+        <div class="flex gap-2 flex-row">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 my-auto" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M18 3a1 1 0 00-1.447-.894L8.763 6H5a3 3 0 000 6h.28l1.771 5.316A1 1 0 008 18h1a1 1 0 001-1v-4.382l6.553 3.276A1 1 0 0018 15V3z" clip-rule="evenodd" />
+          </svg>
+          <span class="font-bold my-auto text-lg">Announcement</span>
+        </div>
+        <div class="italic text-xs opacity-90">
+          {{new Date($parent.game.cache.announcement.time).toISOString() | luxon('relative') }}
+        </div>
+        <div v-text="$parent.game.cache.announcement.message" class="whitespace-pre-wrap"></div>
+
+      </div>
+    </div>
 
   </div>
 </template>

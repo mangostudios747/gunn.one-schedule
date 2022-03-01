@@ -65,7 +65,8 @@ class EliminationGame {
       me:{},
       users:{},
       leaderboard:[],
-      killFeed:[]
+      killFeed:[],
+      announcement:false,
     }
     this.sdk = sdk;
     this.gameId = gameId;
@@ -76,7 +77,12 @@ class EliminationGame {
   async init(){
     await this.fetchGame();
     await this.fetchLeaderboard();
+    await this.fetchAnnouncement()
     await this.fetchSelf()
+  }
+
+  async fetchAnnouncement(){
+    this.cache.announcement = await this.sdk.getFrom(`game/${this.gameId}/announcements`).then(e=>e[e.length-1]);
   }
 
   async fetchSelf(){
