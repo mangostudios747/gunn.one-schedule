@@ -59,8 +59,8 @@
         <div class="italic text-sm opacity-90">
           {{new Date($parent.game.cache.announcement.time).toISOString() | luxon('relative') }}
         </div>
-        <div v-text="$parent.game.cache.announcement.message" :class="announcementCollapsed&&($parent.game.cache.announcement.message.length>200)?'line-clamp-4':'whitespace-pre-wrap'"></div>
-        <div v-if="$parent.game.cache.announcement.message.length>200" class="mt-2">
+        <div v-text="$parent.game.cache.announcement.message" class="mb-2" :class="announcementCollapsed&&($parent.game.cache.announcement.message.length>200)?'line-clamp-4':'whitespace-pre-wrap'"></div>
+        <div v-if="$parent.game.cache.announcement.message.length>200" class="mt-auto mb-0">
           <button @click="announcementCollapsed=!announcementCollapsed" class="btn float-right text-white bg-orange-400/80 ">Show {{announcementCollapsed?'more':'less'}}</button>
         </div>
       </div>
