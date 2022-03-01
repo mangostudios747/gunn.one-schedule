@@ -1,7 +1,7 @@
 <template>
   <div class="h-full pb-16 w-full mb-8">
     <loader v-if="$fetchState.pending"/>
-    <div class="w-full h-full" v-else>
+    <div class="w-full h-full " v-else>
       <h1 class="page-title">{{ game.name }} </h1>
       <div class="h-full w-full flex flex-auto flex-col" v-if="game.start">
         <div
