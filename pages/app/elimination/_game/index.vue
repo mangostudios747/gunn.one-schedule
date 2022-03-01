@@ -56,11 +56,11 @@
           </svg>
           <span class="font-bold my-auto text-lg">Announcement</span>
         </div>
-        <div class="italic text-xs opacity-90">
+        <div class="italic text-sm opacity-90">
           {{new Date($parent.game.cache.announcement.time).toISOString() | luxon('relative') }}
         </div>
-        <div v-text="$parent.game.cache.announcement.message" :class="announcementCollapsed&&($parent.game.cache.announcement.message.length>100)?'line-clamp-2':'whitespace-pre-wrap'"></div>
-        <div v-if="$parent.game.cache.announcement.message.length>100" class="mt-2">
+        <div v-text="$parent.game.cache.announcement.message" :class="announcementCollapsed&&($parent.game.cache.announcement.message.length>200)?'line-clamp-4':'whitespace-pre-wrap'"></div>
+        <div v-if="$parent.game.cache.announcement.message.length>200" class="mt-2">
           <button @click="announcementCollapsed=!announcementCollapsed" class="btn float-right text-white bg-orange-400/80 ">Show {{announcementCollapsed?'more':'less'}}</button>
         </div>
       </div>
