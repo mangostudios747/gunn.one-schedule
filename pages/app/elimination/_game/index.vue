@@ -1,6 +1,6 @@
 <template>
   <div class="h-full  w-full">
-    <loader v-if="$fetchState.pending"/>
+    <loader v-if="!this.target"/>
     <div v-else class=" flex flex-col w-full h-full lg:flex-row gap-3 mt-3">
       <div v-if="!me.eliminated" class="box flex flex-col basis-1 grow gap-2 -!bg-red-500/80 -dark:!bg-red-500/20  px-3 py-2">
       <div class="flex flex-row gap-2">
@@ -82,8 +82,13 @@ export default {
     announcementCollapsed: true
   }),
   fetchOnServer: false,
+  computed:{
+    me(){
+      return this.$parent.game.cache.me;
+    }
+  },
   async fetch(){
-    this.me = await this.$parent.game.cache.me
+    if (!this.me) return;
     this.target = await this.$parent.game.fetchUser(this.me.targetID)
   },
   mounted(){
