@@ -135,10 +135,10 @@ export default {
         href: "/app/classes",
         auth: true
       },
-      {
-        title: 'Elimination',
-        href: '/app/elimination/',
-      },
+      //{
+      //  title: 'Elimination',
+      //  href: '/app/elimination/',
+      //},
       {
         title: "Directories",
         href: "/app/people",
