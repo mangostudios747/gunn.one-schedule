@@ -34,7 +34,7 @@ export const actions = {
         cust[key].meta.course_home = `https://pausd.schoology.com/course/${id}/materials`
       }
     }
-    commit('setCustomizations', {customizations:cust, sgy:true})
+    commit('setCustomizations', {customizations: cust, sgy: true})
   }
 }
 
@@ -91,7 +91,8 @@ export const getters = {
         color: (state.customizations[event.name] || state.customizations['Other']).color
       }
     })//regular schedule for this day of the week
-  }, currentEvent: (state, getters) => {
+  },
+  currentEvent: (state, getters) => {
     //console.log('hello');
     const now = state.now//.addDays(2)
     const sched = getters.scheduleForDate(now)
@@ -105,7 +106,7 @@ export const getters = {
         return {
           type: 'future',
           name: (state.customizations[event.id] || {name: undefined}).name || event.name,
-          meta: (state.customizations[event.id] || {meta: {}}).meta,
+          meta: state.customizations[event.id] || {},
           id: event.id,
           displayText: 'until',
           remaining: (+start - now) / 60000,
@@ -118,11 +119,10 @@ export const getters = {
       }
       const end = event.end
       if (start <= now && now <= end) {
-        //console.log('ola')
         return {
           type: 'current',
           name: (state.customizations[event.name] || {name: undefined}).name || event.name,
-          meta: (state.customizations[event.id] || {meta: {}}).meta,
+          meta: state.customizations[event.id] || {},
           id: event.id,
           displayText: 'left in',
           remaining: (+end - now) / 60000,
@@ -138,7 +138,7 @@ export const getters = {
         return {
           type: 'since',
           name: (state.customizations[event.name] || {name: undefined}).name || event.name,
-          meta: (state.customizations[event.id] || {meta: {}}).meta,
+          meta: state.customizations[event.id] || {},
           id: event.id,
           displayText: 'since',
           remaining: null,
@@ -179,7 +179,7 @@ export const getters = {
     return upcoming
   },
   sectionInfo: (state) => (sid) => {
-    return Object.values(state.customizations).filter(({meta})=>{
+    return Object.values(state.customizations).filter(({meta}) => {
       if (!meta) return false;
       return meta.id === sid;
     })[0] || {}
